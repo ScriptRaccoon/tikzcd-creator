@@ -15,4 +15,7 @@ export const STEPS = [
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{ message: 'Done!', button_labels: { prev: 'Back', next: 'Start over' } }
-] as const;
+] as const satisfies {
+	message: string;
+	button_labels: { prev: string | null; next: string | null };
+}[];
