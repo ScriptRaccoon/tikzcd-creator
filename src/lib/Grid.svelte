@@ -2,10 +2,23 @@
 	let size = $state({ x: 1, y: 1 });
 	const padding = 25;
 
+	let node_keys = $state<string[]>([]);
+
+	const k = (x: number, y: number) => `${x}_${y}`;
+
 	$effect(() => {
 		size.x = Math.floor((window.innerWidth - 2 * padding) / 100);
 		size.y = Math.floor((window.innerHeight - 2 * padding) / 100);
 	});
+
+	function toggle_node(x: number, y: number) {
+		const key = k(x, y);
+		if (node_keys.includes(key)) {
+			node_keys = node_keys.filter((c) => c != key);
+		} else {
+			node_keys.push(k(x, y));
+		}
+	}
 </script>
 
 <div class="grid-wrapper">
@@ -14,8 +27,12 @@
 			{#each { length: size.x } as _, x}
 				<span class="tile">
 					{#if y > 0 && x > 0}
-						<button aria-label="create node here" class="node">
-							<div class="node-inner"></div>
+						<button
+							aria-label="toggle node"
+							class="node"
+							onclick={() => toggle_node(x, y)}
+							class:selected={node_keys.includes(k(x, y))}
+						>
 						</button>
 					{/if}
 				</span>
@@ -42,33 +59,43 @@
 
 	.tile {
 		border: 1px solid #333;
+		position: relative;
 	}
 
 	.node {
-		width: 60px;
-		height: 60px;
+		--size: 20px;
+		position: absolute;
+		width: var(--size);
+		height: var(--size);
 		border-radius: 50%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		transform: translate(-50%, -50%);
-	}
-
-	.node-inner {
-		width: 20px;
-		height: 20px;
+		top: calc(-0.5 * var(--size) - 1px);
+		left: calc(-0.5 * var(--size) - 1px);
 		background-color: white;
-		border-radius: 50%;
-		opacity: 0;
-		scale: 0.25;
-
-		transition:
-			opacity 200ms,
-			scale 200ms;
+		transition: all 200ms;
 	}
 
-	.node:hover .node-inner {
+	.node:not(.selected) {
+		opacity: 0;
+		scale: 0.5;
+	}
+
+	.node:not(.selected):hover {
 		opacity: 1;
 		scale: 1;
+	}
+
+	.node.selected {
+		scale: 1.5;
+	}
+
+	.node::before {
+		position: absolute;
+		content: '';
+		width: 65px;
+		height: 65px;
+		border-radius: 50%;
 	}
 </style>
