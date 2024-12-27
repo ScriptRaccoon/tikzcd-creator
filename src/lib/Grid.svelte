@@ -4,9 +4,12 @@
 	let size = $state({ x: 1, y: 1 });
 	const padding = 25;
 
-	let node_keys = $state<string[]>([]);
+	let nodes = $state<string[]>([]);
+	let arrows = $state<string[]>([]);
 
-	const k = (x: number, y: number) => `${x}_${y}`;
+	let start_node = $state<string | null>(null);
+
+	const k = (x: number, y: number) => `${x},${y}`;
 
 	$effect(() => {
 		size.x = Math.floor((window.innerWidth - 2 * padding) / 100);
@@ -14,28 +17,42 @@
 	});
 
 	function handle_node_click(x: number, y: number) {
+		const node = k(x, y);
+
 		if (step.value === 1) {
-			const key = k(x, y);
-			if (node_keys.includes(key)) {
-				node_keys = node_keys.filter((c) => c != key);
+			if (nodes.includes(node)) {
+				nodes = nodes.filter((_node) => _node != node);
 			} else {
-				node_keys.push(k(x, y));
+				nodes.push(k(x, y));
+			}
+		} else if (step.value === 2) {
+			if (start_node) {
+				if (start_node !== node) {
+					const arrow = `${start_node}->${node}`;
+					arrows.push(arrow);
+					start_node = null;
+				} else {
+					start_node = null;
+				}
+			} else {
+				start_node = node;
 			}
 		}
 	}
 </script>
 
-<div class="grid-wrapper" class:active={step.value == 1}>
+<div class="grid-wrapper step-{step.value}">
 	<div class="grid" style:--x={size.x} style:--y={size.y}>
 		{#each { length: size.y } as _, y}
 			{#each { length: size.x } as _, x}
+				{@const selected = nodes.includes(k(x, y))}
 				<span class="tile">
 					{#if y > 0 && x > 0}
 						<button
 							aria-label="toggle node"
 							class="node"
 							onclick={() => handle_node_click(x, y)}
-							class:selected={node_keys.includes(k(x, y))}
+							class:selected
 						>
 						</button>
 					{/if}
@@ -99,12 +116,16 @@
 		border-radius: 50%;
 	}
 
-	.grid-wrapper.active .node {
+	.grid-wrapper.step-1 .node {
 		pointer-events: initial;
 
 		&:not(.selected):hover {
 			opacity: 1;
 			scale: 1;
 		}
+	}
+
+	.grid-wrapper.step-2 .node {
+		pointer-events: initial;
 	}
 </style>
