@@ -10,7 +10,7 @@
 	const padding = 20;
 
 	let length = $derived(
-		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) - 2 * padding
+		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) - 2.5 * padding
 	);
 
 	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x));
@@ -28,7 +28,9 @@
 	style:--y="{padded_start_y}px"
 	style:--length="{length}px"
 	style:--angle="{angle_deg}deg"
-></div>
+>
+	<div class="tip"></div>
+</div>
 
 <style>
 	.arrow {
@@ -46,5 +48,16 @@
 
 	.arrow:not(.editable) {
 		pointer-events: none;
+	}
+
+	.tip {
+		position: absolute;
+		right: -10px;
+		width: 20px;
+		--height: 20px;
+		height: var(--height);
+		translate: 0px calc(0.5 * var(--thickness) - 0.5 * var(--height));
+		background-color: inherit;
+		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 	}
 </style>
