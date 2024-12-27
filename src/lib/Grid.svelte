@@ -46,41 +46,51 @@
 		mouse_pos.y = e.clientY - rect.top;
 	}
 
+	function toggle_node(x: number, y: number) {
+		const existing_node = nodes.find((node) => node.x == x && node.y == y);
+		if (existing_node) {
+			nodes = nodes.filter((node) => node != existing_node);
+		} else {
+			nodes.push({ x, y });
+		}
+	}
+
+	function create_arrow(x: number, y: number) {
+		if (start_coord) {
+			if (start_coord.x !== x || start_coord.y !== y) {
+				const id = crypto.randomUUID();
+				const arrow = { id, start: start_coord, end: { x, y } };
+				arrows.push(arrow);
+				start_coord = null;
+			} else {
+				start_coord = null;
+			}
+		} else {
+			start_coord = { x, y };
+		}
+	}
+
+	function create_label(x: number, y: number) {
+		if (label_coord && label_coord.x == x && label_coord.y === y) {
+			label_coord = null;
+		} else {
+			label_coord = { x, y };
+		}
+	}
+
 	function handle_node_click(x: number, y: number) {
 		if (step === 1) {
-			const existing_node = nodes.find((node) => node.x == x && node.y == y);
-			if (existing_node) {
-				nodes = nodes.filter((node) => node != existing_node);
-			} else {
-				nodes.push({ x, y });
-			}
+			toggle_node(x, y);
 		} else if (step === 2) {
-			if (start_coord) {
-				if (start_coord.x !== x || start_coord.y !== y) {
-					const id = crypto.randomUUID();
-					const arrow = { id, start: start_coord, end: { x, y } };
-					arrows.push(arrow);
-					start_coord = null;
-				} else {
-					start_coord = null;
-				}
-			} else {
-				start_coord = { x, y };
-			}
+			create_arrow(x, y);
 		} else if (step === 3) {
-			if (label_coord && label_coord.x == x && label_coord.y === y) {
-				label_coord = null;
-			} else {
-				label_coord = { x, y };
-			}
+			create_label(x, y);
 		}
 	}
 
 	function remove_arrow(id: string) {
 		arrows = arrows.filter((arrow) => arrow.id != id);
 	}
-
-	$inspect(node_labels);
 </script>
 
 <div class="grid-wrapper">
