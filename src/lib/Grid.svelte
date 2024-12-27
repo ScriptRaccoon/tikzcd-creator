@@ -36,7 +36,11 @@
 
 	$effect(() => {
 		window.addEventListener('mousemove', update_mouse_pos);
-		return () => window.removeEventListener('mousemove', update_mouse_pos);
+		window.addEventListener('keydown', handle_keydown);
+		return () => {
+			window.removeEventListener('mousemove', update_mouse_pos);
+			window.removeEventListener('keydown', handle_keydown);
+		};
 	});
 
 	function update_mouse_pos(e: MouseEvent) {
@@ -44,6 +48,12 @@
 		const rect = grid_element.getBoundingClientRect();
 		mouse_pos.x = e.clientX - rect.left;
 		mouse_pos.y = e.clientY - rect.top;
+	}
+
+	function handle_keydown(e: KeyboardEvent) {
+		if (e.key === 'Escape' && start_coord) {
+			start_coord = null;
+		}
 	}
 
 	function toggle_node(x: number, y: number) {
