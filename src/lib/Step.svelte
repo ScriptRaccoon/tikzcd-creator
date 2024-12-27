@@ -12,24 +12,33 @@
 		{
 			message:
 				'Welcome!<br>This app will help you create code for tikzcd diagrams.',
-			button_label: 'Start'
+			button_labels: { prev: null, next: 'Start' }
 		},
 		{
 			message:
 				'<b>Create the nodes.</b> Click on the canvas to add or remove them.',
-			button_label: 'Next'
+			button_labels: { prev: 'Back', next: 'Next' }
 		},
-		{ message: 'Create the arrows. (TBA)', button_label: 'Next' },
-		{ message: 'Done!', button_label: 'Start over' }
+		{
+			message: 'Create the arrows. (TBA)',
+			button_labels: { prev: 'Back', next: 'Next' }
+		},
+		{ message: 'Done!', button_labels: { prev: 'Back', next: 'Start over' } }
 	] as const;
 
 	let current_step = $derived(STEPS[step]);
 
-	function increase_step() {
+	function handle_next() {
 		if (step < STEPS.length - 1) {
 			step += 1;
 		} else {
 			reset();
+		}
+	}
+
+	function handle_previous() {
+		if (step > 0) {
+			step -= 1;
 		}
 	}
 </script>
@@ -42,9 +51,16 @@
 	>
 		<h2>Step {step}</h2>
 		<p>{@html current_step.message}</p>
-		<button class="button" onclick={increase_step}>
-			{current_step.button_label}
-		</button>
+		<div class="buttons">
+			{#if current_step.button_labels.prev !== null}
+				<button class="button" onclick={handle_previous}>
+					{current_step.button_labels.prev}
+				</button>
+			{/if}
+			<button class="button" onclick={handle_next}>
+				{current_step.button_labels.next}
+			</button>
+		</div>
 	</div>
 {/key}
 
@@ -69,5 +85,10 @@
 	p {
 		margin-block: 10px 15px;
 		line-height: 1.4;
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: space-between;
 	}
 </style>
