@@ -42,7 +42,8 @@
 		} else if (step === 2) {
 			if (start_coord) {
 				if (start_coord.x !== x || start_coord.y !== y) {
-					const arrow = { start: start_coord, end: { x, y } };
+					const id = crypto.randomUUID();
+					const arrow = { id, start: start_coord, end: { x, y } };
 					arrows.push(arrow);
 					start_coord = null;
 				} else {
@@ -52,6 +53,10 @@
 				start_coord = { x, y };
 			}
 		}
+	}
+
+	function remove_arrow(id: string) {
+		arrows = arrows.filter((arrow) => arrow.id != id);
 	}
 </script>
 
@@ -79,7 +84,7 @@
 			{/each}
 		{/each}
 
-		{#each arrows as arrow}
+		{#each arrows as arrow (arrow.id)}
 			<ArrowComponent
 				start={{
 					x: arrow.start.x * 100,
@@ -89,7 +94,8 @@
 					x: arrow.end.x * 100,
 					y: arrow.end.y * 100
 				}}
-				editable={false}
+				handle_remove={() => remove_arrow(arrow.id)}
+				editable={step === 2}
 			></ArrowComponent>
 		{/each}
 

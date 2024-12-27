@@ -11,7 +11,7 @@ export const STEPS = [
 	},
 	{
 		message:
-			'<b>Create the arrows.</b> Click on two nodes serving as start and end of an arrow.',
+			'<b>Create the arrows.</b> Click on two nodes serving as start and end of an arrow. Click on the middle of an arrow to remove it.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{ message: 'Done!', button_labels: { prev: 'Back', next: 'Start over' } }

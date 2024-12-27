@@ -1,11 +1,15 @@
 <script lang="ts">
+	import { faXmark } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
+
 	type Props = {
 		start: { x: number; y: number };
 		end: { x: number; y: number };
+		handle_remove?: () => void;
 		editable: boolean;
 	};
 
-	const { start, end, editable }: Props = $props();
+	const { start, end, handle_remove, editable }: Props = $props();
 
 	const padding = 20;
 
@@ -23,13 +27,17 @@
 
 <div
 	class="arrow"
-	class:editable
 	style:--x="{padded_start_x}px"
 	style:--y="{padded_start_y}px"
 	style:--length="{length}px"
 	style:--angle="{angle_deg}deg"
 >
 	<div class="tip"></div>
+	{#if editable && handle_remove !== undefined}
+		<button aria-label="delete arrow" onclick={handle_remove}>
+			<Fa icon={faXmark} />
+		</button>
+	{/if}
 </div>
 
 <style>
@@ -44,20 +52,41 @@
 		translate: 0px calc(-0.5 * var(--thickness));
 		rotate: var(--angle);
 		background-color: var(--accent-color);
-	}
-
-	.arrow:not(.editable) {
-		pointer-events: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.tip {
 		position: absolute;
 		right: -10px;
 		width: 20px;
-		--height: 20px;
-		height: var(--height);
-		translate: 0px calc(0.5 * var(--thickness) - 0.5 * var(--height));
+		height: 20px;
 		background-color: inherit;
 		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
+	}
+
+	button {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		background-color: coral;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 200ms;
+		opacity: 0;
+	}
+
+	button::before {
+		content: '';
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+	}
+
+	button:hover {
+		opacity: 1;
 	}
 </style>
