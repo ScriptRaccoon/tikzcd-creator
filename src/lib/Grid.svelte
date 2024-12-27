@@ -1,9 +1,10 @@
 <script lang="ts">
 	import ArrowComponent from './Arrow.svelte';
-	import { step } from './state.svelte';
+	import type { Arrow, Coord } from './types';
 
-	type Coord = { x: number; y: number };
-	type Arrow = { start: Coord; end: Coord };
+	type Props = { nodes: Coord[]; arrows: Arrow[]; step: number };
+
+	let { nodes = $bindable(), arrows = $bindable(), step }: Props = $props();
 
 	let size = $state<{ x: number; y: number }>({ x: 1, y: 1 });
 	const grid_padding = 25;
@@ -13,8 +14,6 @@
 		size.y = Math.floor((window.innerHeight - 2 * grid_padding) / 100);
 	});
 
-	let nodes = $state<Coord[]>([]);
-	let arrows = $state<Arrow[]>([]);
 	let start_coord = $state<Coord | null>(null);
 
 	let grid_element = $state<HTMLElement | null>(null);
@@ -33,14 +32,14 @@
 	}
 
 	function handle_node_click(x: number, y: number) {
-		if (step.value === 1) {
+		if (step === 1) {
 			const existing_node = nodes.find((node) => node.x == x && node.y == y);
 			if (existing_node) {
 				nodes = nodes.filter((node) => node != existing_node);
 			} else {
 				nodes.push({ x, y });
 			}
-		} else if (step.value === 2) {
+		} else if (step === 2) {
 			if (start_coord) {
 				if (start_coord.x !== x || start_coord.y !== y) {
 					const arrow = { start: start_coord, end: { x, y } };
@@ -56,7 +55,7 @@
 	}
 </script>
 
-<div class="grid-wrapper step-{step.value}">
+<div class="grid-wrapper step-{step}">
 	<div
 		class="grid"
 		style:--x={size.x}

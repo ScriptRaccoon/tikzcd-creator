@@ -1,6 +1,11 @@
 <script lang="ts">
-	import { step } from './state.svelte';
 	import { fly } from 'svelte/transition';
+
+	type Props = {
+		step: number;
+	};
+
+	let { step = $bindable() } = $props();
 
 	const STEPS = [
 		{
@@ -17,24 +22,24 @@
 		{ message: 'Done!', button_label: 'Start over' }
 	] as const;
 
-	let current_step = $derived(STEPS[step.value]);
+	let current_step = $derived(STEPS[step]);
 
 	function increase_step() {
-		if (step.value < STEPS.length - 1) {
-			step.increase();
+		if (step < STEPS.length - 1) {
+			step += 1;
 		} else {
-			step.reset();
+			step = 1;
 		}
 	}
 </script>
 
-{#key step.value}
+{#key step}
 	<div
 		class="step-card"
 		in:fly={{ y: -100, duration: 200, delay: 200 }}
 		out:fly={{ y: -100, duration: 100 }}
 	>
-		<h2>Step {step.value}</h2>
+		<h2>Step {step}</h2>
 		<p>{@html current_step.message}</p>
 		<button class="button" onclick={increase_step}>
 			{current_step.button_label}
