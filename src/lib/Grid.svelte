@@ -116,7 +116,7 @@
 		border-radius: 50%;
 	}
 
-	.grid-wrapper.step-1 .node {
+	.grid-wrapper:is(.step-1, .step-2) .node {
 		pointer-events: initial;
 
 		&:not(.selected):hover {
