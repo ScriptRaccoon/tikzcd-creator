@@ -24,3 +24,11 @@ export const STEPS = [
 	message: string;
 	button_labels: { prev: string | null; next: string | null };
 }[];
+
+// https://stackoverflow.com/a/77991391
+type ArrayIndex<T extends readonly unknown[]> = Exclude<
+	Partial<T>['length'],
+	T['length']
+>;
+
+export type StepIndex = ArrayIndex<typeof STEPS>;

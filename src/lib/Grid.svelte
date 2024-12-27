@@ -1,13 +1,15 @@
 <script lang="ts">
 	import ArrowComponent from './Arrow.svelte';
 	import Node from './Node.svelte';
+	import type { StepIndex } from './step.config';
 	import type { Arrow, Coord } from './types';
+	import { noop } from './utils';
 
 	type Props = {
 		nodes: Coord[];
 		arrows: Arrow[];
 		node_labels: Record<string, string>;
-		step: number;
+		step: StepIndex;
 	};
 
 	let {
@@ -88,14 +90,16 @@
 		}
 	}
 
+	const click_actions = {
+		0: noop,
+		1: toggle_node,
+		2: create_arrow,
+		3: create_label,
+		4: noop
+	} as const;
+
 	function handle_node_click(x: number, y: number) {
-		if (step === 1) {
-			toggle_node(x, y);
-		} else if (step === 2) {
-			create_arrow(x, y);
-		} else if (step === 3) {
-			create_label(x, y);
-		}
+		click_actions[step](x, y);
 	}
 
 	function remove_arrow(id: string) {

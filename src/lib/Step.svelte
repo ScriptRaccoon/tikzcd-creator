@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { STEPS } from './step.config';
+	import { STEPS, type StepIndex } from './step.config';
 
 	type Props = {
-		step: number;
+		step: StepIndex;
 		reset: () => void;
 	};
 
@@ -58,10 +58,6 @@
 		border-radius: 10px;
 		box-shadow: 5px 5px 20px #0004;
 		width: 300px;
-	}
-
-	h2 {
-		font-size: 2rem;
 	}
 
 	p {
