@@ -79,6 +79,21 @@
 				</span>
 			{/each}
 		{/each}
+
+		{#each arrows as arrow}
+			<ArrowComponent
+				start={{
+					x: arrow.start.x * 100,
+					y: arrow.start.y * 100
+				}}
+				end={{
+					x: arrow.end.x * 100,
+					y: arrow.end.y * 100
+				}}
+				editable={false}
+			></ArrowComponent>
+		{/each}
+
 		{#if start_coord && grid_element}
 			<ArrowComponent
 				start={{
