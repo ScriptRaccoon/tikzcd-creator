@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { step } from './state.svelte';
+
 	let size = $state({ x: 1, y: 1 });
 	const padding = 25;
 
@@ -11,17 +13,19 @@
 		size.y = Math.floor((window.innerHeight - 2 * padding) / 100);
 	});
 
-	function toggle_node(x: number, y: number) {
-		const key = k(x, y);
-		if (node_keys.includes(key)) {
-			node_keys = node_keys.filter((c) => c != key);
-		} else {
-			node_keys.push(k(x, y));
+	function handle_node_click(x: number, y: number) {
+		if (step.value === 1) {
+			const key = k(x, y);
+			if (node_keys.includes(key)) {
+				node_keys = node_keys.filter((c) => c != key);
+			} else {
+				node_keys.push(k(x, y));
+			}
 		}
 	}
 </script>
 
-<div class="grid-wrapper">
+<div class="grid-wrapper" class:active={step.value == 1}>
 	<div class="grid" style:--x={size.x} style:--y={size.y}>
 		{#each { length: size.y } as _, y}
 			{#each { length: size.x } as _, x}
@@ -30,7 +34,7 @@
 						<button
 							aria-label="toggle node"
 							class="node"
-							onclick={() => toggle_node(x, y)}
+							onclick={() => handle_node_click(x, y)}
 							class:selected={node_keys.includes(k(x, y))}
 						>
 						</button>
@@ -75,16 +79,12 @@
 		left: calc(-0.5 * var(--size) - 1px);
 		background-color: white;
 		transition: all 200ms;
+		pointer-events: none;
 	}
 
 	.node:not(.selected) {
 		opacity: 0;
 		scale: 0.5;
-	}
-
-	.node:not(.selected):hover {
-		opacity: 1;
-		scale: 1;
 	}
 
 	.node.selected {
@@ -97,5 +97,14 @@
 		width: 65px;
 		height: 65px;
 		border-radius: 50%;
+	}
+
+	.grid-wrapper.active .node {
+		pointer-events: initial;
+
+		&:not(.selected):hover {
+			opacity: 1;
+			scale: 1;
+		}
 	}
 </style>
