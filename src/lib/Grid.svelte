@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ArrowComponent from './Arrow.svelte';
+	import Node from './Node.svelte';
 	import type { Arrow, Coord } from './types';
 
 	type Props = {
@@ -82,7 +83,7 @@
 	$inspect(node_labels);
 </script>
 
-<div class="grid-wrapper step-{step}">
+<div class="grid-wrapper">
 	<div
 		class="grid"
 		style:--x={size.x}
@@ -94,13 +95,14 @@
 				{@const selected = nodes.some((node) => node.x == x && node.y == y)}
 				<span class="tile">
 					{#if y > 0 && x > 0}
-						<button
-							aria-label="toggle node"
-							class="node"
-							onclick={() => handle_node_click(x, y)}
-							class:selected
-						>
-						</button>
+						<Node
+							{x}
+							{y}
+							handle_click={() => handle_node_click(x, y)}
+							{selected}
+							hoverable={[1, 2].includes(step)}
+							clickable={[1, 2, 3].includes(step)}
+						/>
 					{/if}
 				</span>
 			{/each}
@@ -163,49 +165,6 @@
 	.tile {
 		border: 1px solid #333;
 		position: relative;
-	}
-
-	.node {
-		--size: 20px;
-		position: absolute;
-		width: var(--size);
-		height: var(--size);
-		border-radius: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		top: calc(-0.5 * var(--size) - 1px);
-		left: calc(-0.5 * var(--size) - 1px);
-		background-color: white;
-		transition: all 200ms;
-	}
-
-	.node:not(.selected) {
-		opacity: 0;
-		scale: 0.5;
-	}
-
-	.node.selected {
-		scale: 1.5;
-	}
-
-	.node::before {
-		position: absolute;
-		content: '';
-		width: 65px;
-		height: 65px;
-		border-radius: 50%;
-	}
-
-	.grid-wrapper.step-0 .node {
-		pointer-events: none;
-	}
-
-	.grid-wrapper:is(.step-1, .step-2) .node {
-		&:not(.selected):hover {
-			opacity: 1;
-			scale: 1;
-		}
 	}
 
 	.node_label_input {
