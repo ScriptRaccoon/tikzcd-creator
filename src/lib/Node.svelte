@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { render_latex } from './utils';
+
 	type Props = {
 		x: number;
 		y: number;
@@ -22,7 +24,9 @@
 	disabled={!clickable}
 	class:labelled={label && label.length > 0}
 >
-	<span class="label">{label}</span>
+	{#if label}
+		<span class="label">{@html render_latex(label)}</span>
+	{/if}
 </button>
 
 <style>
@@ -32,10 +36,6 @@
 		justify-content: center;
 		align-items: center;
 		transform: translate(-50%, -50%);
-	}
-
-	.label {
-		font-size: 1.25rem;
 	}
 
 	.node:not(.labelled) {
