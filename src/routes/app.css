@@ -61,3 +61,7 @@ input {
 	background: none;
 	border: none;
 }
+
+input:focus-visible {
+	outline: none;
+}

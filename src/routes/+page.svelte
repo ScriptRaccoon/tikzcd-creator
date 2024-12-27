@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Grid from '$lib/Grid.svelte';
-	import type { StepIndex } from '$lib/step.config';
 	import Step from '$lib/Step.svelte';
+	import type { StepIndex } from '$lib/step.config';
 	import type { Coord, Arrow } from '$lib/types';
 
 	let nodes = $state<Coord[]>([]);
@@ -13,6 +13,7 @@
 	function reset() {
 		nodes = [];
 		arrows = [];
+		node_labels = {};
 		step = 1;
 	}
 </script>

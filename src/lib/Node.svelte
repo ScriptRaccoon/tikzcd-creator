@@ -5,10 +5,12 @@
 		selected: boolean;
 		hoverable: boolean;
 		clickable: boolean;
+		label: string | undefined;
 		handle_click: () => void;
 	};
 
-	let { x, y, selected, hoverable, clickable, handle_click }: Props = $props();
+	let { x, y, selected, hoverable, clickable, handle_click, label }: Props =
+		$props();
 </script>
 
 <button
@@ -18,23 +20,36 @@
 	class:selected
 	class:hoverable
 	disabled={!clickable}
+	class:labelled={label && label.length > 0}
 >
+	<span class="label">{label}</span>
 </button>
 
 <style>
 	.node {
-		--size: 20px;
 		position: absolute;
-		width: var(--size);
-		height: var(--size);
-		border-radius: 50%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		transform: translate(-50%, -50%);
+	}
+
+	.label {
+		font-size: 1.25rem;
+	}
+
+	.node:not(.labelled) {
+		--size: 20px;
+		width: var(--size);
+		height: var(--size);
+		border-radius: 50%;
+		transform: initial;
 		top: calc(-0.5 * var(--size) - 1px);
 		left: calc(-0.5 * var(--size) - 1px);
 		background-color: white;
-		transition: all 200ms;
+		transition:
+			opacity 200ms,
+			scale 200ms;
 	}
 
 	.node:disabled {

@@ -4,6 +4,7 @@
 	import type { StepIndex } from './step.config';
 	import type { Arrow, Coord } from './types';
 	import { noop } from './utils';
+	import LabelInput from './LabelInput.svelte';
 
 	type Props = {
 		nodes: Coord[];
@@ -53,8 +54,9 @@
 	}
 
 	function handle_keydown(e: KeyboardEvent) {
-		if (e.key === 'Escape' && start_coord) {
-			start_coord = null;
+		if (e.key === 'Escape') {
+			if (start_coord) start_coord = null;
+			if (label_coord) label_coord = null;
 		}
 	}
 
@@ -62,6 +64,7 @@
 		const existing_node = nodes.find((node) => node.x == x && node.y == y);
 		if (existing_node) {
 			nodes = nodes.filter((node) => node != existing_node);
+			delete node_labels[key({ x, y })];
 		} else {
 			nodes.push({ x, y });
 		}
@@ -126,6 +129,7 @@
 							{selected}
 							hoverable={[1, 2].includes(step)}
 							clickable={[1, 2, 3].includes(step)}
+							label={node_labels[key({ x, y })]}
 						/>
 					{/if}
 				</span>
@@ -159,12 +163,13 @@
 		{/if}
 
 		{#if step === 3 && label_coord}
-			<input
-				class="node_label_input"
-				type="text"
-				id={label_coord.toString()}
-				bind:value={node_labels[key(label_coord)]}
-			/>
+			{#key key(label_coord)}
+				<LabelInput
+					x={label_coord.x}
+					y={label_coord.y}
+					bind:label={node_labels[key(label_coord)]}
+				/>
+			{/key}
 		{/if}
 	</div>
 </div>
@@ -189,13 +194,5 @@
 	.tile {
 		border: 1px solid #333;
 		position: relative;
-	}
-
-	.node_label_input {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		border: 1px solid var(--accent-color);
-		padding: 0.5rem 1rem;
 	}
 </style>
