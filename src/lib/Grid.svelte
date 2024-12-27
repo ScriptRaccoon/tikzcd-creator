@@ -86,6 +86,7 @@
 					y: start_coord.y * 100
 				}}
 				end={mouse_pos}
+				editable={false}
 			/>
 		{/if}
 	</div>
