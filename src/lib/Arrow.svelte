@@ -36,7 +36,7 @@
 		height: var(--thickness);
 		translate: 0px calc(-0.5 * var(--thickness));
 		rotate: var(--angle);
-		background-color: orange;
+		background-color: var(--accent-color);
 	}
 	.arrow:not(.editable) {
 		pointer-events: none;

@@ -1,3 +1,11 @@
+:root {
+	--accent-color: #e1ba30;
+	--dark-font-color: #4a3f23;
+	--font-color: #eee;
+	--bg-color: #222;
+	--card-color: #36773c;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -5,8 +13,8 @@
 }
 
 body {
-	background-color: #222;
-	color: #eee;
+	background-color: var(--bg-color);
+	color: var(--font-color);
 	font-family:
 		system-ui,
 		-apple-system,
@@ -31,10 +39,10 @@ button {
 }
 
 .button {
-	background-color: #e1ba30;
+	background-color: var(--accent-color);
 	padding: 4px 12px;
 	border-radius: 4px;
-	color: #4a3f23;
+	color: var(--dark-font-color);
 }
 
 .button:focus-visible {

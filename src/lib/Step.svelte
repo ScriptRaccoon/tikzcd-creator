@@ -50,7 +50,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		padding: 10px 20px;
-		background-color: #36773c;
+		background-color: var(--card-color);
 		border-radius: 10px;
 		box-shadow: 5px 5px 20px #0004;
 		width: 300px;
