@@ -3,9 +3,10 @@
 
 	type Props = {
 		step: number;
+		reset: () => void;
 	};
 
-	let { step = $bindable() } = $props();
+	let { step = $bindable(), reset }: Props = $props();
 
 	const STEPS = [
 		{
@@ -28,7 +29,7 @@
 		if (step < STEPS.length - 1) {
 			step += 1;
 		} else {
-			step = 1;
+			reset();
 		}
 	}
 </script>

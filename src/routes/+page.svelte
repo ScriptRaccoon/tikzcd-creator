@@ -7,9 +7,13 @@
 	let arrows = $state<Arrow[]>([]);
 	let step = $state<number>(0);
 
-	$inspect(nodes);
+	function reset() {
+		nodes = [];
+		arrows = [];
+		step = 1;
+	}
 </script>
 
 <Grid bind:nodes bind:arrows {step} />
 
-<Step bind:step />
+<Step bind:step {reset} />
