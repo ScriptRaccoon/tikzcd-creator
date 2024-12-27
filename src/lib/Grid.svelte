@@ -1,25 +1,23 @@
 <script lang="ts">
-	import Arrow from './Arrow.svelte';
+	import ArrowComponent from './Arrow.svelte';
 	import { step } from './state.svelte';
 
-	let size = $state({ x: 1, y: 1 });
+	type Coord = { x: number; y: number };
+	type Arrow = { start: Coord; end: Coord };
+
+	let size = $state<{ x: number; y: number }>({ x: 1, y: 1 });
+	const grid_padding = 25;
 
 	$effect(() => {
-		size.x = Math.floor((window.innerWidth - 2 * padding) / 100);
-		size.y = Math.floor((window.innerHeight - 2 * padding) / 100);
+		size.x = Math.floor((window.innerWidth - 2 * grid_padding) / 100);
+		size.y = Math.floor((window.innerHeight - 2 * grid_padding) / 100);
 	});
 
-	const padding = 25;
-
-	let nodes = $state<string[]>([]);
-	let arrows = $state<string[]>([]);
-
-	let start_node = $state<{ x: number; y: number } | null>(null);
+	let nodes = $state<Coord[]>([]);
+	let arrows = $state<Arrow[]>([]);
+	let start_coord = $state<Coord | null>(null);
 
 	let grid_element = $state<HTMLElement | null>(null);
-
-	const k = (x: number, y: number) => `${x},${y}`;
-
 	let mouse_pos = $state<{ x: number; y: number }>({ x: 0, y: 0 });
 
 	$effect(() => {
@@ -36,24 +34,23 @@
 
 	function handle_node_click(x: number, y: number) {
 		if (step.value === 1) {
-			const key = k(x, y);
-			if (nodes.includes(key)) {
-				nodes = nodes.filter((_node) => _node != key);
+			const existing_node = nodes.find((node) => node.x == x && node.y == y);
+			if (existing_node) {
+				nodes = nodes.filter((node) => node != existing_node);
 			} else {
-				nodes.push(k(x, y));
+				nodes.push({ x, y });
 			}
 		} else if (step.value === 2) {
-			const node = { x, y };
-			if (start_node) {
-				if (start_node !== node) {
-					const arrow = `${start_node}->${node}`;
+			if (start_coord) {
+				if (start_coord.x !== x || start_coord.y !== y) {
+					const arrow = { start: start_coord, end: { x, y } };
 					arrows.push(arrow);
-					start_node = null;
+					start_coord = null;
 				} else {
-					start_node = null;
+					start_coord = null;
 				}
 			} else {
-				start_node = node;
+				start_coord = { x, y };
 			}
 		}
 	}
@@ -68,7 +65,7 @@
 	>
 		{#each { length: size.y } as _, y}
 			{#each { length: size.x } as _, x}
-				{@const selected = nodes.includes(k(x, y))}
+				{@const selected = nodes.some((node) => node.x == x && node.y == y)}
 				<span class="tile">
 					{#if y > 0 && x > 0}
 						<button
@@ -82,11 +79,11 @@
 				</span>
 			{/each}
 		{/each}
-		{#if start_node && grid_element}
-			<Arrow
+		{#if start_coord && grid_element}
+			<ArrowComponent
 				start={{
-					x: start_node.x * 100,
-					y: start_node.y * 100
+					x: start_coord.x * 100,
+					y: start_coord.y * 100
 				}}
 				end={mouse_pos}
 			/>
