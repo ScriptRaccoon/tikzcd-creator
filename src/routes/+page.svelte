@@ -5,6 +5,8 @@
 
 	let nodes = $state<Coord[]>([]);
 	let arrows = $state<Arrow[]>([]);
+	let node_labels = $state<Record<string, string>>({});
+
 	let step = $state<number>(0);
 
 	function reset() {
@@ -14,6 +16,6 @@
 	}
 </script>
 
-<Grid bind:nodes bind:arrows {step} />
+<Grid bind:nodes bind:arrows bind:node_labels {step} />
 
 <Step bind:step {reset} />

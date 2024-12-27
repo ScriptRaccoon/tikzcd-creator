@@ -2,9 +2,23 @@
 	import ArrowComponent from './Arrow.svelte';
 	import type { Arrow, Coord } from './types';
 
-	type Props = { nodes: Coord[]; arrows: Arrow[]; step: number };
+	type Props = {
+		nodes: Coord[];
+		arrows: Arrow[];
+		node_labels: Record<string, string>;
+		step: number;
+	};
 
-	let { nodes = $bindable(), arrows = $bindable(), step }: Props = $props();
+	let {
+		nodes = $bindable(),
+		arrows = $bindable(),
+		node_labels = $bindable(),
+		step
+	}: Props = $props();
+
+	let label_coord = $state<Coord | null>(null);
+
+	const key = (coord: Coord) => `${coord.x}|${coord.y}`;
 
 	let size = $state<{ x: number; y: number }>({ x: 1, y: 1 });
 	const grid_padding = 25;
@@ -52,12 +66,20 @@
 			} else {
 				start_coord = { x, y };
 			}
+		} else if (step === 3) {
+			if (label_coord && label_coord.x == x && label_coord.y === y) {
+				label_coord = null;
+			} else {
+				label_coord = { x, y };
+			}
 		}
 	}
 
 	function remove_arrow(id: string) {
 		arrows = arrows.filter((arrow) => arrow.id != id);
 	}
+
+	$inspect(node_labels);
 </script>
 
 <div class="grid-wrapper step-{step}">
@@ -109,6 +131,15 @@
 				editable={false}
 			/>
 		{/if}
+
+		{#if step === 3 && label_coord}
+			<input
+				class="node_label_input"
+				type="text"
+				id={label_coord.toString()}
+				bind:value={node_labels[key(label_coord)]}
+			/>
+		{/if}
 	</div>
 </div>
 
@@ -147,7 +178,6 @@
 		left: calc(-0.5 * var(--size) - 1px);
 		background-color: white;
 		transition: all 200ms;
-		pointer-events: none;
 	}
 
 	.node:not(.selected) {
@@ -167,16 +197,22 @@
 		border-radius: 50%;
 	}
 
-	.grid-wrapper:is(.step-1, .step-2) .node {
-		pointer-events: initial;
+	.grid-wrapper.step-0 .node {
+		pointer-events: none;
+	}
 
+	.grid-wrapper:is(.step-1, .step-2) .node {
 		&:not(.selected):hover {
 			opacity: 1;
 			scale: 1;
 		}
 	}
 
-	.grid-wrapper.step-2 .node {
-		pointer-events: initial;
+	.node_label_input {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		border: 1px solid var(--accent-color);
+		padding: 0.5rem 1rem;
 	}
 </style>

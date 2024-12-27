@@ -49,7 +49,7 @@
 
 <style>
 	.step-card {
-		z-index: 1;
+		z-index: 10;
 		position: absolute;
 		top: 20px;
 		left: 50%;
