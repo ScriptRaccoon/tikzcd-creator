@@ -19,6 +19,11 @@ export const STEPS = [
 			'<b>Create labels for the nodes.</b> Click on a node to edit its label. You can use LaTeX.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
+	{
+		message:
+			'<b>Create labels for the arrows.</b> Click on the circles to edit the labels. You can use LaTeX.',
+		button_labels: { prev: 'Back', next: 'Next' }
+	},
 	{ message: 'Done!', button_labels: { prev: 'Back', next: 'Start over' } }
 ] as const satisfies {
 	message: string

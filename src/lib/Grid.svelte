@@ -78,7 +78,13 @@
 		if (start_coord) {
 			if (start_coord.x !== x || start_coord.y !== y) {
 				const id = crypto.randomUUID()
-				const arrow = { id, start: start_coord, end: { x, y } }
+				const arrow = {
+					id,
+					start: start_coord,
+					end: { x, y },
+					label_above: '',
+					label_below: ''
+				}
 				arrows.push(arrow)
 				start_coord = null
 			} else {
@@ -97,16 +103,17 @@
 		}
 	}
 
-	const click_actions = {
+	const node_click_actions = {
 		0: noop,
 		1: toggle_node,
 		2: create_arrow,
 		3: create_label,
-		4: noop
+		4: noop,
+		5: noop
 	} as const
 
 	function handle_node_click(x: number, y: number) {
-		click_actions[step](x, y)
+		node_click_actions[step](x, y)
 	}
 
 	function remove_arrow(id: string) {
@@ -151,18 +158,26 @@
 					y: arrow.end.y * tile_size
 				}}
 				handle_remove={() => remove_arrow(arrow.id)}
-				editable={step === 2}
+				removable={step === 2}
+				labellable={step === 4}
+				bind:label_above={arrow.label_above}
+				bind:label_below={arrow.label_below}
+				show_labels={step >= 4}
 			></ArrowComponent>
 		{/each}
 
-		{#if start_coord && grid_element}
+		{#if step === 2 && start_coord && grid_element}
 			<ArrowComponent
 				start={{
 					x: start_coord.x * tile_size,
 					y: start_coord.y * tile_size
 				}}
 				end={mouse_pos}
-				editable={false}
+				removable={false}
+				labellable={false}
+				label_above=""
+				label_below=""
+				show_labels={false}
 			/>
 		{/if}
 

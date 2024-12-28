@@ -1,15 +1,29 @@
 <script lang="ts">
 	import { faXmark } from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
+	import Label from './Label.svelte'
 
 	type Props = {
 		start: { x: number; y: number }
 		end: { x: number; y: number }
 		handle_remove?: () => void
-		editable: boolean
+		removable: boolean
+		labellable: boolean
+		label_above: string
+		label_below: string
+		show_labels: boolean
 	}
 
-	const { start, end, handle_remove, editable }: Props = $props()
+	let {
+		start,
+		end,
+		handle_remove,
+		removable,
+		labellable,
+		label_above = $bindable(),
+		label_below = $bindable(),
+		show_labels
+	}: Props = $props()
 
 	const padding = 30
 	const tip_size = 20
@@ -35,10 +49,35 @@
 	style:--length="{length}px"
 	style:--angle="{angle_deg}deg"
 >
+	{#if show_labels}
+		<div class="label_buttons">
+			<div class="rotation_correction">
+				<Label
+					aria_label="Create label above the arrow"
+					size="small"
+					editable={labellable}
+					bind:label={label_above}
+				/>
+			</div>
+			<div class="rotation_correction">
+				<Label
+					aria_label="Create label below the arrow"
+					size="small"
+					editable={labellable}
+					bind:label={label_below}
+				/>
+			</div>
+		</div>
+	{/if}
+
 	<div class="tip" style:--size="{tip_size}px"></div>
 
-	{#if editable && handle_remove !== undefined}
-		<button aria-label="delete arrow" onclick={handle_remove}>
+	{#if removable && handle_remove !== undefined}
+		<button
+			class="remove_btn"
+			aria-label="delete arrow"
+			onclick={handle_remove}
+		>
 			<Fa icon={faXmark} />
 		</button>
 	{/if}
@@ -70,7 +109,7 @@
 		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 	}
 
-	button {
+	.remove_btn {
 		width: 1.5rem;
 		height: 1.5rem;
 		border-radius: 50%;
@@ -82,7 +121,7 @@
 		opacity: 0;
 	}
 
-	button::before {
+	.remove_btn::before {
 		content: '';
 		position: absolute;
 		width: 3rem;
@@ -90,7 +129,18 @@
 		border-radius: 50%;
 	}
 
-	button:hover {
+	.remove_btn:hover {
 		opacity: 1;
+	}
+
+	.label_buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		translate: 5px; /* center including arrow tip */
+	}
+
+	.rotation_correction {
+		rotate: calc(-1 * var(--angle));
 	}
 </style>
