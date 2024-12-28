@@ -11,7 +11,7 @@
 
 	const { start, end, handle_remove, editable }: Props = $props();
 
-	const padding = 20;
+	const padding = 30;
 
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) - 2.5 * padding
@@ -42,7 +42,7 @@
 
 <style>
 	.arrow {
-		--thickness: 4px;
+		--thickness: 3px;
 		position: absolute;
 		transform-origin: left;
 		top: var(--y);

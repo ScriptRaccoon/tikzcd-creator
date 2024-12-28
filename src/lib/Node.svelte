@@ -22,7 +22,6 @@
 	class:selected
 	class:hoverable
 	disabled={!clickable}
-	class:labelled={label && label.length > 0}
 >
 	{#if label}
 		<span class="label">
@@ -73,5 +72,9 @@
 
 	.node:disabled {
 		cursor: initial;
+	}
+
+	.label {
+		font-size: 2rem;
 	}
 </style>
