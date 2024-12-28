@@ -54,7 +54,7 @@
 		position: absolute;
 		width: 1.25rem;
 		height: 1.25rem;
-		background-color: white;
+		background-color: var(--node-color);
 		border-radius: 50%;
 		transition:
 			opacity 200ms,

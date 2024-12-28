@@ -3,7 +3,11 @@
 	--dark-font-color: #4a3f23;
 	--font-color: #eee;
 	--bg-color: #222;
+	--line-color: #333;
 	--card-color: #36773c;
+	--danger-color: orangered;
+	--node-color: white;
+	--shadow-color: #0005;
 }
 
 * {

@@ -34,7 +34,7 @@
 		border-radius: 0.25rem;
 		translate: -50% -4.25rem;
 		background: black;
-		box-shadow: 0 0 1rem #0005;
+		box-shadow: 0 0 1rem var(--shadow-color);
 		font-size: 1.5rem;
 		font-family: monospace;
 		text-align: center;

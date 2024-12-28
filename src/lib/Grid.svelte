@@ -194,12 +194,12 @@
 		display: inline-grid;
 		grid-template-columns: repeat(var(--x), var(--tile-size));
 		grid-template-rows: repeat(var(--y), var(--tile-size));
-		outline: 1px solid #333;
+		outline: 1px solid var(--line-color);
 		position: relative;
 	}
 
 	.tile {
-		border: 1px solid #333;
+		border: 1px solid var(--line-color);
 		position: relative;
 	}
 </style>

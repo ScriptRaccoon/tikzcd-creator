@@ -74,7 +74,7 @@
 		width: 1.5rem;
 		height: 1.5rem;
 		border-radius: 50%;
-		background-color: coral;
+		background-color: var(--danger-color);
 		display: flex;
 		justify-content: center;
 		align-items: center;

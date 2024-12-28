@@ -56,7 +56,7 @@
 		padding: 1.25rem 1.25rem 0.75rem;
 		background-color: var(--card-color);
 		border-radius: 0.5rem;
-		box-shadow: 0 0 1rem #0005;
+		box-shadow: 0 0 1rem var(--shadow-color);
 		width: min(90vw, 20rem);
 	}
 
