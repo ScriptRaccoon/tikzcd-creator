@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { render_latex } from './utils';
+	import { render_latex } from './utils'
 
 	type Props = {
-		selected: boolean;
-		hoverable: boolean;
-		clickable: boolean;
-		handle_click: () => void;
-		label: string | undefined;
-		aria_label: string;
-	};
+		selected: boolean
+		hoverable: boolean
+		clickable: boolean
+		handle_click: () => void
+		label: string | undefined
+		aria_label: string
+	}
 
 	let {
 		selected,
@@ -17,7 +17,7 @@
 		handle_click,
 		label,
 		aria_label
-	}: Props = $props();
+	}: Props = $props()
 </script>
 
 <button

@@ -1,101 +1,99 @@
 <script lang="ts">
-	import ArrowComponent from './Arrow.svelte';
-	import Node from './Node.svelte';
-	import type { StepIndex } from './step.config';
-	import type { Arrow, Coord } from './types';
-	import { noop } from './utils';
-	import LabelInput from './LabelInput.svelte';
+	import ArrowComponent from './Arrow.svelte'
+	import Node from './Node.svelte'
+	import type { StepIndex } from './step.config'
+	import type { Arrow, Coord } from './types'
+	import { noop } from './utils'
+	import LabelInput from './LabelInput.svelte'
 
-	const tile_size = 100;
+	const tile_size = 100
 
 	type Props = {
-		nodes: Coord[];
-		arrows: Arrow[];
-		node_labels: Record<string, string>;
-		step: StepIndex;
-	};
+		nodes: Coord[]
+		arrows: Arrow[]
+		node_labels: Record<string, string>
+		step: StepIndex
+	}
 
 	let {
 		nodes = $bindable(),
 		arrows = $bindable(),
 		node_labels = $bindable(),
 		step
-	}: Props = $props();
+	}: Props = $props()
 
-	let label_coord = $state<Coord | null>(null);
+	let label_coord = $state<Coord | null>(null)
 
-	const key = (coord: Coord) => `${coord.x}|${coord.y}`;
+	const key = (coord: Coord) => `${coord.x}|${coord.y}`
 
-	let grid_size = $state<{ x: number; y: number }>({ x: 1, y: 1 });
-	const grid_padding = 25;
+	let grid_size = $state<{ x: number; y: number }>({ x: 1, y: 1 })
+	const grid_padding = 25
 
 	$effect(() => {
-		grid_size.x = Math.floor(
-			(window.innerWidth - 2 * grid_padding) / tile_size
-		);
+		grid_size.x = Math.floor((window.innerWidth - 2 * grid_padding) / tile_size)
 		grid_size.y = Math.floor(
 			(window.innerHeight - 2 * grid_padding) / tile_size
-		);
-	});
+		)
+	})
 
-	let start_coord = $state<Coord | null>(null);
+	let start_coord = $state<Coord | null>(null)
 
-	let grid_element = $state<HTMLElement | null>(null);
-	let mouse_pos = $state<{ x: number; y: number }>({ x: 0, y: 0 });
+	let grid_element = $state<HTMLElement | null>(null)
+	let mouse_pos = $state<{ x: number; y: number }>({ x: 0, y: 0 })
 
 	$effect(() => {
-		window.addEventListener('mousemove', update_mouse_pos);
-		window.addEventListener('keydown', handle_keydown);
+		window.addEventListener('mousemove', update_mouse_pos)
+		window.addEventListener('keydown', handle_keydown)
 		return () => {
-			window.removeEventListener('mousemove', update_mouse_pos);
-			window.removeEventListener('keydown', handle_keydown);
-		};
-	});
+			window.removeEventListener('mousemove', update_mouse_pos)
+			window.removeEventListener('keydown', handle_keydown)
+		}
+	})
 
 	function update_mouse_pos(e: MouseEvent) {
-		if (!grid_element) return;
-		const rect = grid_element.getBoundingClientRect();
-		mouse_pos.x = e.clientX - rect.left;
-		mouse_pos.y = e.clientY - rect.top;
+		if (!grid_element) return
+		const rect = grid_element.getBoundingClientRect()
+		mouse_pos.x = e.clientX - rect.left
+		mouse_pos.y = e.clientY - rect.top
 	}
 
 	function handle_keydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			if (start_coord) start_coord = null;
-			if (label_coord) label_coord = null;
+			if (start_coord) start_coord = null
+			if (label_coord) label_coord = null
 		}
 	}
 
 	function toggle_node(x: number, y: number) {
-		const existing_node = nodes.find((node) => node.x == x && node.y == y);
+		const existing_node = nodes.find((node) => node.x == x && node.y == y)
 		if (existing_node) {
-			nodes = nodes.filter((node) => node != existing_node);
-			delete node_labels[key({ x, y })];
+			nodes = nodes.filter((node) => node != existing_node)
+			delete node_labels[key({ x, y })]
 		} else {
-			nodes.push({ x, y });
+			nodes.push({ x, y })
 		}
 	}
 
 	function create_arrow(x: number, y: number) {
 		if (start_coord) {
 			if (start_coord.x !== x || start_coord.y !== y) {
-				const id = crypto.randomUUID();
-				const arrow = { id, start: start_coord, end: { x, y } };
-				arrows.push(arrow);
-				start_coord = null;
+				const id = crypto.randomUUID()
+				const arrow = { id, start: start_coord, end: { x, y } }
+				arrows.push(arrow)
+				start_coord = null
 			} else {
-				start_coord = null;
+				start_coord = null
 			}
 		} else {
-			start_coord = { x, y };
+			start_coord = { x, y }
 		}
 	}
 
 	function create_label(x: number, y: number) {
 		if (label_coord && label_coord.x == x && label_coord.y === y) {
-			label_coord = null;
+			label_coord = null
 		} else {
-			label_coord = { x, y };
+			label_coord = { x, y }
 		}
 	}
 
@@ -105,14 +103,14 @@
 		2: create_arrow,
 		3: create_label,
 		4: noop
-	} as const;
+	} as const
 
 	function handle_node_click(x: number, y: number) {
-		click_actions[step](x, y);
+		click_actions[step](x, y)
 	}
 
 	function remove_arrow(id: string) {
-		arrows = arrows.filter((arrow) => arrow.id != id);
+		arrows = arrows.filter((arrow) => arrow.id != id)
 	}
 </script>
 

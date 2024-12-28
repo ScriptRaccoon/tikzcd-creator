@@ -1,31 +1,31 @@
 <script lang="ts">
-	import { faXmark } from '@fortawesome/free-solid-svg-icons';
-	import Fa from 'svelte-fa';
+	import { faXmark } from '@fortawesome/free-solid-svg-icons'
+	import Fa from 'svelte-fa'
 
 	type Props = {
-		start: { x: number; y: number };
-		end: { x: number; y: number };
-		handle_remove?: () => void;
-		editable: boolean;
-	};
+		start: { x: number; y: number }
+		end: { x: number; y: number }
+		handle_remove?: () => void
+		editable: boolean
+	}
 
-	const { start, end, handle_remove, editable }: Props = $props();
+	const { start, end, handle_remove, editable }: Props = $props()
 
-	const padding = 30;
-	const tip_size = 20;
+	const padding = 30
+	const tip_size = 20
 
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
 			2 * padding -
 			0.5 * tip_size
-	);
+	)
 
-	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x));
+	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x))
 
-	let angle_deg = $derived((180 / Math.PI) * angle);
+	let angle_deg = $derived((180 / Math.PI) * angle)
 
-	let padded_start_x = $derived(start.x + Math.cos(angle) * padding);
-	let padded_start_y = $derived(start.y + Math.sin(angle) * padding);
+	let padded_start_x = $derived(start.x + Math.cos(angle) * padding)
+	let padded_start_y = $derived(start.y + Math.sin(angle) * padding)
 </script>
 
 <div

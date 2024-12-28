@@ -1,27 +1,27 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
-	import { STEPS, type StepIndex } from './step.config';
+	import { fly } from 'svelte/transition'
+	import { STEPS, type StepIndex } from './step.config'
 
 	type Props = {
-		step: StepIndex;
-		reset: () => void;
-	};
+		step: StepIndex
+		reset: () => void
+	}
 
-	let { step = $bindable(), reset }: Props = $props();
+	let { step = $bindable(), reset }: Props = $props()
 
-	let current_step = $derived(STEPS[step]);
+	let current_step = $derived(STEPS[step])
 
 	function handle_next() {
 		if (step < STEPS.length - 1) {
-			step += 1;
+			step += 1
 		} else {
-			reset();
+			reset()
 		}
 	}
 
 	function handle_previous() {
 		if (step > 0) {
-			step -= 1;
+			step -= 1
 		}
 	}
 </script>

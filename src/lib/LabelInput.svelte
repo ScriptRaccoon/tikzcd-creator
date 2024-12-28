@@ -1,18 +1,18 @@
 <script lang="ts">
 	type Props = {
-		x: number;
-		y: number;
-		label: string | undefined;
-		aria_label: string;
-	};
+		x: number
+		y: number
+		label: string | undefined
+		aria_label: string
+	}
 
-	let { x, y, label = $bindable(), aria_label }: Props = $props();
+	let { x, y, label = $bindable(), aria_label }: Props = $props()
 
-	let element = $state<HTMLInputElement | null>(null);
+	let element = $state<HTMLInputElement | null>(null)
 
 	$effect(() => {
-		element?.select();
-	});
+		element?.select()
+	})
 </script>
 
 <input
