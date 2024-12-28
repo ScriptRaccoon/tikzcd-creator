@@ -25,7 +25,11 @@
 	class:labelled={label && label.length > 0}
 >
 	{#if label}
-		<span class="label">{@html render_latex(label)}</span>
+		<span class="label">
+			{@html render_latex(label)}
+		</span>
+	{:else}
+		<div class="circle"></div>
 	{/if}
 </button>
 
@@ -35,46 +39,39 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		transform: translate(-50%, -50%);
+		transform: translate(calc(-50% - 1px), calc(-50% - 1px));
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
 	}
 
-	.node:not(.labelled) {
-		--size: 20px;
-		width: var(--size);
-		height: var(--size);
-		border-radius: 50%;
-		transform: initial;
-		top: calc(-0.5 * var(--size) - 1px);
-		left: calc(-0.5 * var(--size) - 1px);
+	.circle {
+		position: absolute;
+		width: 20px;
+		height: 20px;
 		background-color: white;
+		border-radius: 50%;
 		transition:
 			opacity 200ms,
 			scale 200ms;
 	}
 
-	.node:disabled {
-		pointer-events: none;
+	.node:not(.selected) .circle {
+		opacity: 0;
+		scale: 0;
 	}
 
-	.node.hoverable:not(.selected):hover {
+	.node.selected .circle {
+		opacity: 1;
+		scale: 1.25;
+	}
+
+	.node.hoverable:not(.selected):hover .circle {
 		opacity: 1;
 		scale: 1;
 	}
 
-	.node:not(.selected) {
-		opacity: 0;
-		scale: 0.5;
-	}
-
-	.node.selected {
-		scale: 1.5;
-	}
-
-	.node::before {
-		position: absolute;
-		content: '';
-		width: 65px;
-		height: 65px;
-		border-radius: 50%;
+	.node:disabled {
+		cursor: initial;
 	}
 </style>

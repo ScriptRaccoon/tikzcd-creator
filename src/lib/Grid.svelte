@@ -127,7 +127,7 @@
 							{y}
 							handle_click={() => handle_node_click(x, y)}
 							{selected}
-							hoverable={[1, 2].includes(step)}
+							hoverable={[1, 2, 3].includes(step)}
 							clickable={[1, 2, 3].includes(step)}
 							label={node_labels[key({ x, y })]}
 						/>
