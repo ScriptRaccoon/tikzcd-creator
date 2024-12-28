@@ -6,6 +6,8 @@
 	import { noop } from './utils';
 	import LabelInput from './LabelInput.svelte';
 
+	const tile_size = 100;
+
 	type Props = {
 		nodes: Coord[];
 		arrows: Arrow[];
@@ -24,12 +26,16 @@
 
 	const key = (coord: Coord) => `${coord.x}|${coord.y}`;
 
-	let size = $state<{ x: number; y: number }>({ x: 1, y: 1 });
+	let grid_size = $state<{ x: number; y: number }>({ x: 1, y: 1 });
 	const grid_padding = 25;
 
 	$effect(() => {
-		size.x = Math.floor((window.innerWidth - 2 * grid_padding) / 100);
-		size.y = Math.floor((window.innerHeight - 2 * grid_padding) / 100);
+		grid_size.x = Math.floor(
+			(window.innerWidth - 2 * grid_padding) / tile_size
+		);
+		grid_size.y = Math.floor(
+			(window.innerHeight - 2 * grid_padding) / tile_size
+		);
 	});
 
 	let start_coord = $state<Coord | null>(null);
@@ -113,18 +119,18 @@
 <div class="grid-wrapper">
 	<div
 		class="grid"
-		style:--x={size.x}
-		style:--y={size.y}
+		style:--x={grid_size.x}
+		style:--y={grid_size.y}
+		style:--tile-size="{tile_size}px"
 		bind:this={grid_element}
 	>
-		{#each { length: size.y } as _, y}
-			{#each { length: size.x } as _, x}
+		{#each { length: grid_size.y } as _, y}
+			{#each { length: grid_size.x } as _, x}
 				{@const selected = nodes.some((node) => node.x == x && node.y == y)}
 				<span class="tile">
 					{#if y > 0 && x > 0}
 						<Node
-							{x}
-							{y}
+							aria_label="node at {x}, {y}"
 							handle_click={() => handle_node_click(x, y)}
 							{selected}
 							hoverable={[1, 2, 3].includes(step)}
@@ -139,12 +145,12 @@
 		{#each arrows as arrow (arrow.id)}
 			<ArrowComponent
 				start={{
-					x: arrow.start.x * 100,
-					y: arrow.start.y * 100
+					x: arrow.start.x * tile_size,
+					y: arrow.start.y * tile_size
 				}}
 				end={{
-					x: arrow.end.x * 100,
-					y: arrow.end.y * 100
+					x: arrow.end.x * tile_size,
+					y: arrow.end.y * tile_size
 				}}
 				handle_remove={() => remove_arrow(arrow.id)}
 				editable={step === 2}
@@ -154,8 +160,8 @@
 		{#if start_coord && grid_element}
 			<ArrowComponent
 				start={{
-					x: start_coord.x * 100,
-					y: start_coord.y * 100
+					x: start_coord.x * tile_size,
+					y: start_coord.y * tile_size
 				}}
 				end={mouse_pos}
 				editable={false}
@@ -165,8 +171,9 @@
 		{#if step === 3 && label_coord}
 			{#key key(label_coord)}
 				<LabelInput
-					x={label_coord.x}
-					y={label_coord.y}
+					aria_label="label for node at {label_coord.x}, {label_coord.y}"
+					x={label_coord.x * tile_size}
+					y={label_coord.y * tile_size}
 					bind:label={node_labels[key(label_coord)]}
 				/>
 			{/key}
@@ -185,8 +192,8 @@
 
 	.grid {
 		display: inline-grid;
-		grid-template-columns: repeat(var(--x), 100px);
-		grid-template-rows: repeat(var(--y), 100px);
+		grid-template-columns: repeat(var(--x), var(--tile-size));
+		grid-template-rows: repeat(var(--y), var(--tile-size));
 		outline: 1px solid #333;
 		position: relative;
 	}

@@ -2,21 +2,26 @@
 	import { render_latex } from './utils';
 
 	type Props = {
-		x: number;
-		y: number;
 		selected: boolean;
 		hoverable: boolean;
 		clickable: boolean;
-		label: string | undefined;
 		handle_click: () => void;
+		label: string | undefined;
+		aria_label: string;
 	};
 
-	let { x, y, selected, hoverable, clickable, handle_click, label }: Props =
-		$props();
+	let {
+		selected,
+		hoverable,
+		clickable,
+		handle_click,
+		label,
+		aria_label
+	}: Props = $props();
 </script>
 
 <button
-	aria-label="node at {x}, {y}"
+	aria-label={aria_label}
 	class="node"
 	onclick={handle_click}
 	class:selected
@@ -38,16 +43,17 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		/* shift 1px for tile outline */
 		transform: translate(calc(-50% - 1px), calc(-50% - 1px));
-		width: 60px;
-		height: 60px;
+		width: 3rem;
+		height: 3rem;
 		border-radius: 50%;
 	}
 
 	.circle {
 		position: absolute;
-		width: 20px;
-		height: 20px;
+		width: 1.25rem;
+		height: 1.25rem;
 		background-color: white;
 		border-radius: 50%;
 		transition:

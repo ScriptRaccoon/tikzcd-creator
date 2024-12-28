@@ -12,9 +12,12 @@
 	const { start, end, handle_remove, editable }: Props = $props();
 
 	const padding = 30;
+	const tip_size = 20;
 
 	let length = $derived(
-		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) - 2.5 * padding
+		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
+			2 * padding -
+			0.5 * tip_size
 	);
 
 	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x));
@@ -32,7 +35,8 @@
 	style:--length="{length}px"
 	style:--angle="{angle_deg}deg"
 >
-	<div class="tip"></div>
+	<div class="tip" style:--size="{tip_size}px"></div>
+
 	{#if editable && handle_remove !== undefined}
 		<button aria-label="delete arrow" onclick={handle_remove}>
 			<Fa icon={faXmark} />
@@ -49,7 +53,7 @@
 		left: var(--x);
 		width: var(--length);
 		height: var(--thickness);
-		translate: 0px calc(-0.5 * var(--thickness));
+		translate: 0 calc(-0.5 * var(--thickness));
 		rotate: var(--angle);
 		background-color: var(--accent-color);
 		display: flex;
@@ -59,16 +63,16 @@
 
 	.tip {
 		position: absolute;
-		right: -10px;
-		width: 20px;
-		height: 20px;
+		right: calc(-0.5 * var(--size));
+		width: var(--size);
+		height: var(--size);
 		background-color: inherit;
 		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 	}
 
 	button {
-		width: 30px;
-		height: 30px;
+		width: 1.5rem;
+		height: 1.5rem;
 		border-radius: 50%;
 		background-color: coral;
 		display: flex;
@@ -81,8 +85,8 @@
 	button::before {
 		content: '';
 		position: absolute;
-		width: 50px;
-		height: 50px;
+		width: 3rem;
+		height: 3rem;
 		border-radius: 50%;
 	}
 

@@ -50,22 +50,22 @@
 	.step-card {
 		z-index: 10;
 		position: absolute;
-		top: 20px;
+		top: 1.5rem;
 		left: 50%;
 		transform: translateX(-50%);
-		padding: 10px 20px;
+		padding: 1.25rem 1.25rem 0.75rem;
 		background-color: var(--card-color);
-		border-radius: 10px;
-		box-shadow: 5px 5px 20px #0004;
-		width: 300px;
+		border-radius: 0.5rem;
+		box-shadow: 0 0 1rem #0005;
+		width: min(90vw, 20rem);
 	}
 
 	p {
-		margin-block: 10px 15px;
-		line-height: 1.4;
+		line-height: 1.5;
 	}
 
 	.buttons {
+		margin-top: 1rem;
 		display: flex;
 		justify-content: space-between;
 	}
