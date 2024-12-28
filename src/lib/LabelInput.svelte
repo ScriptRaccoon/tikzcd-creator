@@ -30,10 +30,15 @@
 		top: var(--y);
 		left: var(--x);
 		outline: 1px solid var(--accent-color);
-		padding: 0.5rem 0.5rem;
+		padding: 0.5rem 0.75rem;
 		border-radius: 5px;
-		translate: -50% -175%;
+		translate: -50% -4.25rem;
 		background: black;
 		box-shadow: 0px 0px 20px #0005;
+		font-size: 1.5rem;
+		font-family: monospace;
+		text-align: center;
+		field-sizing: content; /* https://caniuse.com/?search=field-sizing */
+		min-width: 4rem;
 	}
 </style>
