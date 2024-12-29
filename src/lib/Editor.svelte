@@ -99,13 +99,13 @@
 			{@const selected = nodes.some(
 				(node) => node.pos.x == x && node.pos.y == y
 			)}
-			<NodeComponent
-				x={x * tile_size}
-				y={y * tile_size}
-				aria_label="node at {x}, {y}"
-				handle_click={() => handle_node_click(x, y)}
-				{selected}
-			/>
+			<Positioner x={x * tile_size} y={y * tile_size}>
+				<NodeComponent
+					aria_label="node at {x}, {y}"
+					handle_click={() => handle_node_click(x, y)}
+					{selected}
+				/>
+			</Positioner>
 		{/each}
 	{/each}
 {/if}

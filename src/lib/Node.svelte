@@ -1,19 +1,15 @@
 <script lang="ts">
 	type Props = {
-		x: number
-		y: number
 		selected: boolean
 		handle_click: () => void
 		aria_label: string
 	}
 
-	let { x, y, selected, handle_click, aria_label }: Props = $props()
+	let { selected, handle_click, aria_label }: Props = $props()
 </script>
 
 <button
 	class="node"
-	style:--x="{x}px"
-	style:--y="{y}px"
 	aria-label={aria_label}
 	onclick={handle_click}
 	class:selected
@@ -23,10 +19,6 @@
 
 <style>
 	.node {
-		position: absolute;
-		left: var(--x);
-		top: var(--y);
-		translate: -50% -50%;
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
