@@ -1,5 +1,3 @@
-export const noop = () => {}
-
 export function render_latex(input: string): string {
 	// @ts-ignore
 	if (typeof MathJax !== undefined) {

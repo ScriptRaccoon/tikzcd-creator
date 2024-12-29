@@ -4,7 +4,6 @@
 	import NodeComponent from './Node.svelte'
 	import type { StepIndex } from './step.config'
 	import type { Arrow, Coord, Node } from './types'
-	import { noop } from './utils'
 
 	type Props = {
 		nodes: Node[]
