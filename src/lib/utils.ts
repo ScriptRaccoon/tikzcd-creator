@@ -9,8 +9,8 @@ export function render_latex(input: string): string {
 	return ''
 }
 
-export function agree(start: Coord, end: Coord) {
-	return start.x === end.x && start.y === end.y
+export function agree(pos1: Coord, pos2: Coord) {
+	return pos1.x === pos2.x && pos1.y === pos2.y
 }
 
 export function repeat_string(str: string, times: number) {

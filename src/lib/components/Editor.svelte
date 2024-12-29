@@ -2,6 +2,7 @@
 	import type { StepIndex } from '../step.config'
 	import type { Coord, Diagram } from '../types'
 	import { tile_size } from '../constants'
+	import { agree } from '../utils'
 
 	import ArrowComponent from './Arrow.svelte'
 	import Label from './Label.svelte'
@@ -39,28 +40,26 @@
 		}
 	}
 
-	function toggle_node(x: number, y: number) {
-		const existing_node = diagram.nodes.find(
-			(node) => node.pos.x == x && node.pos.y == y
-		)
+	function toggle_node(pos: Coord) {
+		const existing_node = diagram.nodes.find((node) => agree(node.pos, pos))
 		if (existing_node) {
 			diagram.nodes = diagram.nodes.filter((node) => node != existing_node)
 		} else {
 			const new_node = {
-				pos: { x, y },
+				pos,
 				label: ''
 			}
 			diagram.nodes.push(new_node)
 		}
 	}
 
-	function create_arrow(x: number, y: number) {
+	function create_arrow(pos: Coord) {
 		if (!next_arrow_start) {
-			next_arrow_start = { x, y }
+			next_arrow_start = pos
 			return
 		}
 
-		if (next_arrow_start.x == x && next_arrow_start.y == y) {
+		if (agree(next_arrow_start, pos)) {
 			next_arrow_start = null
 			return
 		}
@@ -70,7 +69,7 @@
 		const new_arrow = {
 			id,
 			start: next_arrow_start,
-			end: { x, y },
+			end: pos,
 			label_above: '',
 			label_below: ''
 		}
@@ -83,11 +82,11 @@
 		diagram.arrows = diagram.arrows.filter((arrow) => arrow.id != id)
 	}
 
-	function handle_node_click(x: number, y: number) {
+	function handle_node_click(pos: Coord) {
 		if (step === 1) {
-			toggle_node(x, y)
+			toggle_node(pos)
 		} else if (step === 2) {
-			create_arrow(x, y)
+			create_arrow(pos)
 		}
 	}
 </script>
@@ -95,13 +94,13 @@
 {#if step === 1 || step === 2}
 	{#each { length: grid_rows + 1 } as _, y}
 		{#each { length: grid_cols + 1 } as _, x}
-			{@const selected = diagram.nodes.some(
-				(node) => node.pos.x == x && node.pos.y == y
+			{@const selected = diagram.nodes.some((node) =>
+				agree(node.pos, { x, y })
 			)}
 			<Positioner x={x * tile_size} y={y * tile_size}>
 				<NodeComponent
 					aria_label="node at {x}, {y}"
-					handle_click={() => handle_node_click(x, y)}
+					handle_click={() => handle_node_click({ x, y })}
 					{selected}
 				/>
 			</Positioner>
