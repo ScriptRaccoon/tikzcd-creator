@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
-	import { render_latex } from './utils'
+	import { render_latex } from '../utils'
 
 	type Props = {
 		aria_label: string

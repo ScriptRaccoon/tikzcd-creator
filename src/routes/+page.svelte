@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Grid from '$lib/Grid.svelte'
-	import Step from '$lib/Step.svelte'
+	import Grid from '$lib/components/Grid.svelte'
+	import Step from '$lib/components/Step.svelte'
 	import type { StepIndex } from '$lib/step.config'
 	import type { Node, Arrow } from '$lib/types'
 

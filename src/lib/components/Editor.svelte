@@ -1,11 +1,12 @@
 <script lang="ts">
+	import type { StepIndex } from '../step.config'
+	import type { Arrow, Coord, Node } from '../types'
+	import { tile_size } from '../constants'
+
 	import ArrowComponent from './Arrow.svelte'
-	import { tile_size } from './constants'
 	import Label from './Label.svelte'
 	import NodeComponent from './Node.svelte'
 	import Positioner from './Positioner.svelte'
-	import type { StepIndex } from './step.config'
-	import type { Arrow, Coord, Node } from './types'
 
 	type Props = {
 		nodes: Node[]
