@@ -24,8 +24,6 @@
 		mouse_pos
 	}: Props = $props()
 
-	let label_coord = $state<Coord | null>(null)
-
 	let start_coord = $state<Coord | null>(null)
 
 	let grid_element = $state<HTMLElement | null>(null)
@@ -40,7 +38,6 @@
 	function handle_keydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
 			if (start_coord) start_coord = null
-			if (label_coord) label_coord = null
 		}
 	}
 
@@ -80,25 +77,12 @@
 		}
 	}
 
-	function create_label(x: number, y: number) {
-		if (label_coord && label_coord.x == x && label_coord.y === y) {
-			label_coord = null
-		} else {
-			label_coord = { x, y }
-		}
-	}
-
-	const node_click_actions = {
-		0: noop,
-		1: toggle_node,
-		2: create_arrow,
-		3: create_label,
-		4: noop,
-		5: noop
-	} as const
-
 	function handle_node_click(x: number, y: number) {
-		node_click_actions[step](x, y)
+		if (step === 1) {
+			toggle_node(x, y)
+		} else if (step === 2) {
+			create_arrow(x, y)
+		}
 	}
 
 	function remove_arrow(id: string) {
@@ -106,20 +90,22 @@
 	}
 </script>
 
-{#each { length: grid_rows + 1 } as _, y}
-	{#each { length: grid_cols + 1 } as _, x}
-		{@const selected = nodes.some((node) => node.pos.x == x && node.pos.y == y)}
-		<NodeComponent
-			x={x * tile_size + 1}
-			y={y * tile_size + 1}
-			aria_label="node at {x}, {y}"
-			handle_click={() => handle_node_click(x, y)}
-			{selected}
-			hoverable={[1, 2, 3].includes(step)}
-			clickable={[1, 2, 3].includes(step)}
-		/>
+{#if step === 1 || step === 2}
+	{#each { length: grid_rows + 1 } as _, y}
+		{#each { length: grid_cols + 1 } as _, x}
+			{@const selected = nodes.some(
+				(node) => node.pos.x == x && node.pos.y == y
+			)}
+			<NodeComponent
+				x={x * tile_size + 1}
+				y={y * tile_size + 1}
+				aria_label="node at {x}, {y}"
+				handle_click={() => handle_node_click(x, y)}
+				{selected}
+			/>
+		{/each}
 	{/each}
-{/each}
+{/if}
 
 {#each arrows as arrow (arrow.id)}
 	<ArrowComponent

@@ -3,21 +3,11 @@
 		x: number
 		y: number
 		selected: boolean
-		hoverable: boolean
-		clickable: boolean
 		handle_click: () => void
 		aria_label: string
 	}
 
-	let {
-		x,
-		y,
-		selected,
-		hoverable,
-		clickable,
-		handle_click,
-		aria_label
-	}: Props = $props()
+	let { x, y, selected, handle_click, aria_label }: Props = $props()
 </script>
 
 <button
@@ -27,8 +17,6 @@
 	aria-label={aria_label}
 	onclick={handle_click}
 	class:selected
-	class:hoverable
-	disabled={!clickable}
 >
 	<div class="circle"></div>
 </button>
@@ -63,7 +51,7 @@
 		scale: 0;
 	}
 
-	.node:not(.selected).hoverable:hover .circle {
+	.node:not(.selected):hover .circle {
 		opacity: 1;
 		scale: 1;
 	}
@@ -71,9 +59,5 @@
 	.node.selected .circle {
 		opacity: 1;
 		scale: 1.25;
-	}
-
-	.node:disabled {
-		cursor: initial;
 	}
 </style>
