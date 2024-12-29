@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition'
+
 	type Props = {
 		selected: boolean
 		handle_click: () => void
@@ -9,6 +11,7 @@
 </script>
 
 <button
+	transition:fade|global={{ duration: 150 }}
 	class="node"
 	aria-label={aria_label}
 	onclick={handle_click}

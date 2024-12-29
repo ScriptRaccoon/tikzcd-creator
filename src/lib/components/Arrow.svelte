@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { faXmark } from '@fortawesome/free-solid-svg-icons'
+	import { fade } from 'svelte/transition'
 	import Fa from 'svelte-fa'
 	import Label from './Label.svelte'
 
@@ -48,6 +49,7 @@
 	style:--y="{padded_start_y}px"
 	style:--length="{length}px"
 	style:--angle="{angle_deg}deg"
+	transition:fade|global={{ duration: 150 }}
 >
 	{#if show_labels}
 		<div class="label_buttons">
