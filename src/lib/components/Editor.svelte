@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { StepIndex } from '../step.config'
-	import type { Arrow, Coord, Node } from '../types'
+	import type { Coord, Diagram } from '../types'
 	import { tile_size } from '../constants'
 
 	import ArrowComponent from './Arrow.svelte'
@@ -9,8 +9,7 @@
 	import Positioner from './Positioner.svelte'
 
 	type Props = {
-		nodes: Node[]
-		arrows: Arrow[]
+		diagram: Diagram
 		step: StepIndex
 		grid_cols: number
 		grid_rows: number
@@ -18,8 +17,7 @@
 	}
 
 	let {
-		nodes = $bindable(),
-		arrows = $bindable(),
+		diagram = $bindable(),
 		step,
 		grid_cols,
 		grid_rows,
@@ -42,17 +40,17 @@
 	}
 
 	function toggle_node(x: number, y: number) {
-		const existing_node = nodes.find(
+		const existing_node = diagram.nodes.find(
 			(node) => node.pos.x == x && node.pos.y == y
 		)
 		if (existing_node) {
-			nodes = nodes.filter((node) => node != existing_node)
+			diagram.nodes = diagram.nodes.filter((node) => node != existing_node)
 		} else {
 			const new_node = {
 				pos: { x, y },
 				label: ''
 			}
-			nodes.push(new_node)
+			diagram.nodes.push(new_node)
 		}
 	}
 
@@ -76,13 +74,13 @@
 			label_above: '',
 			label_below: ''
 		}
-		arrows.push(new_arrow)
+		diagram.arrows.push(new_arrow)
 
 		next_arrow_start = null
 	}
 
 	function remove_arrow(id: string) {
-		arrows = arrows.filter((arrow) => arrow.id != id)
+		diagram.arrows = diagram.arrows.filter((arrow) => arrow.id != id)
 	}
 
 	function handle_node_click(x: number, y: number) {
@@ -97,7 +95,7 @@
 {#if step === 1 || step === 2}
 	{#each { length: grid_rows + 1 } as _, y}
 		{#each { length: grid_cols + 1 } as _, x}
-			{@const selected = nodes.some(
+			{@const selected = diagram.nodes.some(
 				(node) => node.pos.x == x && node.pos.y == y
 			)}
 			<Positioner x={x * tile_size} y={y * tile_size}>
@@ -112,7 +110,7 @@
 {/if}
 
 {#if step >= 2}
-	{#each arrows as arrow (arrow.id)}
+	{#each diagram.arrows as arrow (arrow.id)}
 		<ArrowComponent
 			start={{
 				x: arrow.start.x * tile_size,
@@ -148,7 +146,7 @@
 {/if}
 
 {#if step >= 3}
-	{#each nodes as node}
+	{#each diagram.nodes as node}
 		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
 			<Label
 				aria_label="label for node at {node.pos.x}, {node.pos.y}"

@@ -9,3 +9,8 @@ export type Arrow = {
 	label_above: string
 	label_below: string
 }
+
+export type Diagram = {
+	nodes: Node[]
+	arrows: Arrow[]
+}

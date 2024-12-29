@@ -2,20 +2,18 @@
 	import Grid from '$lib/components/Grid.svelte'
 	import Step from '$lib/components/Step.svelte'
 	import type { StepIndex } from '$lib/step.config'
-	import type { Node, Arrow } from '$lib/types'
+	import { type Diagram } from '$lib/types'
 
-	let nodes = $state<Node[]>([])
-	let arrows = $state<Arrow[]>([])
-
+	let diagram = $state<Diagram>({ nodes: [], arrows: [] })
 	let step = $state<StepIndex>(0)
 
 	function reset() {
-		nodes = []
-		arrows = []
+		diagram.nodes = []
+		diagram.arrows = []
 		step = 1
 	}
 </script>
 
-<Grid bind:nodes bind:arrows {step} />
+<Grid bind:diagram {step} />
 
 <Step bind:step {reset} />
