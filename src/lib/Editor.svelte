@@ -23,9 +23,7 @@
 		mouse_pos
 	}: Props = $props()
 
-	let start_coord = $state<Coord | null>(null)
-
-	let grid_element = $state<HTMLElement | null>(null)
+	let next_arrow_start = $state<Coord | null>(null)
 
 	$effect(() => {
 		window.addEventListener('keydown', handle_keydown)
@@ -36,7 +34,7 @@
 
 	function handle_keydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			if (start_coord) start_coord = null
+			next_arrow_start = null
 		}
 	}
 
@@ -56,23 +54,23 @@
 	}
 
 	function create_arrow(x: number, y: number) {
-		if (start_coord) {
-			if (start_coord.x !== x || start_coord.y !== y) {
+		if (next_arrow_start) {
+			if (next_arrow_start.x !== x || next_arrow_start.y !== y) {
 				const id = crypto.randomUUID()
 				const arrow = {
 					id,
-					start: start_coord,
+					start: next_arrow_start,
 					end: { x, y },
 					label_above: '',
 					label_below: ''
 				}
 				arrows.push(arrow)
-				start_coord = null
+				next_arrow_start = null
 			} else {
-				start_coord = null
+				next_arrow_start = null
 			}
 		} else {
-			start_coord = { x, y }
+			next_arrow_start = { x, y }
 		}
 	}
 
@@ -96,8 +94,8 @@
 				(node) => node.pos.x == x && node.pos.y == y
 			)}
 			<NodeComponent
-				x={x * tile_size + 1}
-				y={y * tile_size + 1}
+				x={x * tile_size + 0.5}
+				y={y * tile_size + 0.5}
 				aria_label="node at {x}, {y}"
 				handle_click={() => handle_node_click(x, y)}
 				{selected}
@@ -106,30 +104,32 @@
 	{/each}
 {/if}
 
-{#each arrows as arrow (arrow.id)}
-	<ArrowComponent
-		start={{
-			x: arrow.start.x * tile_size,
-			y: arrow.start.y * tile_size
-		}}
-		end={{
-			x: arrow.end.x * tile_size,
-			y: arrow.end.y * tile_size
-		}}
-		handle_remove={() => remove_arrow(arrow.id)}
-		removable={step === 2}
-		labellable={step === 4}
-		bind:label_above={arrow.label_above}
-		bind:label_below={arrow.label_below}
-		show_labels={step >= 4}
-	></ArrowComponent>
-{/each}
+{#if step >= 2}
+	{#each arrows as arrow (arrow.id)}
+		<ArrowComponent
+			start={{
+				x: arrow.start.x * tile_size + 0.5,
+				y: arrow.start.y * tile_size + 0.5
+			}}
+			end={{
+				x: arrow.end.x * tile_size + 0.5,
+				y: arrow.end.y * tile_size + 0.5
+			}}
+			handle_remove={() => remove_arrow(arrow.id)}
+			removable={step === 2}
+			labellable={step === 4}
+			bind:label_above={arrow.label_above}
+			bind:label_below={arrow.label_below}
+			show_labels={step >= 4}
+		></ArrowComponent>
+	{/each}
+{/if}
 
-{#if step === 2 && start_coord && grid_element}
+{#if step === 2 && next_arrow_start}
 	<ArrowComponent
 		start={{
-			x: start_coord.x * tile_size,
-			y: start_coord.y * tile_size
+			x: next_arrow_start.x * tile_size + 0.5,
+			y: next_arrow_start.y * tile_size + 0.5
 		}}
 		end={mouse_pos}
 		removable={false}
