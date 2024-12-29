@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Coord, Diagram, StepIndex } from '../types'
-	import { tile_size } from '../constants'
-	import { agree } from '../utils'
+	import type { Coord, Diagram, StepIndex } from '$lib/types'
+	import { tile_size } from '$lib/constants'
+	import { agree } from '$lib/utils'
 
 	import ArrowComponent from './Arrow.svelte'
 	import Label from './Label.svelte'

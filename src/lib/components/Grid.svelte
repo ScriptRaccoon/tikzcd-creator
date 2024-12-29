@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Diagram, StepIndex } from '../types'
-	import { tile_size } from '../constants'
+	import type { Diagram, StepIndex } from '$lib/types'
+	import { tile_size } from '$lib/constants'
 
 	import Editor from './Editor.svelte'
 

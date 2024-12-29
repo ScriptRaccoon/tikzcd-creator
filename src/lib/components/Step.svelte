@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition'
+
 	import { STEPS } from '$lib/step.config'
 	import type { StepIndex } from '$lib/types'
 

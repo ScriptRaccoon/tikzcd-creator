@@ -1,4 +1,5 @@
 import { z } from 'zod'
+
 import { STEPS } from './step.config'
 
 export const CoordSchema = z.object({

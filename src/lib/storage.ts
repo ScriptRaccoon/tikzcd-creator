@@ -1,4 +1,5 @@
 import { browser } from '$app/environment'
+
 import type { StorageData } from './types'
 import { StorageDataSchema } from './schemas'
 

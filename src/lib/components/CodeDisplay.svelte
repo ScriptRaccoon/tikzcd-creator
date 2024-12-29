@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
+
 	import { get_tikzcd_code } from '$lib/code-generator'
 	import type { Diagram } from '$lib/types'
 
