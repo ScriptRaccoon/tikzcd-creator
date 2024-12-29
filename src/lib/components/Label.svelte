@@ -1,3 +1,7 @@
+<script lang="ts" module>
+	let editing_label_id = $state<null | string>(null)
+</script>
+
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition'
 	import { render_latex } from '../utils'
@@ -20,7 +24,8 @@
 		variant
 	}: Props = $props()
 
-	let editing = $state<boolean>(false)
+	let editing = $derived(editing_label_id === id)
+
 	let input_element = $state<HTMLInputElement | null>(null)
 
 	function select_input() {
@@ -31,7 +36,7 @@
 
 	function handle_keydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			editing = false
+			editing_label_id = null
 		}
 	}
 
@@ -50,7 +55,7 @@
 	})
 
 	function toggle_edit() {
-		editing = !editing
+		editing_label_id = editing ? null : id
 	}
 </script>
 
