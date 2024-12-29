@@ -54,24 +54,32 @@
 	}
 
 	function create_arrow(x: number, y: number) {
-		if (next_arrow_start) {
-			if (next_arrow_start.x !== x || next_arrow_start.y !== y) {
-				const id = crypto.randomUUID()
-				const arrow = {
-					id,
-					start: next_arrow_start,
-					end: { x, y },
-					label_above: '',
-					label_below: ''
-				}
-				arrows.push(arrow)
-				next_arrow_start = null
-			} else {
-				next_arrow_start = null
-			}
-		} else {
+		if (!next_arrow_start) {
 			next_arrow_start = { x, y }
+			return
 		}
+
+		if (next_arrow_start.x == x && next_arrow_start.y == y) {
+			next_arrow_start = null
+			return
+		}
+
+		const id = crypto.randomUUID()
+
+		const new_arrow = {
+			id,
+			start: next_arrow_start,
+			end: { x, y },
+			label_above: '',
+			label_below: ''
+		}
+		arrows.push(new_arrow)
+
+		next_arrow_start = null
+	}
+
+	function remove_arrow(id: string) {
+		arrows = arrows.filter((arrow) => arrow.id != id)
 	}
 
 	function handle_node_click(x: number, y: number) {
@@ -80,10 +88,6 @@
 		} else if (step === 2) {
 			create_arrow(x, y)
 		}
-	}
-
-	function remove_arrow(id: string) {
-		arrows = arrows.filter((arrow) => arrow.id != id)
 	}
 </script>
 
