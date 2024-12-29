@@ -45,7 +45,9 @@
 		if (existing_node) {
 			diagram.nodes = diagram.nodes.filter((node) => node != existing_node)
 		} else {
+			const id = crypto.randomUUID()
 			const new_node = {
+				id,
 				pos,
 				label: ''
 			}
@@ -145,7 +147,7 @@
 {/if}
 
 {#if step >= 3}
-	{#each diagram.nodes as node}
+	{#each diagram.nodes as node (node.id)}
 		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
 			<Label
 				aria_label="label for node at {node.pos.x}, {node.pos.y}"

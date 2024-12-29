@@ -6,6 +6,7 @@ export const CoordSchema = z.object({
 })
 
 export const NodeSchema = z.object({
+	id: z.string(),
 	pos: CoordSchema,
 	label: z.string()
 })
