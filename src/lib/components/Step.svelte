@@ -24,27 +24,35 @@
 			step -= 1
 		}
 	}
+
+	let show_step = $state(false)
+
+	$effect(() => {
+		show_step = true
+	})
 </script>
 
-{#key step}
-	<div
-		class="step-card"
-		in:fly={{ x: -50, duration: 200, delay: 200 }}
-		out:fly={{ x: 50, duration: 200 }}
-	>
-		<p>{@html current_step.message}</p>
-		<div class="buttons">
-			{#if current_step.button_labels.prev !== null}
-				<button class="button" onclick={handle_previous}>
-					{current_step.button_labels.prev}
+{#if show_step}
+	{#key step}
+		<div
+			class="step-card"
+			in:fly={{ x: -50, duration: 200, delay: 200 }}
+			out:fly={{ x: 50, duration: 200 }}
+		>
+			<p>{@html current_step.message}</p>
+			<div class="buttons">
+				{#if current_step.button_labels.prev !== null}
+					<button class="button" onclick={handle_previous}>
+						{current_step.button_labels.prev}
+					</button>
+				{/if}
+				<button class="button" onclick={handle_next}>
+					{current_step.button_labels.next}
 				</button>
-			{/if}
-			<button class="button" onclick={handle_next}>
-				{current_step.button_labels.next}
-			</button>
+			</div>
 		</div>
-	</div>
-{/key}
+	{/key}
+{/if}
 
 <style>
 	.step-card {
