@@ -30,3 +30,12 @@ export const StepSchema = z
 	.int()
 	.min(0)
 	.max(STEPS.length - 1)
+
+export const StorageSchema = z.object({
+	diagram: DiagramSchema,
+	step: z
+		.number()
+		.int()
+		.min(0)
+		.max(STEPS.length - 1)
+})

@@ -1,12 +1,7 @@
 import { browser } from '$app/environment'
-import type { Diagram, StepIndex } from './types'
+import type { StorageData } from './types'
 
 const storage_key = 'data'
-
-type StorageData = {
-	diagram: Diagram
-	step: StepIndex
-}
 
 const default_data: StorageData = {
 	diagram: { nodes: [], arrows: [] },
@@ -26,7 +21,7 @@ export function get_stored_data(): StorageData {
 	}
 }
 
-export function save_data(data: { diagram: Diagram; step: StepIndex }) {
+export function save_data(data: StorageData) {
 	if (!browser) return
 
 	try {

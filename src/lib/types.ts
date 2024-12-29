@@ -5,7 +5,8 @@ import type {
 	CoordSchema,
 	DiagramSchema,
 	NodeSchema,
-	StepSchema
+	StepSchema,
+	StorageSchema
 } from './schemas'
 
 export type Coord = z.infer<typeof CoordSchema>
@@ -13,3 +14,4 @@ export type Node = z.infer<typeof NodeSchema>
 export type Arrow = z.infer<typeof ArrowSchema>
 export type Diagram = z.infer<typeof DiagramSchema>
 export type StepIndex = z.infer<typeof StepSchema>
+export type StorageData = z.infer<typeof StorageSchema>
