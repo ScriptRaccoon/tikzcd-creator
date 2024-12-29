@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CodeDisplay from '$lib/components/CodeDisplay.svelte'
 	import Grid from '$lib/components/Grid.svelte'
 	import Step from '$lib/components/Step.svelte'
 	import type { StepIndex } from '$lib/step.config'
@@ -17,3 +18,7 @@
 <Grid bind:diagram {step} />
 
 <Step bind:step {reset} />
+
+{#if step === 5}
+	<CodeDisplay {diagram} />
+{/if}

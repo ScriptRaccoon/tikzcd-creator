@@ -1,7 +1,7 @@
 export const STEPS = [
 	{
 		message:
-			'Welcome!<br>This app will help you create code for tikzcd diagrams.',
+			'<b>Welcome!</b> This editor will help you create code for tikzcd diagrams.',
 		button_labels: { prev: null, next: 'Start' }
 	},
 	{
@@ -24,7 +24,10 @@ export const STEPS = [
 			'<b>Create labels for the arrows.</b> Click on the circles to edit the labels. You can use LaTeX.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
-	{ message: 'Done!', button_labels: { prev: 'Back', next: 'Start over' } }
+	{
+		message: 'The diagram is complete! The code has been generated.',
+		button_labels: { prev: 'Back', next: 'Start over' }
+	}
 ] as const satisfies {
 	message: string
 	button_labels: { prev: string | null; next: string | null }
