@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CodeDisplay from '$lib/components/CodeDisplay.svelte'
 	import Grid from '$lib/components/Grid.svelte'
+	import Menu from '$lib/components/Menu.svelte'
 	import Step from '$lib/components/Step.svelte'
 
 	import type { StepIndex } from '$lib/step.config'
@@ -13,9 +14,13 @@
 	let step = $state<StepIndex>(initial_data.step)
 
 	function reset() {
+		clear_diagram()
+		step = 1
+	}
+
+	function clear_diagram() {
 		diagram.nodes = []
 		diagram.arrows = []
-		step = 1
 	}
 
 	$effect(() => {
@@ -29,4 +34,8 @@
 
 {#if step === 5}
 	<CodeDisplay {diagram} />
+{/if}
+
+{#if step >= 1 && step <= 4}
+	<Menu {clear_diagram} />
 {/if}

@@ -50,6 +50,12 @@ button {
 	font-weight: 600;
 }
 
+.button.small {
+	padding: 0.3rem 0.6rem;
+	font-size: 0.8rem;
+	font-weight: initial;
+}
+
 .button:focus-visible {
 	outline: 2px solid var(--font-color);
 	outline-offset: 2px;
