@@ -1,7 +1,9 @@
 <script lang="ts">
 	import ArrowComponent from './Arrow.svelte'
 	import { tile_size } from './constants'
+	import Label from './Label.svelte'
 	import NodeComponent from './Node.svelte'
+	import Positioner from './Positioner.svelte'
 	import type { StepIndex } from './step.config'
 	import type { Arrow, Coord, Node } from './types'
 
@@ -105,6 +107,19 @@
 				{selected}
 			/>
 		{/each}
+	{/each}
+{/if}
+
+{#if step >= 3}
+	{#each nodes as node}
+		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
+			<Label
+				aria_label="label for node at {node.pos.x}, {node.pos.y}"
+				size="large"
+				bind:label={node.label}
+				editable={step === 3}
+			></Label>
+		</Positioner>
 	{/each}
 {/if}
 
