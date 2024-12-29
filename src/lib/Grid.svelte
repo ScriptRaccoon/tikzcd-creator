@@ -72,5 +72,6 @@
 			),
 			linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
 		background-size: var(--tile-size) var(--tile-size);
+		background-position: -0.5px -0.5px;
 	}
 </style>

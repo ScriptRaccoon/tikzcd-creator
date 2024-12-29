@@ -94,8 +94,8 @@
 				(node) => node.pos.x == x && node.pos.y == y
 			)}
 			<NodeComponent
-				x={x * tile_size + 0.5}
-				y={y * tile_size + 0.5}
+				x={x * tile_size}
+				y={y * tile_size}
 				aria_label="node at {x}, {y}"
 				handle_click={() => handle_node_click(x, y)}
 				{selected}
@@ -108,12 +108,12 @@
 	{#each arrows as arrow (arrow.id)}
 		<ArrowComponent
 			start={{
-				x: arrow.start.x * tile_size + 0.5,
-				y: arrow.start.y * tile_size + 0.5
+				x: arrow.start.x * tile_size,
+				y: arrow.start.y * tile_size
 			}}
 			end={{
-				x: arrow.end.x * tile_size + 0.5,
-				y: arrow.end.y * tile_size + 0.5
+				x: arrow.end.x * tile_size,
+				y: arrow.end.y * tile_size
 			}}
 			handle_remove={() => remove_arrow(arrow.id)}
 			removable={step === 2}
@@ -128,8 +128,8 @@
 {#if step === 2 && next_arrow_start}
 	<ArrowComponent
 		start={{
-			x: next_arrow_start.x * tile_size + 0.5,
-			y: next_arrow_start.y * tile_size + 0.5
+			x: next_arrow_start.x * tile_size,
+			y: next_arrow_start.y * tile_size
 		}}
 		end={mouse_pos}
 		removable={false}
