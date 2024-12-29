@@ -1,6 +1,6 @@
 import { browser } from '$app/environment'
 import type { StorageData } from './types'
-import { StorageSchema } from './schemas'
+import { StorageDataSchema } from './schemas'
 
 const storage_key = 'data'
 
@@ -15,7 +15,7 @@ export function get_stored_data(): StorageData {
 	try {
 		const data = localStorage.getItem(storage_key)
 		if (!data) return default_data
-		return StorageSchema.parse(JSON.parse(data))
+		return StorageDataSchema.parse(JSON.parse(data))
 	} catch (err) {
 		console.error(err)
 		return default_data

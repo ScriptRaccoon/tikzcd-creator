@@ -25,13 +25,13 @@ export const DiagramSchema = z.object({
 	arrows: z.array(ArrowSchema)
 })
 
-export const StepSchema = z
+export const StepIndexSchema = z
 	.number()
 	.int()
 	.min(0)
 	.max(STEPS.length - 1)
 
-export const StorageSchema = z.object({
+export const StorageDataSchema = z.object({
 	diagram: DiagramSchema,
 	step: z
 		.number()
