@@ -1,4 +1,7 @@
 export type Coord = { x: number; y: number }
+
+export type Node = { pos: Coord; label: string }
+
 export type Arrow = {
 	id: string
 	start: Coord

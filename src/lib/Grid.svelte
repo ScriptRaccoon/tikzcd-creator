@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { StepIndex } from './step.config'
-	import type { Arrow, Coord } from './types'
+	import type { Arrow, Node } from './types'
 	import Editor from './Editor.svelte'
 	import { tile_size } from './constants'
 
 	type Props = {
-		nodes: Coord[]
+		nodes: Node[]
 		arrows: Arrow[]
 		step: StepIndex
 	}

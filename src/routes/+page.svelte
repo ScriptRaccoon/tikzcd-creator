@@ -2,9 +2,9 @@
 	import Grid from '$lib/Grid.svelte'
 	import Step from '$lib/Step.svelte'
 	import type { StepIndex } from '$lib/step.config'
-	import type { Coord, Arrow } from '$lib/types'
+	import type { Node, Arrow } from '$lib/types'
 
-	let nodes = $state<Coord[]>([])
+	let nodes = $state<Node[]>([])
 	let arrows = $state<Arrow[]>([])
 
 	let step = $state<StepIndex>(0)

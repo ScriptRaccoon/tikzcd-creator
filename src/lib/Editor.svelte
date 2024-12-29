@@ -1,13 +1,13 @@
 <script lang="ts">
 	import ArrowComponent from './Arrow.svelte'
 	import { tile_size } from './constants'
-	import Node from './Node.svelte'
+	import NodeComponent from './Node.svelte'
 	import type { StepIndex } from './step.config'
-	import type { Arrow, Coord } from './types'
+	import type { Arrow, Coord, Node } from './types'
 	import { noop } from './utils'
 
 	type Props = {
-		nodes: Coord[]
+		nodes: Node[]
 		arrows: Arrow[]
 		step: StepIndex
 		grid_cols: number
@@ -45,11 +45,17 @@
 	}
 
 	function toggle_node(x: number, y: number) {
-		const existing_node = nodes.find((node) => node.x == x && node.y == y)
+		const existing_node = nodes.find(
+			(node) => node.pos.x == x && node.pos.y == y
+		)
 		if (existing_node) {
 			nodes = nodes.filter((node) => node != existing_node)
 		} else {
-			nodes.push({ x, y })
+			const new_node = {
+				pos: { x, y },
+				label: ''
+			}
+			nodes.push(new_node)
 		}
 	}
 
@@ -102,8 +108,8 @@
 
 {#each { length: grid_rows + 1 } as _, y}
 	{#each { length: grid_cols + 1 } as _, x}
-		{@const selected = nodes.some((node) => node.x == x && node.y == y)}
-		<Node
+		{@const selected = nodes.some((node) => node.pos.x == x && node.pos.y == y)}
+		<NodeComponent
 			x={x * tile_size + 1}
 			y={y * tile_size + 1}
 			aria_label="node at {x}, {y}"
