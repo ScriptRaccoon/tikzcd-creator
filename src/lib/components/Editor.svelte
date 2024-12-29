@@ -113,6 +113,7 @@
 {#if step >= 2}
 	{#each diagram.arrows as arrow (arrow.id)}
 		<ArrowComponent
+			id={arrow.id}
 			start={{
 				x: arrow.start.x * tile_size,
 				y: arrow.start.y * tile_size
@@ -133,6 +134,7 @@
 
 {#if step === 2 && next_arrow_start}
 	<ArrowComponent
+		id="preview"
 		start={{
 			x: next_arrow_start.x * tile_size,
 			y: next_arrow_start.y * tile_size
@@ -150,6 +152,7 @@
 	{#each diagram.nodes as node (node.id)}
 		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
 			<Label
+				id={`node-label-${node.id}`}
 				aria_label="label for node at {node.pos.x}, {node.pos.y}"
 				size="large"
 				bind:label={node.label}

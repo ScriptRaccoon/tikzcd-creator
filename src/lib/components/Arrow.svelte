@@ -5,6 +5,7 @@
 	import Label from './Label.svelte'
 
 	type Props = {
+		id: string
 		start: { x: number; y: number }
 		end: { x: number; y: number }
 		handle_remove?: () => void
@@ -16,6 +17,7 @@
 	}
 
 	let {
+		id,
 		start,
 		end,
 		handle_remove,
@@ -55,6 +57,7 @@
 		<div class="label_buttons">
 			<div class="rotation_correction">
 				<Label
+					id={`arrow-label-above-${id}`}
 					aria_label="Create label above the arrow"
 					size="small"
 					editable={labellable}
@@ -64,6 +67,7 @@
 			</div>
 			<div class="rotation_correction">
 				<Label
+					id={`arrow-label-below-${id}`}
 					aria_label="Create label below the arrow"
 					size="small"
 					editable={labellable}

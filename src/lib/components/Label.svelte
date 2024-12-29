@@ -3,6 +3,7 @@
 	import { render_latex } from '../utils'
 
 	type Props = {
+		id: string
 		aria_label: string
 		size: 'small' | 'large'
 		variant: 'normal' | 'accent'
@@ -11,6 +12,7 @@
 	}
 
 	let {
+		id,
 		aria_label,
 		size,
 		label = $bindable(),
@@ -55,6 +57,7 @@
 <div class="wrapper">
 	{#if editable && editing}
 		<input
+			{id}
 			type="text"
 			transition:fly={{ y: 10, duration: 100 }}
 			aria-label={aria_label}
