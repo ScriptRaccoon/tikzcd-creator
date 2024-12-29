@@ -1,16 +1,13 @@
-export type Coord = { x: number; y: number }
+import { z } from 'zod'
 
-export type Node = { pos: Coord; label: string }
+import type {
+	ArrowSchema,
+	CoordSchema,
+	DiagramSchema,
+	NodeSchema
+} from './schemas'
 
-export type Arrow = {
-	id: string
-	start: Coord
-	end: Coord
-	label_above: string
-	label_below: string
-}
-
-export type Diagram = {
-	nodes: Node[]
-	arrows: Arrow[]
-}
+export type Coord = z.infer<typeof CoordSchema>
+export type Node = z.infer<typeof NodeSchema>
+export type Arrow = z.infer<typeof ArrowSchema>
+export type Diagram = z.infer<typeof DiagramSchema>
