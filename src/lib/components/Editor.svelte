@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { StepIndex } from '../step.config'
-	import type { Coord, Diagram } from '../types'
+	import type { Coord, Diagram, StepIndex } from '../types'
 	import { tile_size } from '../constants'
 	import { agree } from '../utils'
 

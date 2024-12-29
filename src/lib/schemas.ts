@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { STEPS } from './step.config'
 
 export const CoordSchema = z.object({
 	x: z.number(),
@@ -23,3 +24,9 @@ export const DiagramSchema = z.object({
 	nodes: z.array(NodeSchema),
 	arrows: z.array(ArrowSchema)
 })
+
+export const StepSchema = z
+	.number()
+	.int()
+	.min(0)
+	.max(STEPS.length - 1)

@@ -4,9 +4,8 @@
 	import Menu from '$lib/components/Menu.svelte'
 	import Step from '$lib/components/Step.svelte'
 
-	import type { StepIndex } from '$lib/step.config'
 	import { get_stored_data, save_data } from '$lib/storage'
-	import { type Diagram } from '$lib/types'
+	import { type Diagram, type StepIndex } from '$lib/types'
 
 	const initial_data = get_stored_data()
 

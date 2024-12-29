@@ -1,6 +1,5 @@
 import { browser } from '$app/environment'
-import type { StepIndex } from './step.config'
-import type { Diagram } from './types'
+import type { Diagram, StepIndex } from './types'
 
 const storage_key = 'data'
 

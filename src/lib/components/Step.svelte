@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition'
-	import { STEPS, type StepIndex } from '../step.config'
+	import { STEPS } from '$lib/step.config'
+	import type { StepIndex } from '$lib/types'
 
 	type Props = {
 		step: StepIndex
