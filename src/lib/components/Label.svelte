@@ -5,11 +5,18 @@
 	type Props = {
 		aria_label: string
 		size: 'small' | 'large'
+		variant: 'normal' | 'accent'
 		label: string
 		editable: boolean
 	}
 
-	let { aria_label, size, label = $bindable(), editable }: Props = $props()
+	let {
+		aria_label,
+		size,
+		label = $bindable(),
+		editable,
+		variant
+	}: Props = $props()
 
 	let editing = $state<boolean>(false)
 	let input_element = $state<HTMLInputElement | null>(null)
@@ -57,6 +64,7 @@
 	{/if}
 
 	<button
+		class={variant}
 		class:empty={label === ''}
 		transition:fade={{ duration: 150 }}
 		aria-label={aria_label}
@@ -83,9 +91,16 @@
 		width: 2.25rem;
 		height: 2.25rem;
 		border-radius: 50%;
-		border: 1px dashed var(--accent-color);
 		transition: opacity 200ms;
 		opacity: 0.5;
+	}
+
+	button.empty.accent {
+		border: 1px dashed var(--accent-color);
+	}
+
+	button.empty.normal {
+		border: 1px dashed var(--font-color);
 	}
 
 	button:hover {

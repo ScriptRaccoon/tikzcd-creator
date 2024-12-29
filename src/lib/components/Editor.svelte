@@ -153,6 +153,7 @@
 				size="large"
 				bind:label={node.label}
 				editable={step === 3}
+				variant="normal"
 			></Label>
 		</Positioner>
 	{/each}

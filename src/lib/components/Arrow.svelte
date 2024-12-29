@@ -59,6 +59,7 @@
 					size="small"
 					editable={labellable}
 					bind:label={label_above}
+					variant="accent"
 				/>
 			</div>
 			<div class="rotation_correction">
@@ -67,6 +68,7 @@
 					size="small"
 					editable={labellable}
 					bind:label={label_below}
+					variant="accent"
 				/>
 			</div>
 		</div>
