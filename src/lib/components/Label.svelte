@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition'
+	import { fade, fly } from 'svelte/transition'
 	import { render_latex } from '../utils'
 
 	type Props = {
@@ -49,6 +49,7 @@
 	{#if editable && editing}
 		<input
 			type="text"
+			transition:fly={{ y: 10, duration: 100 }}
 			aria-label={aria_label}
 			bind:value={label}
 			bind:this={input_element}
