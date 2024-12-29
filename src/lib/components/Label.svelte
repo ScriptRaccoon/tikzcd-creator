@@ -112,6 +112,7 @@
 		text-align: center;
 		field-sizing: content; /* https://caniuse.com/?search=field-sizing */
 		min-width: 4rem;
+		z-index: 20;
 	}
 
 	.label-small {

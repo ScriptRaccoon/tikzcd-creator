@@ -111,19 +111,6 @@
 	{/each}
 {/if}
 
-{#if step >= 3}
-	{#each nodes as node}
-		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
-			<Label
-				aria_label="label for node at {node.pos.x}, {node.pos.y}"
-				size="large"
-				bind:label={node.label}
-				editable={step === 3}
-			></Label>
-		</Positioner>
-	{/each}
-{/if}
-
 {#if step >= 2}
 	{#each arrows as arrow (arrow.id)}
 		<ArrowComponent
@@ -158,4 +145,17 @@
 		label_below=""
 		show_labels={false}
 	/>
+{/if}
+
+{#if step >= 3}
+	{#each nodes as node}
+		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
+			<Label
+				aria_label="label for node at {node.pos.x}, {node.pos.y}"
+				size="large"
+				bind:label={node.label}
+				editable={step === 3}
+			></Label>
+		</Positioner>
+	{/each}
 {/if}
