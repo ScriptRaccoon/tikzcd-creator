@@ -6,18 +6,16 @@
 
 	let nodes = $state<Coord[]>([])
 	let arrows = $state<Arrow[]>([])
-	let node_labels = $state<Record<string, string>>({})
 
 	let step = $state<StepIndex>(0)
 
 	function reset() {
 		nodes = []
 		arrows = []
-		node_labels = {}
 		step = 1
 	}
 </script>
 
-<Grid bind:nodes bind:arrows bind:node_labels {step} />
+<Grid bind:nodes bind:arrows {step} />
 
 <Step bind:step {reset} />

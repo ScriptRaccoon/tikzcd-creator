@@ -1,53 +1,50 @@
 <script lang="ts">
-	import { render_latex } from './utils'
-
 	type Props = {
+		x: number
+		y: number
 		selected: boolean
 		hoverable: boolean
 		clickable: boolean
 		handle_click: () => void
-		label: string | undefined
 		aria_label: string
 	}
 
 	let {
+		x,
+		y,
 		selected,
 		hoverable,
 		clickable,
 		handle_click,
-		label,
 		aria_label
 	}: Props = $props()
 </script>
 
 <button
-	aria-label={aria_label}
 	class="node"
+	style:--x="{x}px"
+	style:--y="{y}px"
+	aria-label={aria_label}
 	onclick={handle_click}
 	class:selected
 	class:hoverable
 	disabled={!clickable}
 >
-	{#if label}
-		<span class="label">
-			{@html render_latex(label)}
-		</span>
-	{:else}
-		<div class="circle"></div>
-	{/if}
+	<div class="circle"></div>
 </button>
 
 <style>
 	.node {
 		position: absolute;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		/* shift 1px for tile outline */
-		transform: translate(calc(-50% - 1px), calc(-50% - 1px));
+		left: var(--x);
+		top: var(--y);
+		translate: -50% -50%;
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.circle {
@@ -66,21 +63,17 @@
 		scale: 0;
 	}
 
+	.node:not(.selected).hoverable:hover .circle {
+		opacity: 1;
+		scale: 1;
+	}
+
 	.node.selected .circle {
 		opacity: 1;
 		scale: 1.25;
 	}
 
-	.node.hoverable:not(.selected):hover .circle {
-		opacity: 1;
-		scale: 1;
-	}
-
 	.node:disabled {
 		cursor: initial;
-	}
-
-	.label {
-		font-size: 2rem;
 	}
 </style>
