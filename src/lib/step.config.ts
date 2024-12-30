@@ -1,34 +1,38 @@
 export const STEPS = [
 	{
+		summary: 'Welcome!',
 		message:
-			'<b>Welcome!</b> This editor will help you create code for <a href="https://ctan.org/pkg/tikz-cd" target="_blank">tikzcd</a> diagrams.',
+			'This editor will help you create code for <a href="https://ctan.org/pkg/tikz-cd" target="_blank">tikzcd</a> diagrams.',
 		button_labels: { prev: null, next: 'Start' }
 	},
 	{
-		message:
-			'<b>Create the nodes.</b> Click on the canvas to add or remove them.',
+		summary: 'Create the nodes.',
+		message: ' Click on the canvas to add or remove them.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{
+		summary: 'Create the arrows.',
 		message:
-			'<b>Create the arrows.</b> Click on two nodes serving as start and end of an arrow. Click on the middle of an arrow to remove it.',
+			'Click on two nodes serving as start and end of an arrow. Click on the middle of an arrow to remove it.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{
-		message:
-			'<b>Create labels for the nodes.</b> Click on a node to edit its label. You can use LaTeX.',
+		summary: 'Create labels for the nodes.',
+		message: 'Click on a node to edit its label. You can use LaTeX.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{
-		message:
-			'<b>Create labels for the arrows.</b> Click on the circles to edit the labels. You can use LaTeX.',
-		button_labels: { prev: 'Back', next: 'Next' }
+		summary: 'Create labels for the arrows.',
+		message: 'Click on the circles to edit the labels. You can use LaTeX.',
+		button_labels: { prev: 'Back', next: 'Finish' }
 	},
 	{
-		message: 'The diagram is complete! The code has been generated.',
+		summary: 'Diagram complete.',
+		message: 'The code has been generated.',
 		button_labels: { prev: 'Back', next: 'Start over' }
 	}
 ] as const satisfies {
+	summary: string
 	message: string
 	button_labels: { prev: string | null; next: string | null }
 }[]
