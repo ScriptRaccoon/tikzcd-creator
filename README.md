@@ -1,4 +1,4 @@
-# tikzcd-creator
+# tikzcd creator
 
 Graphical editor for [tikzcd diagrams](https://ctan.org/pkg/tikz-cd) that generates the code for you. The idea of the user interface is to make it _dead simple_ and also enjoyable to use. The diagram is generated _step by step_.
 
