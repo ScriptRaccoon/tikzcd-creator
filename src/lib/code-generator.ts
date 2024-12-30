@@ -1,6 +1,48 @@
 import type { Arrow, Coord, Diagram } from './types'
 import { agree, deduplicate, repeat_string } from './utils'
 
+export function get_tikzcd_code(diagram: Diagram): string {
+	let code = ' '
+
+	const [xrange, yrange] = get_ranges(diagram)
+	const xmin = Math.min(...xrange)
+	const xmax = Math.max(...xrange)
+	const ymin = Math.min(...yrange)
+	const ymax = Math.max(...yrange)
+
+	for (let y = ymin; y <= ymax; y++) {
+		for (let x = xmin; x <= xmax; x++) {
+			code += get_node_code(diagram, x, y)
+			code += get_arrows_code(diagram, x, y)
+			code += get_deliminiter(x, xmax, y, ymax)
+		}
+	}
+	return `\\begin{tikzcd}${code}\\end{tikzcd}`
+}
+
+export function get_ranges(diagram: Diagram): [number[], number[]] {
+	const xrange = deduplicate([
+		...diagram.nodes.map((node) => node.pos.x),
+		...diagram.arrows.map((arrow) => arrow.start.x),
+		...diagram.arrows.map((arrow) => arrow.end.x)
+	])
+
+	const yrange = deduplicate([
+		...diagram.nodes.map((node) => node.pos.y),
+		...diagram.arrows.map((arrow) => arrow.start.y),
+		...diagram.arrows.map((arrow) => arrow.end.y)
+	])
+	return [xrange, yrange]
+}
+
+function get_node_code(diagram: Diagram, x: number, y: number): string {
+	const node_here = diagram.nodes.find((node) => agree(node.pos, { x, y }))
+	if (node_here) {
+		return `${node_here.label} `
+	}
+	return ''
+}
+
 function get_arrow_direction(start: Coord, end: Coord): string | null {
 	let result = ''
 
@@ -34,71 +76,32 @@ function get_arrow_code(arrow: Arrow): string {
 	return arrow_code
 }
 
-function get_arrows_code(diag: Diagram, x: number, y: number) {
+function get_arrows_code(diagram: Diagram, x: number, y: number) {
 	let code = ''
-	const arrows_here = diag.arrows.filter((arrow) =>
+
+	const arrows_here = diagram.arrows.filter((arrow) =>
 		agree(arrow.start, { x, y })
 	)
+
 	for (const arrow of arrows_here) {
 		if (agree(arrow.start, arrow.end)) continue
 		const arrow_code = get_arrow_code(arrow)
 		code += `${arrow_code} `
 	}
+
 	return code
 }
 
 function get_deliminiter(
 	x: number,
-	max_x: number,
+	xmax: number,
 	y: number,
-	max_y: number
+	ymax: number
 ): string {
-	if (x < max_x) {
+	if (x < xmax) {
 		return '& '
-	} else if (y < max_y) {
+	} else if (y < ymax) {
 		return '\\\\ '
 	}
 	return ''
-}
-
-function get_node_code(diag: Diagram, x: number, y: number): string {
-	const node_here = diag.nodes.find((node) => agree(node.pos, { x, y }))
-	if (node_here) {
-		return `${node_here.label} `
-	}
-	return ''
-}
-
-export function get_ranges(diagram: Diagram) {
-	const xrange = deduplicate([
-		...diagram.nodes.map((node) => node.pos.x),
-		...diagram.arrows.map((arrow) => arrow.start.x),
-		...diagram.arrows.map((arrow) => arrow.end.x)
-	])
-
-	const yrange = deduplicate([
-		...diagram.nodes.map((node) => node.pos.y),
-		...diagram.arrows.map((arrow) => arrow.start.y),
-		...diagram.arrows.map((arrow) => arrow.end.y)
-	])
-	return [xrange, yrange]
-}
-
-export function get_tikzcd_code(diagram: Diagram): string {
-	let code = ' '
-
-	const [xrange, yrange] = get_ranges(diagram)
-	const xmin = Math.min(...xrange)
-	const xmax = Math.max(...xrange)
-	const ymin = Math.min(...yrange)
-	const ymax = Math.max(...yrange)
-
-	for (let y = ymin; y <= ymax; y++) {
-		for (let x = xmin; x <= xmax; x++) {
-			code += get_node_code(diagram, x, y)
-			code += get_arrows_code(diagram, x, y)
-			code += get_deliminiter(x, xmax, y, ymax)
-		}
-	}
-	return `\\begin{tikzcd}${code}\\end{tikzcd}`
 }
