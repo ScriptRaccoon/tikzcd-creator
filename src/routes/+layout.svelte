@@ -4,7 +4,19 @@
 
 <svelte:head>
 	<title>tikzcd creator</title>
-	<meta name="description" content="easy-to-use visual tikzcd editor" />
+	<meta
+		name="description"
+		content="Create TikZ commutative diagrams visually"
+	/>
+
+	<meta property="og:title" content="tikzcd creator" />
+	<meta
+		property="og:description"
+		content="Create TikZ commutative diagrams visually"
+	/>
+	<meta property="og:url" content="https://tikzcd-creator.netlify.app/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="tikzcd creator" />
 
 	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
