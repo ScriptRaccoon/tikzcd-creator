@@ -22,28 +22,6 @@ function get_arrow_direction(start: Coord, end: Coord): string | null {
 	return result
 }
 
-function get_deliminiter(
-	x: number,
-	max_x: number,
-	y: number,
-	max_y: number
-): string {
-	if (x < max_x) {
-		return '& '
-	} else if (y < max_y) {
-		return '\\\\ '
-	}
-	return ''
-}
-
-function get_node_code(diag: Diagram, x: number, y: number): string {
-	const node_here = diag.nodes.find((node) => agree(node.pos, { x, y }))
-	if (node_here) {
-		return `${node_here.label} `
-	}
-	return ''
-}
-
 function get_arrow_code(arrow: Arrow): string {
 	const direction = get_arrow_direction(arrow.start, arrow.end)
 	let arrow_code = `\\ar{${direction}}`
@@ -67,6 +45,28 @@ function get_arrows_code(diag: Diagram, x: number, y: number) {
 		code += `${arrow_code} `
 	}
 	return code
+}
+
+function get_deliminiter(
+	x: number,
+	max_x: number,
+	y: number,
+	max_y: number
+): string {
+	if (x < max_x) {
+		return '& '
+	} else if (y < max_y) {
+		return '\\\\ '
+	}
+	return ''
+}
+
+function get_node_code(diag: Diagram, x: number, y: number): string {
+	const node_here = diag.nodes.find((node) => agree(node.pos, { x, y }))
+	if (node_here) {
+		return `${node_here.label} `
+	}
+	return ''
 }
 
 function get_node_range(diag: Diagram) {
