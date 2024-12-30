@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Diagram, StepIndex } from '$lib/types'
-	import { grid_padding, tile_size } from '$lib/constants'
+	import { tile_size } from '$lib/constants'
 
 	import Editor from './Editor.svelte'
 
@@ -15,8 +15,8 @@
 	let grid_rows = $state(1)
 
 	$effect(() => {
-		grid_cols = Math.floor((window.innerWidth - 2 * grid_padding) / tile_size)
-		grid_rows = Math.floor((window.innerHeight - 2 * grid_padding) / tile_size)
+		grid_cols = Math.floor(window.innerWidth / tile_size)
+		grid_rows = Math.floor(window.innerHeight / tile_size)
 	})
 
 	let grid_element = $state<HTMLElement | null>(null)
