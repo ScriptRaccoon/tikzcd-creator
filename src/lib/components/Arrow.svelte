@@ -3,6 +3,7 @@
 	import { fade } from 'svelte/transition'
 	import Fa from 'svelte-fa'
 
+	import { arrow_padding, arrow_tip_size } from '$lib/constants'
 	import Label from './Label.svelte'
 
 	type Props = {
@@ -29,21 +30,17 @@
 		show_labels
 	}: Props = $props()
 
-	const padding = 30
-	const tip_size = 20
-
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
-			2 * padding -
-			0.5 * tip_size
+			2 * arrow_padding -
+			0.5 * arrow_tip_size
 	)
 
 	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x))
+	let angle_deg = $derived(angle * (180 / Math.PI))
 
-	let angle_deg = $derived((180 / Math.PI) * angle)
-
-	let padded_start_x = $derived(start.x + Math.cos(angle) * padding)
-	let padded_start_y = $derived(start.y + Math.sin(angle) * padding)
+	let padded_start_x = $derived(start.x + Math.cos(angle) * arrow_padding)
+	let padded_start_y = $derived(start.y + Math.sin(angle) * arrow_padding)
 </script>
 
 <div
@@ -51,12 +48,12 @@
 	style:--x="{padded_start_x}px"
 	style:--y="{padded_start_y}px"
 	style:--length="{length}px"
-	style:--angle="{angle_deg}deg"
+	style:--angle-deg="{angle_deg}deg"
 	transition:fade|global={{ duration: 150 }}
 >
 	{#if show_labels}
 		<div class="label_buttons">
-			<div class="rotation_correction">
+			<div class="rotation-correction">
 				<Label
 					id={`arrow-label-above-${id}`}
 					aria_label="Create label above the arrow"
@@ -66,7 +63,7 @@
 					variant="accent"
 				/>
 			</div>
-			<div class="rotation_correction">
+			<div class="rotation-correction">
 				<Label
 					id={`arrow-label-below-${id}`}
 					aria_label="Create label below the arrow"
@@ -79,11 +76,11 @@
 		</div>
 	{/if}
 
-	<div class="tip" style:--size="{tip_size}px"></div>
+	<div class="tip" style:--size="{arrow_tip_size}px"></div>
 
 	{#if removable && handle_remove !== undefined}
 		<button
-			class="remove_btn"
+			class="remove-btn"
 			aria-label="delete arrow"
 			onclick={handle_remove}
 		>
@@ -102,7 +99,7 @@
 		width: var(--length);
 		height: var(--thickness);
 		translate: 0 calc(-0.5 * var(--thickness));
-		rotate: var(--angle);
+		rotate: var(--angle-deg);
 		background-color: var(--accent-color);
 		display: flex;
 		justify-content: center;
@@ -118,7 +115,7 @@
 		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 	}
 
-	.remove_btn {
+	.remove-btn {
 		width: 1.5rem;
 		height: 1.5rem;
 		border-radius: 50%;
@@ -130,7 +127,7 @@
 		opacity: 0;
 	}
 
-	.remove_btn::before {
+	.remove-btn::before {
 		content: '';
 		position: absolute;
 		width: 3rem;
@@ -138,7 +135,7 @@
 		border-radius: 50%;
 	}
 
-	.remove_btn:hover {
+	.remove-btn:hover {
 		opacity: 1;
 	}
 
@@ -149,7 +146,7 @@
 		translate: 5px; /* center including arrow tip */
 	}
 
-	.rotation_correction {
-		rotate: calc(-1 * var(--angle));
+	.rotation-correction {
+		rotate: calc(-1 * var(--angle-deg));
 	}
 </style>

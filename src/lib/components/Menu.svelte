@@ -33,7 +33,7 @@
 
 <menu>
 	<button
-		class="button small"
+		class="small button"
 		aria-label="clear diagram"
 		onclick={ask_for_clearing}
 	>
@@ -41,7 +41,7 @@
 	</button>
 
 	<button
-		class="button small"
+		class="small button"
 		aria-label="move diagram left"
 		onclick={move_left}
 	>
@@ -49,19 +49,19 @@
 	</button>
 
 	<button
-		class="button small"
+		class="small button"
 		aria-label="move diagram right"
 		onclick={move_right}
 	>
 		<Fa icon={faRightLong} />
 	</button>
 
-	<button class="button small" aria-label="move diagram up" onclick={move_up}>
+	<button class="small button" aria-label="move diagram up" onclick={move_up}>
 		<Fa icon={faUpLong} />
 	</button>
 
 	<button
-		class="button small"
+		class="small button"
 		aria-label="move diagram down"
 		onclick={move_down}
 	>

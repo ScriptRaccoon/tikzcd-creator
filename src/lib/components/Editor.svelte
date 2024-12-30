@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Coord, Diagram, StepIndex } from '$lib/types'
+	import type { Coord, Diagram, Arrow, StepIndex } from '$lib/types'
 	import { tile_size } from '$lib/constants'
 	import { agree } from '$lib/utils'
 
@@ -79,8 +79,8 @@
 		next_arrow_start = null
 	}
 
-	function remove_arrow(id: string) {
-		diagram.arrows = diagram.arrows.filter((arrow) => arrow.id != id)
+	function remove_arrow(arrow: Arrow) {
+		diagram.arrows = diagram.arrows.filter((_arrow) => _arrow != arrow)
 	}
 
 	function handle_node_click(pos: Coord) {
@@ -121,7 +121,7 @@
 				x: arrow.end.x * tile_size,
 				y: arrow.end.y * tile_size
 			}}
-			handle_remove={() => remove_arrow(arrow.id)}
+			handle_remove={() => remove_arrow(arrow)}
 			removable={step === 2}
 			labellable={step === 4}
 			bind:label_above={arrow.label_above}

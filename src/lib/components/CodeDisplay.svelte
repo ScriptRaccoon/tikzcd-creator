@@ -39,7 +39,7 @@
 
 <div class="wrapper">
 	<pre class="code" class:copied>{tikzcd_code}</pre>
-	<div class="buttons">
+	<div class="actions">
 		<button class="small button" onclick={toggle_normalization}>
 			<Fa icon={faWandMagicSparkles} />
 			{#if normalized}
@@ -58,7 +58,6 @@
 <style>
 	.wrapper {
 		margin-top: 1rem;
-		max-width: 100%;
 	}
 
 	.code {
@@ -74,7 +73,7 @@
 		color: var(--accent-color);
 	}
 
-	.buttons {
+	.actions {
 		margin-top: 0.25rem;
 		display: flex;
 		justify-content: space-between;

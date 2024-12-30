@@ -28,13 +28,13 @@
 	})
 </script>
 
-<Grid bind:diagram {step} />
-
 <Step bind:step {reset}>
 	{#if step === 5}
 		<CodeDisplay {diagram} />
 	{/if}
 </Step>
+
+<Grid bind:diagram {step} />
 
 {#if step >= 1}
 	<Menu
