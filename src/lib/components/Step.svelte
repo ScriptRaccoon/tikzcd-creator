@@ -33,21 +33,7 @@
 
 	$effect(() => {
 		show_step = true
-
-		window.addEventListener('keydown', handle_keydown)
-		return () => {
-			window.removeEventListener('keydown', handle_keydown)
-		}
 	})
-
-	function handle_keydown(e: KeyboardEvent) {
-		if (e.key === 'n') {
-			handle_next()
-		} else if (e.key === 'p') {
-			if (!current_step.button_labels.prev) return
-			handle_previous()
-		}
-	}
 </script>
 
 {#if show_step}
