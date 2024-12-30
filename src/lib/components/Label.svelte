@@ -28,6 +28,7 @@
 	let editing = $derived(editing_label_id === id)
 
 	let input_element = $state<HTMLInputElement | null>(null)
+	let input_proxy = $state<HTMLElement | null>(null)
 
 	function select_input() {
 		if (input_element) {
@@ -55,6 +56,13 @@
 		}
 	})
 
+	$effect(() => {
+		if (input_proxy && input_element) {
+			input_proxy.innerHTML = label ?? ''
+			input_element.style.width = input_proxy.offsetWidth + 20 + 'px'
+		}
+	})
+
 	function toggle_edit() {
 		editing_label_id = editing ? null : id
 	}
@@ -71,6 +79,8 @@
 			bind:this={input_element}
 		/>
 	{/if}
+
+	<div class="proxy" bind:this={input_proxy} aria-hidden="true"></div>
 
 	<button
 		class={variant}
@@ -125,19 +135,28 @@
 	}
 
 	input {
+		translate: 0 -3.25rem;
+		background: black;
+		box-shadow: 0 0 1rem var(--shadow-color);
+		z-index: 20;
+	}
+
+	input,
+	.proxy {
 		position: absolute;
 		outline: 1px solid var(--accent-color);
 		padding: 0.35rem 0.7rem;
 		border-radius: 0.25rem;
-		translate: 0 -3.25rem;
-		background: black;
-		box-shadow: 0 0 1rem var(--shadow-color);
 		font-size: 1.5rem;
 		font-family: monospace;
 		text-align: center;
-		field-sizing: content; /* https://caniuse.com/?search=field-sizing */
-		min-width: 4rem;
-		z-index: 20;
+	}
+
+	.proxy {
+		pointer-events: none;
+		left: -100vw;
+		white-space: nowrap;
+		opacity: 0;
 	}
 
 	.label-small {
