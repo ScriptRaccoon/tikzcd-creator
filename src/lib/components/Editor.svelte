@@ -47,8 +47,7 @@
 			const id = crypto.randomUUID()
 			const new_node = {
 				id,
-				pos,
-				label: ''
+				pos
 			}
 			diagram.nodes.push(new_node)
 		}
@@ -70,9 +69,7 @@
 		const new_arrow = {
 			id,
 			start: next_arrow_start,
-			end: pos,
-			label_above: '',
-			label_below: ''
+			end: pos
 		}
 		diagram.arrows.push(new_arrow)
 
@@ -141,8 +138,6 @@
 		end={mouse_pos}
 		removable={false}
 		labellable={false}
-		label_above=""
-		label_below=""
 		show_labels={false}
 	/>
 {/if}

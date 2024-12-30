@@ -134,8 +134,7 @@ describe('normalize', () => {
 					id: 'a1',
 					start: { x: 0, y: 0 },
 					end: { x: 5, y: 0 },
-					label_above: 'f',
-					label_below: ''
+					label_above: 'f'
 				}
 			]
 		}
@@ -149,8 +148,7 @@ describe('normalize', () => {
 					id: 'a1',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f',
-					label_below: ''
+					label_above: 'f'
 				}
 			]
 		}
@@ -168,16 +166,12 @@ describe('normalize', () => {
 				{
 					id: 'a1',
 					start: { x: 0, y: 0 },
-					end: { x: 1, y: 0 },
-					label_above: '',
-					label_below: ''
+					end: { x: 1, y: 0 }
 				},
 				{
 					id: 'a2',
 					start: { x: 0, y: 0 },
-					end: { x: 0, y: 1 },
-					label_above: '',
-					label_below: ''
+					end: { x: 0, y: 1 }
 				}
 			]
 		}
@@ -197,30 +191,22 @@ describe('normalize', () => {
 				{
 					id: 'a1',
 					start: { x: 0, y: 0 },
-					end: { x: 5, y: 0 },
-					label_above: '',
-					label_below: ''
+					end: { x: 5, y: 0 }
 				},
 				{
 					id: 'a2',
 					start: { x: 5, y: 0 },
-					end: { x: 5, y: 7 },
-					label_above: '',
-					label_below: ''
+					end: { x: 5, y: 7 }
 				},
 				{
 					id: 'a3',
 					end: { x: 0, y: 0 },
-					start: { x: 0, y: 7 },
-					label_above: '',
-					label_below: ''
+					start: { x: 0, y: 7 }
 				},
 				{
 					id: 'a4',
 					end: { x: 0, y: 7 },
-					start: { x: 5, y: 7 },
-					label_above: '',
-					label_below: ''
+					start: { x: 5, y: 7 }
 				}
 			]
 		}
@@ -235,30 +221,22 @@ describe('normalize', () => {
 				{
 					id: 'a1',
 					start: { x: 0, y: 0 },
-					end: { x: 1, y: 0 },
-					label_above: '',
-					label_below: ''
+					end: { x: 1, y: 0 }
 				},
 				{
 					id: 'a2',
 					start: { x: 1, y: 0 },
-					end: { x: 1, y: 1 },
-					label_above: '',
-					label_below: ''
+					end: { x: 1, y: 1 }
 				},
 				{
 					id: 'a3',
 					end: { x: 0, y: 0 },
-					start: { x: 0, y: 1 },
-					label_above: '',
-					label_below: ''
+					start: { x: 0, y: 1 }
 				},
 				{
 					id: 'a4',
 					end: { x: 0, y: 1 },
-					start: { x: 1, y: 1 },
-					label_above: '',
-					label_below: ''
+					start: { x: 1, y: 1 }
 				}
 			]
 		}
@@ -277,22 +255,19 @@ describe('normalize', () => {
 					id: 'a1',
 					start: { x: 4, y: 2 },
 					end: { x: 8, y: 2 },
-					label_above: 'f',
-					label_below: ''
+					label_above: 'f'
 				},
 				{
 					id: 'a2',
 					start: { x: 4, y: 2 },
 					end: { x: 5, y: 10 },
-					label_above: 'g',
-					label_below: ''
+					label_above: 'g'
 				},
 				{
 					id: 'a3',
 					start: { x: 5, y: 10 },
 					end: { x: 8, y: 2 },
-					label_above: 'h',
-					label_below: ''
+					label_above: 'h'
 				}
 			]
 		}
@@ -307,22 +282,19 @@ describe('normalize', () => {
 					id: 'a1',
 					start: { x: 4, y: 2 },
 					end: { x: 6, y: 2 },
-					label_above: 'f',
-					label_below: ''
+					label_above: 'f'
 				},
 				{
 					id: 'a2',
 					start: { x: 4, y: 2 },
 					end: { x: 5, y: 3 },
-					label_above: 'g',
-					label_below: ''
+					label_above: 'g'
 				},
 				{
 					id: 'a3',
 					start: { x: 5, y: 3 },
 					end: { x: 6, y: 2 },
-					label_above: 'h',
-					label_below: ''
+					label_above: 'h'
 				}
 			]
 		}

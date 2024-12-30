@@ -13,8 +13,8 @@
 		handle_remove?: () => void
 		removable: boolean
 		labellable: boolean
-		label_above: string
-		label_below: string
+		label_above?: string
+		label_below?: string
 		show_labels: boolean
 	}
 

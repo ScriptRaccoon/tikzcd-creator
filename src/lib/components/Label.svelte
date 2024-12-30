@@ -12,7 +12,7 @@
 		aria_label: string
 		size: 'small' | 'large'
 		variant: 'normal' | 'accent'
-		label: string
+		label?: string
 		editable: boolean
 	}
 
@@ -74,7 +74,7 @@
 
 	<button
 		class={variant}
-		class:empty={label === ''}
+		class:empty={!label}
 		transition:fade={{ duration: 150 }}
 		aria-label={aria_label}
 		onclick={toggle_edit}

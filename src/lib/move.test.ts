@@ -18,28 +18,24 @@ beforeEach(() => {
 				id: 'a1',
 				start: { x: 0, y: 0 },
 				end: { x: 1, y: 0 },
-				label_above: 'a',
-				label_below: ''
+				label_above: 'a'
 			},
 			{
 				id: 'a2',
 				start: { x: 1, y: 0 },
 				end: { x: 1, y: 1 },
-				label_above: 'b',
-				label_below: ''
+				label_above: 'b'
 			},
 			{
 				id: 'a3',
 				start: { x: 0, y: 0 },
 				end: { x: 0, y: 1 },
-				label_above: '',
 				label_below: 'c'
 			},
 			{
 				id: 'a4',
 				start: { x: 0, y: 1 },
 				end: { x: 1, y: 1 },
-				label_above: '',
 				label_below: 'd'
 			}
 		]
@@ -60,28 +56,24 @@ describe('move_left', () => {
 					id: 'a1',
 					start: { x: -1, y: 0 },
 					end: { x: 0, y: 0 },
-					label_above: 'a',
-					label_below: ''
+					label_above: 'a'
 				},
 				{
 					id: 'a2',
 					start: { x: 0, y: 0 },
 					end: { x: 0, y: 1 },
-					label_above: 'b',
-					label_below: ''
+					label_above: 'b'
 				},
 				{
 					id: 'a3',
 					start: { x: -1, y: 0 },
 					end: { x: -1, y: 1 },
-					label_above: '',
 					label_below: 'c'
 				},
 				{
 					id: 'a4',
 					start: { x: -1, y: 1 },
 					end: { x: 0, y: 1 },
-					label_above: '',
 					label_below: 'd'
 				}
 			]
@@ -106,28 +98,24 @@ describe('move_right', () => {
 					id: 'a1',
 					start: { x: 1, y: 0 },
 					end: { x: 2, y: 0 },
-					label_above: 'a',
-					label_below: ''
+					label_above: 'a'
 				},
 				{
 					id: 'a2',
 					start: { x: 2, y: 0 },
 					end: { x: 2, y: 1 },
-					label_above: 'b',
-					label_below: ''
+					label_above: 'b'
 				},
 				{
 					id: 'a3',
 					start: { x: 1, y: 0 },
 					end: { x: 1, y: 1 },
-					label_above: '',
 					label_below: 'c'
 				},
 				{
 					id: 'a4',
 					start: { x: 1, y: 1 },
 					end: { x: 2, y: 1 },
-					label_above: '',
 					label_below: 'd'
 				}
 			]
@@ -152,28 +140,24 @@ describe('move_up', () => {
 					id: 'a1',
 					start: { x: 0, y: -1 },
 					end: { x: 1, y: -1 },
-					label_above: 'a',
-					label_below: ''
+					label_above: 'a'
 				},
 				{
 					id: 'a2',
 					start: { x: 1, y: -1 },
 					end: { x: 1, y: 0 },
-					label_above: 'b',
-					label_below: ''
+					label_above: 'b'
 				},
 				{
 					id: 'a3',
 					start: { x: 0, y: -1 },
 					end: { x: 0, y: 0 },
-					label_above: '',
 					label_below: 'c'
 				},
 				{
 					id: 'a4',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: '',
 					label_below: 'd'
 				}
 			]
@@ -198,28 +182,24 @@ describe('move_down', () => {
 					id: 'a1',
 					start: { x: 0, y: 1 },
 					end: { x: 1, y: 1 },
-					label_above: 'a',
-					label_below: ''
+					label_above: 'a'
 				},
 				{
 					id: 'a2',
 					start: { x: 1, y: 1 },
 					end: { x: 1, y: 2 },
-					label_above: 'b',
-					label_below: ''
+					label_above: 'b'
 				},
 				{
 					id: 'a3',
 					start: { x: 0, y: 1 },
 					end: { x: 0, y: 2 },
-					label_above: '',
 					label_below: 'c'
 				},
 				{
 					id: 'a4',
 					start: { x: 0, y: 2 },
 					end: { x: 1, y: 2 },
-					label_above: '',
 					label_below: 'd'
 				}
 			]
