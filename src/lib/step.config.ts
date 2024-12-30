@@ -1,7 +1,7 @@
 export const STEPS = [
 	{
 		message:
-			'<b>Welcome!</b> This editor will help you create code for tikzcd diagrams.',
+			'<b>Welcome!</b> This editor will help you create code for <a href="https://ctan.org/pkg/tikz-cd" target="_blank">tikzcd</a> diagrams.',
 		button_labels: { prev: null, next: 'Start' }
 	},
 	{

@@ -67,3 +67,8 @@ input {
 	background: none;
 	border: none;
 }
+
+a {
+	color: inherit;
+	text-underline-offset: 2px;
+}
