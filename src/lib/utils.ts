@@ -21,10 +21,6 @@ export function repeat_string(str: string, times: number) {
 	return result
 }
 
-export function get_coord_key(x: number, y: number) {
-	return `${x}_${y}`
-}
-
 export function deduplicate<T>(arr: T[]): T[] {
 	return [...new Set<T>(arr)]
 }
