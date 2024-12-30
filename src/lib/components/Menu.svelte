@@ -72,7 +72,7 @@
 	menu {
 		position: absolute;
 		left: 50%;
-		bottom: 2.5rem;
+		bottom: 1rem;
 		translate: -50% 0;
 		display: flex;
 		gap: 1rem;
@@ -80,5 +80,11 @@
 
 	button {
 		width: 2rem;
+	}
+
+	@media (min-width: 900px) {
+		menu {
+			bottom: 2.5rem;
+		}
 	}
 </style>
