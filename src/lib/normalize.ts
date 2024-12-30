@@ -1,20 +1,10 @@
+import { get_ranges } from './code-generator'
 import type { Coord, Diagram } from './types'
-import { deduplicate } from './utils'
 
 export function normalize(diagram: Diagram): Diagram {
 	const copy: Diagram = JSON.parse(JSON.stringify(diagram))
 
-	const xrange = deduplicate([
-		...diagram.nodes.map((node) => node.pos.x),
-		...diagram.arrows.map((arrow) => arrow.start.x),
-		...diagram.arrows.map((arrow) => arrow.end.x)
-	])
-
-	const yrange = deduplicate([
-		...diagram.nodes.map((node) => node.pos.y),
-		...diagram.arrows.map((arrow) => arrow.start.y),
-		...diagram.arrows.map((arrow) => arrow.end.y)
-	])
+	const [xrange, yrange] = get_ranges(diagram)
 
 	for (const node of copy.nodes) {
 		node.pos = transform_coord(node.pos, xrange, yrange)

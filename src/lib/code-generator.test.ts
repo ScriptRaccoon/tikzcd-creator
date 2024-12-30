@@ -115,6 +115,24 @@ describe('get_tikzcd_code', () => {
 		expect(actual_code).toBe(expected_code)
 	})
 
+	it('returns the code of a single arrow without nodes', () => {
+		const sample_diagram: Diagram = {
+			nodes: [],
+			arrows: [
+				{
+					id: 'a1',
+					start: { x: 0, y: 0 },
+					end: { x: 1, y: 0 },
+					label_above: 'f',
+					label_below: ''
+				}
+			]
+		}
+		const expected_code = `\\begin{tikzcd} \\ar{r}{f} & \\end{tikzcd}`
+		const actual_code = get_tikzcd_code(sample_diagram)
+		expect(actual_code).toBe(expected_code)
+	})
+
 	it('returns the code of a single long arrow', () => {
 		const sample_diagram: Diagram = {
 			nodes: [

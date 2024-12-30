@@ -1,5 +1,5 @@
 import type { Arrow, Coord, Diagram } from './types'
-import { agree, repeat_string } from './utils'
+import { agree, deduplicate, repeat_string } from './utils'
 
 function get_arrow_direction(start: Coord, end: Coord): string | null {
 	let result = ''
@@ -69,24 +69,35 @@ function get_node_code(diag: Diagram, x: number, y: number): string {
 	return ''
 }
 
-function get_node_range(diag: Diagram) {
-	const minimal_x = Math.min(...diag.nodes.map((node) => node.pos.x))
-	const maximal_x = Math.max(...diag.nodes.map((node) => node.pos.x))
-	const minimal_y = Math.min(...diag.nodes.map((node) => node.pos.y))
-	const maximal_y = Math.max(...diag.nodes.map((node) => node.pos.y))
-	return { minimal_y, maximal_y, minimal_x, maximal_x }
+export function get_ranges(diagram: Diagram) {
+	const xrange = deduplicate([
+		...diagram.nodes.map((node) => node.pos.x),
+		...diagram.arrows.map((arrow) => arrow.start.x),
+		...diagram.arrows.map((arrow) => arrow.end.x)
+	])
+
+	const yrange = deduplicate([
+		...diagram.nodes.map((node) => node.pos.y),
+		...diagram.arrows.map((arrow) => arrow.start.y),
+		...diagram.arrows.map((arrow) => arrow.end.y)
+	])
+	return [xrange, yrange]
 }
 
-export function get_tikzcd_code(diag: Diagram): string {
+export function get_tikzcd_code(diagram: Diagram): string {
 	let code = ' '
 
-	const { minimal_y, maximal_y, minimal_x, maximal_x } = get_node_range(diag)
+	const [xrange, yrange] = get_ranges(diagram)
+	const xmin = Math.min(...xrange)
+	const xmax = Math.max(...xrange)
+	const ymin = Math.min(...yrange)
+	const ymax = Math.max(...yrange)
 
-	for (let y = minimal_y; y <= maximal_y; y++) {
-		for (let x = minimal_x; x <= maximal_x; x++) {
-			code += get_node_code(diag, x, y)
-			code += get_arrows_code(diag, x, y)
-			code += get_deliminiter(x, maximal_x, y, maximal_y)
+	for (let y = ymin; y <= ymax; y++) {
+		for (let x = xmin; x <= xmax; x++) {
+			code += get_node_code(diagram, x, y)
+			code += get_arrows_code(diagram, x, y)
+			code += get_deliminiter(x, xmax, y, ymax)
 		}
 	}
 	return `\\begin{tikzcd}${code}\\end{tikzcd}`
