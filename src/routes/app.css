@@ -48,6 +48,11 @@ button {
 	padding: 0.4rem 1rem;
 	border-radius: 0.25rem;
 	font-weight: 600;
+	transition: scale 100ms;
+}
+
+.button:active {
+	scale: 0.95;
 }
 
 .button.small {

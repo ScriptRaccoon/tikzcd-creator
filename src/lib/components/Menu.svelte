@@ -1,7 +1,5 @@
 <script lang="ts">
 	import {
-		faArrowLeft,
-		faDownLeftAndUpRightToCenter,
 		faDownLong,
 		faLeftLong,
 		faRightLong,
@@ -9,6 +7,7 @@
 		faUpLong
 	} from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
+	import { fly } from 'svelte/transition'
 
 	type Props = {
 		clear_diagram: () => void
@@ -31,7 +30,7 @@
 	}
 </script>
 
-<menu>
+<menu transition:fly={{ y: 50, duration: 200, delay: 200 }}>
 	<button
 		class="small button"
 		aria-label="clear diagram"
