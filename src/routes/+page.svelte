@@ -36,7 +36,7 @@
 	{/if}
 </Step>
 
-{#if step >= 1 && step <= 4}
+{#if step >= 1}
 	<Menu
 		{clear_diagram}
 		move_left={() => move_left(diagram)}
