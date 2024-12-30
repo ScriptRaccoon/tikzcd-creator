@@ -2,6 +2,8 @@
 
 Graphical editor for [tikzcd diagrams](https://ctan.org/pkg/tikz-cd) that generates the code for you. The idea of the user interface is to make it _dead simple_ and also enjoyable to use. The diagram is generated _step by step_.
 
+<https://tikzcd-creator.netlify.app/>
+
 ## Demo
 
 https://github.com/user-attachments/assets/8369d82c-d7f0-43ff-bfcb-f87aa5d0e96f
