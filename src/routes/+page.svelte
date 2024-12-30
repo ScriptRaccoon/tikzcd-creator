@@ -29,11 +29,11 @@
 
 <Grid bind:diagram {step} />
 
-<Step bind:step {reset} />
-
-{#if step === 5}
-	<CodeDisplay {diagram} />
-{/if}
+<Step bind:step {reset}>
+	{#if step === 5}
+		<CodeDisplay {diagram} />
+	{/if}
+</Step>
 
 {#if step >= 1 && step <= 4}
 	<Menu {clear_diagram} />

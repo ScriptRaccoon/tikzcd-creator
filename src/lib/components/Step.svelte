@@ -3,13 +3,15 @@
 
 	import { STEPS } from '$lib/step.config'
 	import type { StepIndex } from '$lib/types'
+	import type { Snippet } from 'svelte'
 
 	type Props = {
 		step: StepIndex
 		reset: () => void
+		children?: Snippet
 	}
 
-	let { step = $bindable(), reset }: Props = $props()
+	let { step = $bindable(), reset, children }: Props = $props()
 
 	let current_step = $derived(STEPS[step])
 
@@ -56,6 +58,7 @@
 			out:fly={{ x: 50, duration: 200 }}
 		>
 			<p>{@html current_step.message}</p>
+			{@render children?.()}
 			<div class="buttons">
 				{#if current_step.button_labels.prev !== null}
 					<button class="button" onclick={handle_previous}>
