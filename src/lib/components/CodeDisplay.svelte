@@ -67,6 +67,8 @@
 		display: inline-block;
 		overflow-x: scroll;
 		background-color: black;
+		scrollbar-width: thin;
+		scrollbar-color: gray black;
 	}
 
 	.code.copied {
