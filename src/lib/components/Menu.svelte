@@ -75,7 +75,6 @@
 		bottom: 2.5rem;
 		translate: -50% 0;
 		display: flex;
-		flex-wrap: wrap;
 		gap: 1rem;
 	}
 
