@@ -5,6 +5,7 @@
 	import Step from '$lib/components/Step.svelte'
 
 	import { get_stored_data, save_data } from '$lib/storage'
+	import { move_down, move_left, move_right, move_up } from '$lib/move'
 	import { type Diagram, type StepIndex } from '$lib/types'
 
 	const initial_data = get_stored_data()
@@ -36,5 +37,11 @@
 </Step>
 
 {#if step >= 1 && step <= 4}
-	<Menu {clear_diagram} />
+	<Menu
+		{clear_diagram}
+		move_left={() => move_left(diagram)}
+		move_right={() => move_right(diagram)}
+		move_up={() => move_up(diagram)}
+		move_down={() => move_down(diagram)}
+	/>
 {/if}

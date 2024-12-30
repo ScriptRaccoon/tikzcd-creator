@@ -1,12 +1,25 @@
 <script lang="ts">
-	import { faTrash } from '@fortawesome/free-solid-svg-icons'
+	import {
+		faArrowLeft,
+		faDownLeftAndUpRightToCenter,
+		faDownLong,
+		faLeftLong,
+		faRightLong,
+		faTrash,
+		faUpLong
+	} from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
 
 	type Props = {
 		clear_diagram: () => void
+		move_left: () => void
+		move_right: () => void
+		move_up: () => void
+		move_down: () => void
 	}
 
-	let { clear_diagram }: Props = $props()
+	let { clear_diagram, move_left, move_right, move_up, move_down }: Props =
+		$props()
 
 	function ask_for_clearing() {
 		const confirmed = window.confirm(
@@ -19,9 +32,40 @@
 </script>
 
 <menu>
-	<button class="button small" onclick={ask_for_clearing}>
+	<button
+		class="button small"
+		aria-label="clear diagram"
+		onclick={ask_for_clearing}
+	>
 		<Fa icon={faTrash} />
-		<span>Clear diagram</span>
+	</button>
+
+	<button
+		class="button small"
+		aria-label="move diagram left"
+		onclick={move_left}
+	>
+		<Fa icon={faLeftLong}></Fa>
+	</button>
+
+	<button
+		class="button small"
+		aria-label="move diagram right"
+		onclick={move_right}
+	>
+		<Fa icon={faRightLong} />
+	</button>
+
+	<button class="button small" aria-label="move diagram up" onclick={move_up}>
+		<Fa icon={faUpLong} />
+	</button>
+
+	<button
+		class="button small"
+		aria-label="move diagram down"
+		onclick={move_down}
+	>
+		<Fa icon={faDownLong} />
 	</button>
 </menu>
 
@@ -36,7 +80,7 @@
 		gap: 1rem;
 	}
 
-	button span {
-		margin-left: 0.25rem;
+	button {
+		width: 2rem;
 	}
 </style>
