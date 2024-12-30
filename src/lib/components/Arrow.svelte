@@ -123,8 +123,17 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		transition: all 200ms;
-		opacity: 0;
+	}
+
+	@media (hover: hover) {
+		.remove-btn {
+			transition: opacity 200ms;
+			opacity: 0;
+		}
+
+		.remove-btn:hover {
+			opacity: 1;
+		}
 	}
 
 	.remove-btn::before {
@@ -133,10 +142,6 @@
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
-	}
-
-	.remove-btn:hover {
-		opacity: 1;
 	}
 
 	.label_buttons {
