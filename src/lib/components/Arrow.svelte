@@ -26,10 +26,14 @@
 		update_variant
 	}: Props = $props()
 
+	let shorten = $derived(
+		variant === 'equal' || variant === 'dash' ? 0 : 0.5 * arrow_tip_size
+	)
+
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
 			2 * arrow_padding -
-			0.5 * arrow_tip_size
+			shorten
 	)
 
 	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x))
@@ -37,6 +41,8 @@
 
 	let padded_start_x = $derived(start.x + Math.cos(angle) * arrow_padding)
 	let padded_start_y = $derived(start.y + Math.sin(angle) * arrow_padding)
+
+	$inspect(variant)
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -53,7 +59,9 @@
 	style:--angle-deg="{angle_deg}deg"
 	transition:fade|global={{ duration: 150 }}
 >
-	<div class="tip" style:--size="{arrow_tip_size}px"></div>
+	{#if variant !== 'equal' && variant !== 'dash'}
+		<div class="tip" style:--size="{arrow_tip_size}px"></div>
+	{/if}
 
 	{#if removable && handle_remove !== undefined}
 		<button
