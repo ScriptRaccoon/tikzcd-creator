@@ -85,10 +85,21 @@
 		height: var(--thickness);
 		translate: 0 calc(-0.5 * var(--thickness));
 		rotate: var(--angle-deg);
-		background-color: var(--accent-color);
+		background: var(--accent-color);
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.arrow.dashed {
+		background: linear-gradient(
+			to right,
+			var(--accent-color),
+			var(--accent-color) 60%,
+			transparent 60%,
+			transparent 100%
+		);
+		background-size: 1rem 100%;
 	}
 
 	.tip {
@@ -96,7 +107,7 @@
 		right: calc(-0.5 * var(--size));
 		width: var(--size);
 		height: var(--size);
-		background-color: inherit;
+		background-color: var(--accent-color);
 		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 	}
 
