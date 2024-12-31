@@ -109,7 +109,6 @@
 {#if step >= 2}
 	{#each diagram.arrows as arrow (arrow.id)}
 		<ArrowComponent
-			id={arrow.id}
 			start={{
 				x: arrow.start.x * tile_size,
 				y: arrow.start.y * tile_size
@@ -120,25 +119,18 @@
 			}}
 			handle_remove={() => remove_arrow(arrow)}
 			removable={step === 2}
-			labellable={step === 4}
-			bind:label_above={arrow.label_above}
-			bind:label_below={arrow.label_below}
-			show_labels={step >= 4}
 		></ArrowComponent>
 	{/each}
 {/if}
 
 {#if step === 2 && next_arrow_start}
 	<ArrowComponent
-		id="preview"
 		start={{
 			x: next_arrow_start.x * tile_size,
 			y: next_arrow_start.y * tile_size
 		}}
 		end={mouse_pos}
 		removable={false}
-		labellable={false}
-		show_labels={false}
 	/>
 {/if}
 
@@ -156,3 +148,51 @@
 		</Positioner>
 	{/each}
 {/if}
+
+{#if step >= 4}
+	{#each diagram.arrows as arrow (arrow.id)}
+		{@const angle_deg =
+			Math.atan2(arrow.end.y - arrow.start.y, arrow.end.x - arrow.start.x) *
+			(180 / Math.PI)}
+		<Positioner
+			x={0.5 * tile_size * (arrow.start.x + arrow.end.x)}
+			y={0.5 * tile_size * (arrow.start.y + arrow.end.y)}
+		>
+			<div class="arrow_labels" style:--angle-deg="{angle_deg}deg">
+				<div class="rotation-correction">
+					<Label
+						id={`arrow-label-above-${arrow.id}`}
+						aria_label="Create label above the arrow"
+						size="small"
+						editable={step === 4}
+						bind:label={arrow.label_above}
+						variant="accent"
+					/>
+				</div>
+				<div class="rotation-correction">
+					<Label
+						id={`arrow-label-below-${arrow.id}`}
+						aria_label="Create label below the arrow"
+						size="small"
+						editable={step === 4}
+						bind:label={arrow.label_below}
+						variant="accent"
+					/>
+				</div>
+			</div>
+		</Positioner>
+	{/each}
+{/if}
+
+<style>
+	.arrow_labels {
+		rotate: var(--angle-deg);
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.rotation-correction {
+		rotate: calc(-1 * var(--angle-deg));
+	}
+</style>

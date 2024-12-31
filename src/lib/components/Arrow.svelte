@@ -4,31 +4,15 @@
 	import Fa from 'svelte-fa'
 
 	import { arrow_padding, arrow_tip_size } from '$lib/constants'
-	import Label from './Label.svelte'
 
 	type Props = {
-		id: string
 		start: { x: number; y: number }
 		end: { x: number; y: number }
 		handle_remove?: () => void
 		removable: boolean
-		labellable: boolean
-		label_above?: string
-		label_below?: string
-		show_labels: boolean
 	}
 
-	let {
-		id,
-		start,
-		end,
-		handle_remove,
-		removable,
-		labellable,
-		label_above = $bindable(),
-		label_below = $bindable(),
-		show_labels
-	}: Props = $props()
+	let { start, end, handle_remove, removable }: Props = $props()
 
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
@@ -51,31 +35,6 @@
 	style:--angle-deg="{angle_deg}deg"
 	transition:fade|global={{ duration: 150 }}
 >
-	{#if show_labels}
-		<div class="label_buttons">
-			<div class="rotation-correction">
-				<Label
-					id={`arrow-label-above-${id}`}
-					aria_label="Create label above the arrow"
-					size="small"
-					editable={labellable}
-					bind:label={label_above}
-					variant="accent"
-				/>
-			</div>
-			<div class="rotation-correction">
-				<Label
-					id={`arrow-label-below-${id}`}
-					aria_label="Create label below the arrow"
-					size="small"
-					editable={labellable}
-					bind:label={label_below}
-					variant="accent"
-				/>
-			</div>
-		</div>
-	{/if}
-
 	<div class="tip" style:--size="{arrow_tip_size}px"></div>
 
 	{#if removable && handle_remove !== undefined}
@@ -142,16 +101,5 @@
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
-	}
-
-	.label_buttons {
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
-		translate: 5px; /* center including arrow tip */
-	}
-
-	.rotation-correction {
-		rotate: calc(-1 * var(--angle-deg));
 	}
 </style>
