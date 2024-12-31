@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { STEPS } from './step.config'
+import { arrow_variants } from './constants'
 
 export const CoordSchema = z.object({
 	x: z.number(),
@@ -17,7 +18,7 @@ export const ArrowSchema = z.object({
 	id: z.string(),
 	start: CoordSchema,
 	end: CoordSchema,
-	variant: z.enum(['rightarrow', 'dashed', 'Rightarrow', 'equal']),
+	variant: z.enum(arrow_variants),
 	label_above: z.string().optional(),
 	label_below: z.string().optional()
 })

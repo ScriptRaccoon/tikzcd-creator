@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Coord, Diagram, Arrow, StepIndex } from '$lib/types'
-	import { tile_size } from '$lib/constants'
+	import { arrow_variants, tile_size } from '$lib/constants'
 	import { agree } from '$lib/utils'
 
 	import ArrowComponent from './Arrow.svelte'
@@ -88,6 +88,13 @@
 			create_arrow(pos)
 		}
 	}
+
+	function update_arrow_variant(arrow: Arrow) {
+		const index = arrow_variants.indexOf(arrow.variant)
+		if (index < 0) return
+		const next_index = index < arrow_variants.length - 1 ? index + 1 : 0
+		arrow.variant = arrow_variants[next_index]
+	}
 </script>
 
 {#if step === 1 || step === 2}
@@ -120,6 +127,9 @@
 			}}
 			handle_remove={() => remove_arrow(arrow)}
 			removable={step === 2}
+			variantable={step === 3}
+			variant={arrow.variant}
+			update_variant={() => update_arrow_variant(arrow)}
 		></ArrowComponent>
 	{/each}
 {/if}
@@ -132,10 +142,13 @@
 		}}
 		end={mouse_pos}
 		removable={false}
+		variantable={false}
+		variant={'rightarrow'}
+		update_variant={() => {}}
 	/>
 {/if}
 
-{#if step >= 3}
+{#if step >= 4}
 	{#each diagram.nodes as node (node.id)}
 		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
 			<Label
@@ -143,14 +156,14 @@
 				aria_label="label for node at {node.pos.x}, {node.pos.y}"
 				size="large"
 				bind:label={node.label}
-				editable={step === 3}
+				editable={step === 4}
 				variant="normal"
 			></Label>
 		</Positioner>
 	{/each}
 {/if}
 
-{#if step >= 4}
+{#if step >= 5}
 	{#each diagram.arrows as arrow (arrow.id)}
 		{@const angle_deg =
 			Math.atan2(arrow.end.y - arrow.start.y, arrow.end.x - arrow.start.x) *
@@ -165,7 +178,7 @@
 						id={`arrow-label-above-${arrow.id}`}
 						aria_label="Create label above the arrow"
 						size="small"
-						editable={step === 4}
+						editable={step === 5}
 						bind:label={arrow.label_above}
 						variant="accent"
 					/>
@@ -175,7 +188,7 @@
 						id={`arrow-label-below-${arrow.id}`}
 						aria_label="Create label below the arrow"
 						size="small"
-						editable={step === 4}
+						editable={step === 5}
 						bind:label={arrow.label_below}
 						variant="accent"
 					/>

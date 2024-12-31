@@ -17,6 +17,12 @@ export const STEPS = [
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{
+		summary: 'Change the arrow types.',
+		message:
+			'Click on an arrow to change its type if required. Currently four types are supported.',
+		button_labels: { prev: 'Back', next: 'Next' }
+	},
+	{
 		summary: 'Create labels for the nodes.',
 		message: 'Click on a node to edit its label. You can use LaTeX.',
 		button_labels: { prev: 'Back', next: 'Next' }

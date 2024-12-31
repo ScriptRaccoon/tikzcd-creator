@@ -4,15 +4,27 @@
 	import Fa from 'svelte-fa'
 
 	import { arrow_padding, arrow_tip_size } from '$lib/constants'
+	import type { Arrow } from '$lib/types'
 
 	type Props = {
 		start: { x: number; y: number }
 		end: { x: number; y: number }
 		handle_remove?: () => void
 		removable: boolean
+		variantable: boolean
+		variant: Arrow['variant']
+		update_variant: () => void
 	}
 
-	let { start, end, handle_remove, removable }: Props = $props()
+	let {
+		start,
+		end,
+		handle_remove,
+		removable,
+		variantable,
+		variant,
+		update_variant
+	}: Props = $props()
 
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
@@ -27,8 +39,14 @@
 	let padded_start_y = $derived(start.y + Math.sin(angle) * arrow_padding)
 </script>
 
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="arrow"
+	onclick={() => {
+		if (variantable) update_variant()
+	}}
+	class:variantable
+	class="arrow {variant}"
 	style:--x="{padded_start_x}px"
 	style:--y="{padded_start_y}px"
 	style:--length="{length}px"
@@ -49,6 +67,14 @@
 </div>
 
 <style>
+	.arrow.variantable::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 20px;
+		cursor: pointer;
+	}
+
 	.arrow {
 		--thickness: 3px;
 		position: absolute;

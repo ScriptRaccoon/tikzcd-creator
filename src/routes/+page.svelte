@@ -29,7 +29,7 @@
 </script>
 
 <Step bind:step {reset}>
-	{#if step === 5}
+	{#if step === 6}
 		<CodeDisplay {diagram} />
 	{/if}
 </Step>
