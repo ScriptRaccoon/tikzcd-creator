@@ -19,7 +19,7 @@ export const STEPS = [
 	{
 		summary: 'Change the arrow types.',
 		message:
-			'Click on an arrow to change its type if required. Currently four types are supported.',
+			'Click on an arrow to change its type if required. Currently five types are supported.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{

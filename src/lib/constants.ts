@@ -12,5 +12,6 @@ export const arrow_variants = [
 	'rightarrow',
 	'dashed',
 	'Rightarrow',
+	'dash',
 	'equal'
 ] as const
