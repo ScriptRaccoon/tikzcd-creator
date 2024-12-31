@@ -110,6 +110,19 @@
 		background-size: 1rem 100%;
 	}
 
+	.arrow.equal {
+		translate: 0 calc(0.3rem - 0.5 * var(--thickness));
+	}
+
+	.arrow.equal::after {
+		position: absolute;
+		content: '';
+		width: 100%;
+		height: 100%;
+		background-color: inherit;
+		translate: 0 -0.6rem;
+	}
+
 	.tip {
 		position: absolute;
 		right: calc(-0.5 * var(--size));
