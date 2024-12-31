@@ -132,6 +132,7 @@ describe('normalize', () => {
 			arrows: [
 				{
 					id: 'a1',
+					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 5, y: 0 },
 					label_above: 'f'
@@ -146,6 +147,7 @@ describe('normalize', () => {
 			arrows: [
 				{
 					id: 'a1',
+					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
 					label_above: 'f'
@@ -165,11 +167,13 @@ describe('normalize', () => {
 			arrows: [
 				{
 					id: 'a1',
+					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 }
 				},
 				{
 					id: 'a2',
+					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 0, y: 1 }
 				}
@@ -190,21 +194,25 @@ describe('normalize', () => {
 			arrows: [
 				{
 					id: 'a1',
+					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 5, y: 0 }
 				},
 				{
 					id: 'a2',
+					variant: 'rightarrow',
 					start: { x: 5, y: 0 },
 					end: { x: 5, y: 7 }
 				},
 				{
 					id: 'a3',
+					variant: 'rightarrow',
 					end: { x: 0, y: 0 },
 					start: { x: 0, y: 7 }
 				},
 				{
 					id: 'a4',
+					variant: 'rightarrow',
 					end: { x: 0, y: 7 },
 					start: { x: 5, y: 7 }
 				}
@@ -220,21 +228,25 @@ describe('normalize', () => {
 			arrows: [
 				{
 					id: 'a1',
+					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 }
 				},
 				{
 					id: 'a2',
+					variant: 'rightarrow',
 					start: { x: 1, y: 0 },
 					end: { x: 1, y: 1 }
 				},
 				{
 					id: 'a3',
+					variant: 'rightarrow',
 					end: { x: 0, y: 0 },
 					start: { x: 0, y: 1 }
 				},
 				{
 					id: 'a4',
+					variant: 'rightarrow',
 					end: { x: 0, y: 1 },
 					start: { x: 1, y: 1 }
 				}
@@ -253,18 +265,21 @@ describe('normalize', () => {
 			arrows: [
 				{
 					id: 'a1',
+					variant: 'rightarrow',
 					start: { x: 4, y: 2 },
 					end: { x: 8, y: 2 },
 					label_above: 'f'
 				},
 				{
 					id: 'a2',
+					variant: 'rightarrow',
 					start: { x: 4, y: 2 },
 					end: { x: 5, y: 10 },
 					label_above: 'g'
 				},
 				{
 					id: 'a3',
+					variant: 'rightarrow',
 					start: { x: 5, y: 10 },
 					end: { x: 8, y: 2 },
 					label_above: 'h'
@@ -280,18 +295,21 @@ describe('normalize', () => {
 			arrows: [
 				{
 					id: 'a1',
+					variant: 'rightarrow',
 					start: { x: 4, y: 2 },
 					end: { x: 6, y: 2 },
 					label_above: 'f'
 				},
 				{
 					id: 'a2',
+					variant: 'rightarrow',
 					start: { x: 4, y: 2 },
 					end: { x: 5, y: 3 },
 					label_above: 'g'
 				},
 				{
 					id: 'a3',
+					variant: 'rightarrow',
 					start: { x: 5, y: 3 },
 					end: { x: 6, y: 2 },
 					label_above: 'h'

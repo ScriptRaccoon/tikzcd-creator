@@ -17,6 +17,7 @@ export const ArrowSchema = z.object({
 	id: z.string(),
 	start: CoordSchema,
 	end: CoordSchema,
+	variant: z.enum(['rightarrow', 'dashed', 'Rightarrow', 'equal']),
 	label_above: z.string().optional(),
 	label_below: z.string().optional()
 })

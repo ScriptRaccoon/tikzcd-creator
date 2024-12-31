@@ -66,8 +66,9 @@
 
 		const id = crypto.randomUUID()
 
-		const new_arrow = {
+		const new_arrow: Arrow = {
 			id,
+			variant: 'rightarrow',
 			start: next_arrow_start,
 			end: pos
 		}
