@@ -7,7 +7,8 @@ export const STEPS = [
 	},
 	{
 		summary: 'Create the nodes.',
-		message: ' Click on the canvas to add or remove them.',
+		message:
+			'Click on the <i>intersections</i> of the grid lines to add or remove them.',
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{
