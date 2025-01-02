@@ -15,3 +15,11 @@ export const arrow_variants = [
 	'dash',
 	'equal'
 ] as const
+
+export const arrow_codes = {
+	rightarrow: '\\to',
+	dashed: '\\dashrightarrow',
+	Rightarrow: '\\Rightarrow',
+	dash: '-',
+	equal: '='
+} as const

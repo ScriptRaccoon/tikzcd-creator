@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { faXmark } from '@fortawesome/free-solid-svg-icons'
+	import { faCog, faXmark } from '@fortawesome/free-solid-svg-icons'
 	import { fade } from 'svelte/transition'
 	import Fa from 'svelte-fa'
 
 	import { arrow_padding, arrow_tip_size } from '$lib/constants'
 	import type { Arrow } from '$lib/types'
+	import ArrowSelector from './ArrowSelector.svelte'
 
 	type Props = {
 		start: { x: number; y: number }
@@ -12,9 +13,17 @@
 		handle_remove?: () => void
 		removable: boolean
 		variant: Arrow['variant']
+		variantable: boolean
 	}
 
-	let { start, end, handle_remove, removable, variant }: Props = $props()
+	let {
+		start,
+		end,
+		handle_remove,
+		removable,
+		variant = $bindable(),
+		variantable
+	}: Props = $props()
 
 	let has_tip = $derived(variant !== 'equal' && variant !== 'dash')
 
@@ -32,6 +41,12 @@
 
 	let padded_start_x = $derived(start.x + Math.cos(angle) * arrow_padding)
 	let padded_start_y = $derived(start.y + Math.sin(angle) * arrow_padding)
+
+	let show_variant_selector = $state(false)
+
+	$effect(() => {
+		if (variant) show_variant_selector = false
+	})
 </script>
 
 <div
@@ -60,6 +75,23 @@
 		>
 			<Fa icon={faXmark} />
 		</button>
+	{/if}
+
+	{#if variantable}
+		{#if show_variant_selector}
+			<ArrowSelector
+				{angle}
+				bind:selected_variant={variant}
+				update_variant={() => (show_variant_selector = false)}
+			/>
+		{:else}
+			<button
+				class="variant-opener"
+				onclick={() => (show_variant_selector = true)}
+			>
+				<Fa icon={faCog} />
+			</button>
+		{/if}
 	{/if}
 </div>
 
@@ -110,15 +142,23 @@
 		background-size: 1rem 100%;
 	}
 
-	.remove-btn {
+	.remove-btn,
+	.variant-opener {
 		position: absolute;
 		width: 1.5rem;
 		height: 1.5rem;
 		border-radius: 50%;
-		background-color: var(--danger-color);
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.remove-btn {
+		background-color: var(--danger-color);
+	}
+
+	.variant-opener {
+		background-color: var(--card-color);
 	}
 
 	@media (hover: hover) {
