@@ -66,7 +66,14 @@ function get_arrow_direction(start: Coord, end: Coord): string | null {
 
 function get_arrow_code(arrow: Arrow): string {
 	const direction = get_arrow_direction(arrow.start, arrow.end)
-	let arrow_code = `\\ar{${direction}}`
+	let arrow_code = `\\ar`
+
+	if (arrow.variant != 'rightarrow') {
+		arrow_code += `[${arrow.variant}]`
+	}
+
+	arrow_code += `{${direction}}`
+
 	if (arrow.label_above) {
 		arrow_code += `{${arrow.label_above}}`
 	}
