@@ -37,7 +37,7 @@ export function get_ranges(diagram: Diagram): [number[], number[]] {
 
 function get_node_code(diagram: Diagram, x: number, y: number): string {
 	const node_here = diagram.nodes.find((node) => agree(node.pos, { x, y }))
-	if (node_here) {
+	if (node_here?.label) {
 		return `${node_here.label} `
 	}
 	return ''
