@@ -91,7 +91,7 @@
 		position: absolute;
 		bottom: 1rem;
 		display: flex;
-		justify-content: center;
+		justify-content: space-evenly;
 		flex-wrap: wrap;
 		gap: 0.5rem 0.5rem;
 	}
@@ -100,10 +100,11 @@
 		width: 2rem;
 	}
 
-	@media (min-width: 900px) {
+	@media (min-width: 600px) {
 		menu {
 			bottom: 2.5rem;
-			gap: 0.5rem 1rem;
+			justify-content: center;
+			gap: 1rem;
 		}
 	}
 </style>
