@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Coord, Diagram, Arrow, StepIndex } from '$lib/types'
-	import { arrow_variants, tile_size } from '$lib/constants'
 	import { agree } from '$lib/utils'
 
 	import ArrowComponent from './Arrow.svelte'
@@ -14,6 +13,7 @@
 		grid_cols: number
 		grid_rows: number
 		mouse_pos: Coord
+		tile_size: number
 	}
 
 	let {
@@ -21,7 +21,8 @@
 		step,
 		grid_cols,
 		grid_rows,
-		mouse_pos
+		mouse_pos,
+		tile_size
 	}: Props = $props()
 
 	let next_arrow_start = $state<Coord | null>(null)

@@ -40,5 +40,6 @@ export const StorageDataSchema = z.object({
 		.number()
 		.int()
 		.min(0)
-		.max(STEPS.length - 1)
+		.max(STEPS.length - 1),
+	tile_size: z.number().min(1)
 })

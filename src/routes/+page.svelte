@@ -12,6 +12,7 @@
 
 	let diagram = $state<Diagram>(initial_data.diagram)
 	let step = $state<StepIndex>(initial_data.step)
+	let tile_size = $state<number>(initial_data.tile_size)
 
 	function reset() {
 		clear_diagram()
@@ -24,7 +25,7 @@
 	}
 
 	$effect(() => {
-		save_data({ diagram, step })
+		save_data({ diagram, step, tile_size })
 	})
 </script>
 
@@ -34,7 +35,7 @@
 	{/if}
 </Step>
 
-<Grid bind:diagram {step} />
+<Grid bind:diagram {step} {tile_size} />
 
 {#if step >= 1}
 	<Menu

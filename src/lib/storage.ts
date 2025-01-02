@@ -7,7 +7,8 @@ const storage_key = 'data'
 
 const default_data: StorageData = {
 	diagram: { nodes: [], arrows: [] },
-	step: 0
+	step: 0,
+	tile_size: 100
 }
 
 export function get_stored_data(): StorageData {

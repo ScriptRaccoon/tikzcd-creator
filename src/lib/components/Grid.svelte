@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { Diagram, StepIndex } from '$lib/types'
-	import { tile_size } from '$lib/constants'
 
 	import Editor from './Editor.svelte'
 
 	type Props = {
 		diagram: Diagram
 		step: StepIndex
+		tile_size: number
 	}
 
-	let { diagram = $bindable(), step }: Props = $props()
+	let { diagram = $bindable(), step, tile_size }: Props = $props()
 
 	let grid_cols = $state(1)
 	let grid_rows = $state(1)
@@ -45,7 +45,14 @@
 		style:--tile-size="{tile_size}px"
 		bind:this={grid_element}
 	>
-		<Editor bind:diagram {step} {grid_cols} {grid_rows} {mouse_pos} />
+		<Editor
+			bind:diagram
+			{step}
+			{grid_cols}
+			{grid_rows}
+			{mouse_pos}
+			{tile_size}
+		/>
 	</div>
 </div>
 
