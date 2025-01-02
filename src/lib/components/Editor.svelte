@@ -88,13 +88,6 @@
 			create_arrow(pos)
 		}
 	}
-
-	function update_arrow_variant(arrow: Arrow) {
-		const index = arrow_variants.indexOf(arrow.variant)
-		if (index < 0) return
-		const next_index = index < arrow_variants.length - 1 ? index + 1 : 0
-		arrow.variant = arrow_variants[next_index]
-	}
 </script>
 
 {#if step === 1 || step === 2}
@@ -127,9 +120,7 @@
 			}}
 			handle_remove={() => remove_arrow(arrow)}
 			removable={step === 2}
-			variantable={step === 3}
 			variant={arrow.variant}
-			update_variant={() => update_arrow_variant(arrow)}
 		></ArrowComponent>
 	{/each}
 {/if}
@@ -142,9 +133,7 @@
 		}}
 		end={mouse_pos}
 		removable={false}
-		variantable={false}
 		variant={'rightarrow'}
-		update_variant={() => {}}
 	/>
 {/if}
 

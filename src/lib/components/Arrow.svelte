@@ -11,55 +11,44 @@
 		end: { x: number; y: number }
 		handle_remove?: () => void
 		removable: boolean
-		variantable: boolean
 		variant: Arrow['variant']
-		update_variant: () => void
 	}
 
-	let {
-		start,
-		end,
-		handle_remove,
-		removable,
-		variantable,
-		variant,
-		update_variant
-	}: Props = $props()
+	let { start, end, handle_remove, removable, variant }: Props = $props()
 
-	let shorten = $derived(
-		variant === 'equal' || variant === 'dash' ? 0 : 0.5 * arrow_tip_size
+	let has_tip = $derived(variant !== 'equal' && variant !== 'dash')
+
+	let number_lines = $derived(
+		variant === 'equal' || variant == 'Rightarrow' ? 2 : 1
 	)
 
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
 			2 * arrow_padding -
-			shorten
+			(has_tip ? 0.75 * arrow_tip_size : 0)
 	)
 
 	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x))
-	let angle_deg = $derived(angle * (180 / Math.PI))
 
 	let padded_start_x = $derived(start.x + Math.cos(angle) * arrow_padding)
 	let padded_start_y = $derived(start.y + Math.sin(angle) * arrow_padding)
-
-	$inspect(variant)
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	onclick={() => {
-		if (variantable) update_variant()
-	}}
-	class:variantable
 	class="arrow {variant}"
 	style:--x="{padded_start_x}px"
 	style:--y="{padded_start_y}px"
 	style:--length="{length}px"
-	style:--angle-deg="{angle_deg}deg"
+	style:--angle="{angle * (180 / Math.PI)}deg"
 	transition:fade|global={{ duration: 150 }}
 >
-	{#if variant !== 'equal' && variant !== 'dash'}
+	<div class="lines">
+		{#each { length: number_lines }}
+			<div class="line"></div>
+		{/each}
+	</div>
+
+	{#if has_tip}
 		<div class="tip" style:--size="{arrow_tip_size}px"></div>
 	{/if}
 
@@ -75,31 +64,42 @@
 </div>
 
 <style>
-	.arrow.variantable::before {
-		content: '';
-		position: absolute;
-		width: 100%;
-		height: 20px;
-		cursor: pointer;
-	}
-
 	.arrow {
-		--thickness: 3px;
 		position: absolute;
 		transform-origin: left;
 		top: var(--y);
 		left: var(--x);
 		width: var(--length);
-		height: var(--thickness);
-		translate: 0 calc(-0.5 * var(--thickness));
-		rotate: var(--angle-deg);
-		background: var(--accent-color);
+		rotate: var(--angle);
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		translate: 0% -50%;
 	}
 
-	.arrow.dashed {
+	.lines {
+		position: absolute;
+		width: 100%;
+		display: grid;
+		gap: 0.25rem;
+		align-items: center;
+	}
+
+	.line {
+		background: var(--accent-color);
+		height: 0.2rem;
+	}
+
+	.tip {
+		position: absolute;
+		right: calc(-0.75 * var(--size));
+		width: var(--size);
+		height: var(--size);
+		background-color: var(--accent-color);
+		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
+	}
+
+	.arrow.dashed .line {
 		background: linear-gradient(
 			to right,
 			var(--accent-color),
@@ -110,29 +110,8 @@
 		background-size: 1rem 100%;
 	}
 
-	.arrow.equal {
-		translate: 0 calc(0.3rem - 0.5 * var(--thickness));
-	}
-
-	.arrow.equal::after {
-		position: absolute;
-		content: '';
-		width: 100%;
-		height: 100%;
-		background-color: inherit;
-		translate: 0 -0.6rem;
-	}
-
-	.tip {
-		position: absolute;
-		right: calc(-0.5 * var(--size));
-		width: var(--size);
-		height: var(--size);
-		background-color: var(--accent-color);
-		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
-	}
-
 	.remove-btn {
+		position: absolute;
 		width: 1.5rem;
 		height: 1.5rem;
 		border-radius: 50%;
