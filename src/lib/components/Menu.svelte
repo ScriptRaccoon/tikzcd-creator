@@ -2,6 +2,8 @@
 	import {
 		faDownLong,
 		faLeftLong,
+		faMinus,
+		faPlus,
 		faRightLong,
 		faTrash,
 		faUpLong
@@ -15,10 +17,17 @@
 		move_right: () => void
 		move_up: () => void
 		move_down: () => void
+		zoom: (value: -1 | 1) => void
 	}
 
-	let { clear_diagram, move_left, move_right, move_up, move_down }: Props =
-		$props()
+	let {
+		clear_diagram,
+		move_left,
+		move_right,
+		move_up,
+		move_down,
+		zoom
+	}: Props = $props()
 
 	function ask_for_clearing() {
 		const confirmed = window.confirm(
@@ -66,16 +75,25 @@
 	>
 		<Fa icon={faDownLong} />
 	</button>
+
+	<button class="small button" aria-label="zoom in" onclick={() => zoom(1)}>
+		<Fa icon={faPlus} />
+	</button>
+
+	<button class="small button" aria-label="zoom out" onclick={() => zoom(-1)}>
+		<Fa icon={faMinus} />
+	</button>
 </menu>
 
 <style>
 	menu {
+		width: 100%;
 		position: absolute;
-		left: 50%;
 		bottom: 1rem;
-		translate: -50% 0;
 		display: flex;
-		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 0.5rem 0.5rem;
 	}
 
 	button {
@@ -85,6 +103,7 @@
 	@media (min-width: 900px) {
 		menu {
 			bottom: 2.5rem;
+			gap: 0.5rem 1rem;
 		}
 	}
 </style>

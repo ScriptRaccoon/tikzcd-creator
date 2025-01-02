@@ -5,10 +5,12 @@ import { StorageDataSchema } from './schemas'
 
 const storage_key = 'data'
 
+const default_tile_size = browser && window.innerWidth < 600 ? 50 : 100
+
 const default_data: StorageData = {
 	diagram: { nodes: [], arrows: [] },
 	step: 0,
-	tile_size: 100
+	tile_size: default_tile_size
 }
 
 export function get_stored_data(): StorageData {

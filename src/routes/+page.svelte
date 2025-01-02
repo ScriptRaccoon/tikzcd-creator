@@ -24,6 +24,10 @@
 		diagram.arrows = []
 	}
 
+	function zoom(value: -1 | 1) {
+		tile_size = Math.max(10, tile_size + value * 10)
+	}
+
 	$effect(() => {
 		save_data({ diagram, step, tile_size })
 	})
@@ -44,5 +48,6 @@
 		move_right={() => move_right(diagram)}
 		move_up={() => move_up(diagram)}
 		move_down={() => move_down(diagram)}
+		{zoom}
 	/>
 {/if}
