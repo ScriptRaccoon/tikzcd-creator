@@ -4,11 +4,17 @@ Graphical editor for [tikzcd diagrams](https://ctan.org/pkg/tikz-cd) that genera
 
 <https://tikzcd-creator.netlify.app/>
 
-## Demos
+## Demo 1
 
 https://github.com/user-attachments/assets/972f6bcd-c537-4ece-a8ad-c37e99d94a4b
 
+<img width="355" alt="output-triangle" src="https://github.com/user-attachments/assets/80bf9810-d181-4f1c-aad9-a083d54a5d5c" />
+
+## Demo 2
+
 https://github.com/user-attachments/assets/b138e427-074f-40a1-9e33-26dbc68abecf
+
+<img width="540" alt="output-cube" src="https://github.com/user-attachments/assets/da646b8d-5a01-4b27-864b-27dd194ff912" />
 
 ## Development
 
