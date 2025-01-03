@@ -5,9 +5,10 @@
 		selected: boolean
 		handle_click: () => void
 		aria_label: string
+		interactive: boolean
 	}
 
-	let { selected, handle_click, aria_label }: Props = $props()
+	let { selected, handle_click, aria_label, interactive }: Props = $props()
 </script>
 
 <button
@@ -16,6 +17,7 @@
 	aria-label={aria_label}
 	onclick={handle_click}
 	class:selected
+	disabled={!interactive}
 >
 	<div class="circle"></div>
 </button>
@@ -28,6 +30,10 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.node[disabled] {
+		cursor: initial;
 	}
 
 	.circle {
@@ -46,7 +52,7 @@
 		scale: 0;
 	}
 
-	.node:not(.selected):hover .circle {
+	.node:not(.selected):not([disabled]):hover .circle {
 		opacity: 1;
 		scale: 1;
 	}

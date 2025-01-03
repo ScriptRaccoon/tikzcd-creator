@@ -91,7 +91,7 @@
 	}
 </script>
 
-{#if step === 1 || step === 2}
+{#if step === 1 || step === 2 || step === 3}
 	{#each { length: grid_rows + 1 } as _, y}
 		{#each { length: grid_cols + 1 } as _, x}
 			{@const selected = diagram.nodes.some((node) =>
@@ -102,6 +102,7 @@
 					aria_label="node at {x}, {y}"
 					handle_click={() => handle_node_click({ x, y })}
 					{selected}
+					interactive={step <= 2}
 				/>
 			</Positioner>
 		{/each}
