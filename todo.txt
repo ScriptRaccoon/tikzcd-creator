@@ -1,0 +1,3 @@
+- fix that inputs are behind step component
+- adjust arrow padding when label is large and arrows as well
+- improve a11y
