@@ -33,12 +33,14 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		outline: 2px dashed transparent;
+		outline-offset: -0.25rem;
+		transition: outline 500ms;
 	}
 
 	.node.starting {
 		animation: rotate 14s linear infinite;
-		outline: 2px dashed #fffa;
-		outline-offset: -0.25rem;
+		outline-color: #fffa;
 	}
 
 	@keyframes rotate {
