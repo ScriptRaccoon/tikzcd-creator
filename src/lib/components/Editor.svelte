@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { is_desktop } from '$lib/constants'
 	import type { Coord, Diagram, Arrow, StepIndex } from '$lib/types'
 	import { agree } from '$lib/utils'
 
@@ -128,7 +129,7 @@
 	{/each}
 {/if}
 
-{#if step === 2 && next_arrow_start}
+{#if is_desktop && step === 2 && next_arrow_start}
 	<ArrowComponent
 		start={{
 			x: next_arrow_start.x * tile_size,

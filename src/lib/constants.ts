@@ -1,3 +1,5 @@
+import { browser } from '$app/environment'
+
 export const arrow_padding = 30
 export const arrow_tip_size = 20
 export const arrow_variants = [
@@ -15,3 +17,5 @@ export const arrow_codes = {
 	dash: '-',
 	equal: '='
 } as const
+
+export const is_desktop = browser && window.matchMedia('(hover: hover)').matches

@@ -87,6 +87,7 @@
 		{:else}
 			<button
 				class="variant-opener"
+				aria-label="open variant selector"
 				onclick={() => (show_variant_selector = true)}
 			>
 				<Fa icon={faCog} />
