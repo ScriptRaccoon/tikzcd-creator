@@ -62,7 +62,7 @@
 
 	.code {
 		width: 100%;
-		padding: 0.5rem 0.75rem;
+		padding: 1rem 0.75rem;
 		font-size: 1rem;
 		display: inline-block;
 		overflow-x: scroll;
