@@ -6,9 +6,11 @@
 		handle_click: () => void
 		aria_label: string
 		interactive: boolean
+		starting: boolean
 	}
 
-	let { selected, handle_click, aria_label, interactive }: Props = $props()
+	let { selected, handle_click, aria_label, interactive, starting }: Props =
+		$props()
 </script>
 
 <button
@@ -17,6 +19,7 @@
 	aria-label={aria_label}
 	onclick={handle_click}
 	class:selected
+	class:starting
 	disabled={!interactive}
 >
 	<div class="circle"></div>
@@ -30,6 +33,18 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.node.starting {
+		animation: rotate 14s linear infinite;
+		outline: 2px dashed #fffa;
+		outline-offset: -0.25rem;
+	}
+
+	@keyframes rotate {
+		to {
+			rotate: 1turn;
+		}
 	}
 
 	.node[disabled] {

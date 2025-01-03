@@ -104,6 +104,8 @@
 					handle_click={() => handle_node_click({ x, y })}
 					{selected}
 					interactive={step <= 2}
+					starting={next_arrow_start != null &&
+						agree({ x, y }, next_arrow_start)}
 				/>
 			</Positioner>
 		{/each}
