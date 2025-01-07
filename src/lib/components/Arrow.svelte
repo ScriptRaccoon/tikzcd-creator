@@ -3,8 +3,9 @@
 	import { fade } from 'svelte/transition'
 	import Fa from 'svelte-fa'
 
-	import { arrow_padding, arrow_tip_size } from '$lib/constants'
+	import { arrow_padding } from '$lib/constants'
 	import type { Arrow } from '$lib/types'
+
 	import ArrowSelector from './ArrowSelector.svelte'
 
 	type Props = {
@@ -33,8 +34,7 @@
 
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
-			2 * arrow_padding -
-			(has_tip ? 0.75 * arrow_tip_size : 0),
+			2 * arrow_padding,
 	)
 
 	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x))
@@ -61,12 +61,16 @@
 >
 	<div class="lines">
 		{#each { length: number_lines }}
-			<div class="line" class:clipped={has_hook}></div>
+			<div
+				class="line"
+				class:clipped_start={has_hook}
+				class:clipped_end={has_tip}
+			></div>
 		{/each}
 	</div>
 
 	{#if has_tip}
-		<div class="tip" style:--size="{arrow_tip_size}px"></div>
+		<div class="tip"></div>
 	{/if}
 
 	{#if has_hook}
@@ -127,17 +131,29 @@
 	.line {
 		background: var(--accent-color);
 		height: 0.2rem;
+		--clip-start: 0rem;
+		--clip-end: 0rem;
+		clip-path: polygon(
+			var(--clip-start) 0%,
+			calc(100% - var(--clip-end)) 0%,
+			calc(100% - var(--clip-end)) 100%,
+			var(--clip-start) 100%
+		);
 	}
 
-	.line.clipped {
-		clip-path: polygon(0.8rem 0%, 100% 0%, 100% 100%, 0.8rem 100%);
+	.line.clipped_end {
+		--clip-end: 0.8rem;
+	}
+
+	.line.clipped_start {
+		--clip-start: 0.8rem;
 	}
 
 	.tip {
 		position: absolute;
-		right: calc(-0.75 * var(--size));
-		width: var(--size);
-		height: var(--size);
+		right: 0;
+		width: 1.5rem;
+		height: 1.5rem;
 		background-color: var(--accent-color);
 		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 	}

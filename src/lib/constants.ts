@@ -1,7 +1,7 @@
 import { browser } from '$app/environment'
 
 export const arrow_padding = 30
-export const arrow_tip_size = 20
+
 export const arrow_variants = [
 	'rightarrow',
 	'dashed',
