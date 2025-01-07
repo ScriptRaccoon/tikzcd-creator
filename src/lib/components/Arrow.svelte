@@ -44,6 +44,8 @@
 
 	let show_variant_selector = $state(false)
 
+	let has_hook = $derived(variant === 'hookrightarrow')
+
 	$effect(() => {
 		if (variant) show_variant_selector = false
 	})
@@ -59,12 +61,16 @@
 >
 	<div class="lines">
 		{#each { length: number_lines }}
-			<div class="line"></div>
+			<div class="line" class:clipped={has_hook}></div>
 		{/each}
 	</div>
 
 	{#if has_tip}
 		<div class="tip" style:--size="{arrow_tip_size}px"></div>
+	{/if}
+
+	{#if has_hook}
+		<div class="hook"></div>
 	{/if}
 
 	{#if removable && handle_remove !== undefined}
@@ -123,6 +129,10 @@
 		height: 0.2rem;
 	}
 
+	.line.clipped {
+		clip-path: polygon(0.8rem 0%, 100% 0%, 100% 100%, 0.8rem 100%);
+	}
+
 	.tip {
 		position: absolute;
 		right: calc(-0.75 * var(--size));
@@ -160,6 +170,17 @@
 
 	.variant-opener {
 		background-color: var(--card-color);
+	}
+
+	.hook {
+		position: absolute;
+		left: 0;
+		bottom: -0.1rem;
+		width: 1.7rem;
+		height: 1.7rem;
+		border: 0.2rem solid var(--accent-color);
+		border-radius: 50%;
+		clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
 	}
 
 	@media (hover: hover) {

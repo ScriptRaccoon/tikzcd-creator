@@ -1,3 +1,5 @@
+import { arrow_variants } from './constants'
+
 export const STEPS = [
 	{
 		summary: 'Welcome!',
@@ -19,8 +21,7 @@ export const STEPS = [
 	},
 	{
 		summary: 'Change the arrow types.',
-		message:
-			'Click on an arrow to change its type if required. Currently five types are supported.',
+		message: `Click on an arrow to change its type if required. Currently ${arrow_variants.length} types are supported.`,
 		button_labels: { prev: 'Back', next: 'Next' }
 	},
 	{
