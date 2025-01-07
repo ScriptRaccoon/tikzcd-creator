@@ -115,6 +115,27 @@ describe('get_tikzcd_code', () => {
 		expect(actual_code).toBe(expected_code)
 	})
 
+	it('returns the code of a single equals arrow with a label', () => {
+		const sample_diagram: Diagram = {
+			nodes: [
+				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+			],
+			arrows: [
+				{
+					id: 'a1',
+					variant: 'hookrightarrow',
+					start: { x: 0, y: 0 },
+					end: { x: 1, y: 0 },
+					label_above: 'f'
+				}
+			]
+		}
+		const expected_code = `\\begin{tikzcd} A \\ar[hookrightarrow]{r}{f} & B \\end{tikzcd}`
+		const actual_code = get_tikzcd_code(sample_diagram)
+		expect(actual_code).toBe(expected_code)
+	})
+
 	it('returns the code of a single left arrow with a label', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
