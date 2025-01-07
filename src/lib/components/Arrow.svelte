@@ -22,19 +22,19 @@
 		handle_remove,
 		removable,
 		variant = $bindable(),
-		variantable
+		variantable,
 	}: Props = $props()
 
 	let has_tip = $derived(variant !== 'equal' && variant !== 'dash')
 
 	let number_lines = $derived(
-		variant === 'equal' || variant == 'Rightarrow' ? 2 : 1
+		variant === 'equal' || variant == 'Rightarrow' ? 2 : 1,
 	)
 
 	let length = $derived(
 		Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2) -
 			2 * arrow_padding -
-			(has_tip ? 0.75 * arrow_tip_size : 0)
+			(has_tip ? 0.75 * arrow_tip_size : 0),
 	)
 
 	let angle = $derived(Math.atan2(end.y - start.y, end.x - start.x))

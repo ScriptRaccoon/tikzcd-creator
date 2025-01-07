@@ -3,7 +3,7 @@
 	import {
 		faClipboard,
 		faClipboardCheck,
-		faWandMagicSparkles
+		faWandMagicSparkles,
 	} from '@fortawesome/free-solid-svg-icons'
 
 	import type { Diagram } from '$lib/types'
@@ -19,7 +19,7 @@
 	let normalized = $state<boolean>(false)
 
 	let tikzcd_code = $derived(
-		get_tikzcd_code(normalized ? normalize(diagram) : diagram)
+		get_tikzcd_code(normalized ? normalize(diagram) : diagram),
 	)
 
 	let copied = $state<boolean>(false)

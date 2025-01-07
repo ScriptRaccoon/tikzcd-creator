@@ -5,13 +5,13 @@ import { arrow_variants } from './constants'
 
 export const CoordSchema = z.object({
 	x: z.number(),
-	y: z.number()
+	y: z.number(),
 })
 
 export const NodeSchema = z.object({
 	id: z.string(),
 	pos: CoordSchema,
-	label: z.string().optional()
+	label: z.string().optional(),
 })
 
 export const ArrowSchema = z.object({
@@ -20,12 +20,12 @@ export const ArrowSchema = z.object({
 	end: CoordSchema,
 	variant: z.enum(arrow_variants),
 	label_above: z.string().optional(),
-	label_below: z.string().optional()
+	label_below: z.string().optional(),
 })
 
 export const DiagramSchema = z.object({
 	nodes: z.array(NodeSchema),
-	arrows: z.array(ArrowSchema)
+	arrows: z.array(ArrowSchema),
 })
 
 export const StepIndexSchema = z
@@ -41,5 +41,5 @@ export const StorageDataSchema = z.object({
 		.int()
 		.min(0)
 		.max(STEPS.length - 1),
-	tile_size: z.number().min(1)
+	tile_size: z.number().min(1),
 })

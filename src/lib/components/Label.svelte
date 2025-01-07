@@ -22,7 +22,7 @@
 		size,
 		label = $bindable(),
 		editable,
-		variant
+		variant,
 	}: Props = $props()
 
 	let editing = $derived(editing_label_id === id)

@@ -23,7 +23,7 @@
 		grid_cols,
 		grid_rows,
 		mouse_pos,
-		tile_size
+		tile_size,
 	}: Props = $props()
 
 	let next_arrow_start = $state<Coord | null>(null)
@@ -49,7 +49,7 @@
 			const id = crypto.randomUUID()
 			const new_node = {
 				id,
-				pos
+				pos,
 			}
 			diagram.nodes.push(new_node)
 		}
@@ -72,7 +72,7 @@
 			id,
 			variant: 'rightarrow',
 			start: next_arrow_start,
-			end: pos
+			end: pos,
 		}
 		diagram.arrows.push(new_arrow)
 
@@ -96,7 +96,7 @@
 	{#each { length: grid_rows + 1 } as _, y}
 		{#each { length: grid_cols + 1 } as _, x}
 			{@const selected = diagram.nodes.some((node) =>
-				agree(node.pos, { x, y })
+				agree(node.pos, { x, y }),
 			)}
 			<Positioner x={x * tile_size} y={y * tile_size}>
 				<NodeComponent
@@ -117,11 +117,11 @@
 		<ArrowComponent
 			start={{
 				x: arrow.start.x * tile_size,
-				y: arrow.start.y * tile_size
+				y: arrow.start.y * tile_size,
 			}}
 			end={{
 				x: arrow.end.x * tile_size,
-				y: arrow.end.y * tile_size
+				y: arrow.end.y * tile_size,
 			}}
 			handle_remove={() => remove_arrow(arrow)}
 			removable={step === 2}
@@ -135,7 +135,7 @@
 	<ArrowComponent
 		start={{
 			x: next_arrow_start.x * tile_size,
-			y: next_arrow_start.y * tile_size
+			y: next_arrow_start.y * tile_size,
 		}}
 		end={mouse_pos}
 		removable={false}

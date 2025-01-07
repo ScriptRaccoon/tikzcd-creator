@@ -8,7 +8,7 @@ export const arrow_variants = [
 	'Rightarrow',
 	'dash',
 	'equal',
-	'hookrightarrow'
+	'hookrightarrow',
 ] as const
 
 export const arrow_codes = {
@@ -17,7 +17,7 @@ export const arrow_codes = {
 	Rightarrow: '\\Rightarrow',
 	dash: '-',
 	equal: '=',
-	hookrightarrow: '\\hookrightarrow'
+	hookrightarrow: '\\hookrightarrow',
 } as const
 
 export const is_desktop = browser && window.matchMedia('(hover: hover)').matches

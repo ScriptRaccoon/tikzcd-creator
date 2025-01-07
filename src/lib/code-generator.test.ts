@@ -14,7 +14,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -22,9 +22,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -35,7 +35,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -43,9 +43,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'Rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar[Rightarrow]{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -56,7 +56,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -64,9 +64,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'dashed',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar[dashed]{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -77,7 +77,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -85,9 +85,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'dash',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar[dash]{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -98,7 +98,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -106,9 +106,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'equal',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar[equal]{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -119,7 +119,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -127,9 +127,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'hookrightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar[hookrightarrow]{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -140,7 +140,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -148,9 +148,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 1, y: 0 },
 					end: { x: 0, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A & B \\ar{l}{f} \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -161,16 +161,16 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
 					id: 'a1',
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
-					end: { x: 1, y: 0 }
-				}
-			]
+					end: { x: 1, y: 0 },
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar{r} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -181,7 +181,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -189,9 +189,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_below: 'f'
-				}
-			]
+					label_below: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar{r}[swap]{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -202,7 +202,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -211,9 +211,9 @@ describe('get_tikzcd_code', () => {
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
 					label_above: 'g',
-					label_below: 'f'
-				}
-			]
+					label_below: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar{r}{g}[swap]{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -229,9 +229,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} \\ar{r}{f} & \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -242,7 +242,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', pos: { x: 0, y: 0 } },
-				{ id: 'n2', pos: { x: 1, y: 0 } }
+				{ id: 'n2', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
@@ -250,9 +250,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} \\ar{r}{f} & \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -263,7 +263,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 2, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 2, y: 0 } },
 			],
 			arrows: [
 				{
@@ -271,9 +271,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 2, y: 0 },
-					label_below: 'f'
-				}
-			]
+					label_below: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar{rr}[swap]{f} & & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -284,7 +284,7 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 4, y: 5 } },
-				{ id: 'n2', label: 'B', pos: { x: 5, y: 5 } }
+				{ id: 'n2', label: 'B', pos: { x: 5, y: 5 } },
 			],
 			arrows: [
 				{
@@ -292,9 +292,9 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 4, y: 5 },
 					end: { x: 5, y: 5 },
-					label_above: 'f'
-				}
-			]
+					label_above: 'f',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -307,9 +307,9 @@ describe('get_tikzcd_code', () => {
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
 				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 				{ id: 'n3', label: 'C', pos: { x: 0, y: 1 } },
-				{ id: 'n4', label: 'D', pos: { x: 1, y: 1 } }
+				{ id: 'n4', label: 'D', pos: { x: 1, y: 1 } },
 			],
-			arrows: []
+			arrows: [],
 		}
 		const expected_code = `\\begin{tikzcd} A & B \\\\ C & D \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -322,7 +322,7 @@ describe('get_tikzcd_code', () => {
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
 				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 				{ id: 'n3', label: 'C', pos: { x: 0, y: 1 } },
-				{ id: 'n4', label: 'D', pos: { x: 1, y: 1 } }
+				{ id: 'n4', label: 'D', pos: { x: 1, y: 1 } },
 			],
 			arrows: [
 				{
@@ -330,30 +330,30 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
-					label_above: 'a'
+					label_above: 'a',
 				},
 				{
 					id: 'a2',
 					variant: 'rightarrow',
 					start: { x: 1, y: 0 },
 					end: { x: 1, y: 1 },
-					label_above: 'b'
+					label_above: 'b',
 				},
 				{
 					id: 'a3',
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
 					end: { x: 0, y: 1 },
-					label_below: 'c'
+					label_below: 'c',
 				},
 				{
 					id: 'a4',
 					variant: 'rightarrow',
 					start: { x: 0, y: 1 },
 					end: { x: 1, y: 1 },
-					label_below: 'd'
-				}
-			]
+					label_below: 'd',
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A \\ar{r}{a} \\ar{d}[swap]{c} & B \\ar{d}{b} \\\\ C \\ar{r}[swap]{d} & D \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -365,7 +365,7 @@ describe('get_tikzcd_code', () => {
 			nodes: [
 				{ id: 'n1', label: 'X', pos: { x: 0, y: 0 } },
 				{ id: 'n2', label: 'Y', pos: { x: 1, y: 1 } },
-				{ id: 'n3', label: 'Z', pos: { x: 2, y: 0 } }
+				{ id: 'n3', label: 'Z', pos: { x: 2, y: 0 } },
 			],
 			arrows: [
 				{
@@ -373,23 +373,23 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					label_above: 'f',
 					start: { x: 0, y: 0 },
-					end: { x: 2, y: 0 }
+					end: { x: 2, y: 0 },
 				},
 				{
 					id: 'a2',
 					variant: 'rightarrow',
 					label_below: 'g',
 					start: { x: 0, y: 0 },
-					end: { x: 1, y: 1 }
+					end: { x: 1, y: 1 },
 				},
 				{
 					id: 'a3',
 					variant: 'rightarrow',
 					label_below: 'h',
 					start: { x: 1, y: 1 },
-					end: { x: 2, y: 0 }
-				}
-			]
+					end: { x: 2, y: 0 },
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} X \\ar{rr}{f} \\ar{dr}[swap]{g} & & Z \\\\ & Y \\ar{ur}[swap]{h} & \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -401,7 +401,7 @@ describe('get_tikzcd_code', () => {
 			nodes: [
 				{ id: 'n1', label: 'X', pos: { x: 0, y: 0 } },
 				{ id: 'n2', label: 'Y', pos: { x: 1, y: 1 } },
-				{ id: 'n3', label: 'Z', pos: { x: 2, y: 0 } }
+				{ id: 'n3', label: 'Z', pos: { x: 2, y: 0 } },
 			],
 			arrows: [
 				{
@@ -409,23 +409,23 @@ describe('get_tikzcd_code', () => {
 					variant: 'rightarrow',
 					label_above: 'f',
 					start: { x: 2, y: 0 },
-					end: { x: 0, y: 0 }
+					end: { x: 0, y: 0 },
 				},
 				{
 					id: 'a2',
 					variant: 'rightarrow',
 					label_above: 'g',
 					start: { x: 2, y: 0 },
-					end: { x: 1, y: 1 }
+					end: { x: 1, y: 1 },
 				},
 				{
 					id: 'a3',
 					variant: 'rightarrow',
 					label_above: 'h',
 					start: { x: 1, y: 1 },
-					end: { x: 0, y: 0 }
-				}
-			]
+					end: { x: 0, y: 0 },
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} X & & Z \\ar{ll}{f} \\ar{dl}{g} \\\\ & Y \\ar{ul}{h} & \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
@@ -436,16 +436,16 @@ describe('get_tikzcd_code', () => {
 		const sample_diagram: Diagram = {
 			nodes: [
 				{ id: 'n1', label: 'A', pos: { x: 0, y: 0 } },
-				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } }
+				{ id: 'n2', label: 'B', pos: { x: 1, y: 0 } },
 			],
 			arrows: [
 				{
 					id: 'a1',
 					variant: 'rightarrow',
 					start: { x: 0, y: 0 },
-					end: { x: 0, y: 0 }
-				}
-			]
+					end: { x: 0, y: 0 },
+				},
+			],
 		}
 		const expected_code = `\\begin{tikzcd} A & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)

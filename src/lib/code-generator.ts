@@ -24,13 +24,13 @@ export function get_ranges(diagram: Diagram): [number[], number[]] {
 	const xrange = deduplicate([
 		...diagram.nodes.map((node) => node.pos.x),
 		...diagram.arrows.map((arrow) => arrow.start.x),
-		...diagram.arrows.map((arrow) => arrow.end.x)
+		...diagram.arrows.map((arrow) => arrow.end.x),
 	])
 
 	const yrange = deduplicate([
 		...diagram.nodes.map((node) => node.pos.y),
 		...diagram.arrows.map((arrow) => arrow.start.y),
-		...diagram.arrows.map((arrow) => arrow.end.y)
+		...diagram.arrows.map((arrow) => arrow.end.y),
 	])
 	return [xrange, yrange]
 }
@@ -87,7 +87,7 @@ function get_arrows_code(diagram: Diagram, x: number, y: number) {
 	let code = ''
 
 	const arrows_here = diagram.arrows.filter((arrow) =>
-		agree(arrow.start, { x, y })
+		agree(arrow.start, { x, y }),
 	)
 
 	for (const arrow of arrows_here) {
@@ -103,7 +103,7 @@ function get_deliminiter(
 	x: number,
 	xmax: number,
 	y: number,
-	ymax: number
+	ymax: number,
 ): string {
 	if (x < xmax) {
 		return '& '

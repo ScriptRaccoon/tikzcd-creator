@@ -14,7 +14,7 @@
 	let {
 		angle,
 		selected_variant = $bindable(),
-		update_variant
+		update_variant,
 	}: Props = $props()
 </script>
 

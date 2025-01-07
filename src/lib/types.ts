@@ -6,7 +6,7 @@ import type {
 	DiagramSchema,
 	NodeSchema,
 	StepIndexSchema,
-	StorageDataSchema
+	StorageDataSchema,
 } from './schemas'
 
 export type Coord = z.infer<typeof CoordSchema>

@@ -6,7 +6,7 @@
 		faPlus,
 		faRightLong,
 		faTrash,
-		faUpLong
+		faUpLong,
 	} from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
 	import { fly } from 'svelte/transition'
@@ -26,12 +26,12 @@
 		move_right,
 		move_up,
 		move_down,
-		zoom
+		zoom,
 	}: Props = $props()
 
 	function ask_for_clearing() {
 		const confirmed = window.confirm(
-			'Are you sure that you want to clear the diagram?'
+			'Are you sure that you want to clear the diagram?',
 		)
 		if (confirmed) {
 			clear_diagram()

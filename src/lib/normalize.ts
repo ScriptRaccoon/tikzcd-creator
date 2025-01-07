@@ -22,7 +22,7 @@ export function normalize(diagram: Diagram): Diagram {
 function transform_coord(
 	coord: Coord,
 	xrange: number[],
-	yrange: number[]
+	yrange: number[],
 ): Coord {
 	const x_shift = get_left_emptiness(xrange, coord.x)
 	const y_shift = get_left_emptiness(yrange, coord.y)
