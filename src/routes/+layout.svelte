@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Heading from '$lib/components/Heading.svelte'
 	import './app.css'
 </script>
 
@@ -25,5 +26,7 @@
 	<meta name="apple-mobile-web-app-title" content="MyWebSite" />
 	<link rel="manifest" href="/site.webmanifest" />
 </svelte:head>
+
+<Heading />
 
 <slot />
