@@ -169,25 +169,6 @@
 		background-size: 1rem 100%;
 	}
 
-	.remove-btn,
-	.variant-opener {
-		position: absolute;
-		width: 1.5rem;
-		height: 1.5rem;
-		border-radius: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.remove-btn {
-		background-color: var(--danger-color);
-	}
-
-	.variant-opener {
-		background-color: var(--card-color);
-	}
-
 	.hook {
 		position: absolute;
 		left: 0;
@@ -210,11 +191,30 @@
 		}
 	}
 
-	.remove-btn::before {
+	.remove-btn,
+	.variant-opener {
+		position: absolute;
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	:is(.remove-btn, .variant-opener)::before {
 		content: '';
 		position: absolute;
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
+	}
+
+	.remove-btn {
+		background-color: var(--danger-color);
+	}
+
+	.variant-opener {
+		background-color: var(--card-color);
 	}
 </style>
