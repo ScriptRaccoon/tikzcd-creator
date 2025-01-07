@@ -63,7 +63,7 @@
 	}
 
 	function handle_keydown(e: KeyboardEvent): void {
-		if (e.key === 'Escape' && $dialog_state?.modal) {
+		if ($dialog_state?.modal && e.key === 'Escape') {
 			e.preventDefault()
 			cancel()
 		}

@@ -3,8 +3,8 @@
 	import type { Coord, Diagram, Arrow, StepIndex } from '$lib/types'
 	import { agree } from '$lib/utils'
 
-	import ArrowComponent from './Arrow.svelte'
-	import Label from './Label.svelte'
+	import ArrowComponent, { clear_editing_arrow } from './Arrow.svelte'
+	import Label, { clear_editing_label } from './Label.svelte'
 	import NodeComponent from './Node.svelte'
 	import Positioner from './Positioner.svelte'
 
@@ -28,16 +28,11 @@
 
 	let next_arrow_start = $state<Coord | null>(null)
 
-	$effect(() => {
-		window.addEventListener('keydown', handle_keydown)
-		return () => {
-			window.removeEventListener('keydown', handle_keydown)
-		}
-	})
-
 	function handle_keydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
 			next_arrow_start = null
+			clear_editing_label()
+			clear_editing_arrow()
 		}
 	}
 
@@ -91,6 +86,8 @@
 		}
 	}
 </script>
+
+<svelte:window onkeydown={handle_keydown} />
 
 {#if step === 1 || step === 2 || step === 3}
 	{#each { length: grid_rows + 1 } as _, y}

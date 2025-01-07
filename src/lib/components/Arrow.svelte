@@ -1,5 +1,9 @@
 <script lang="ts" module>
 	let editing_arrow_id = $state<null | string>(null)
+
+	export function clear_editing_arrow() {
+		editing_arrow_id = null
+	}
 </script>
 
 <script lang="ts">

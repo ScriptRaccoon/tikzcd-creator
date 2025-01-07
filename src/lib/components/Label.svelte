@@ -1,5 +1,9 @@
 <script lang="ts" module>
 	let editing_label_id = $state<null | string>(null)
+
+	export function clear_editing_label() {
+		editing_label_id = null
+	}
 </script>
 
 <script lang="ts">
@@ -36,23 +40,9 @@
 		}
 	}
 
-	function handle_keydown(e: KeyboardEvent) {
-		if (e.key === 'Escape') {
-			editing_label_id = null
-		}
-	}
-
 	$effect(() => {
 		if (editing) {
 			select_input()
-		}
-	})
-
-	$effect(() => {
-		window.addEventListener('keydown', handle_keydown)
-
-		return () => {
-			window.removeEventListener('keydown', handle_keydown)
 		}
 	})
 

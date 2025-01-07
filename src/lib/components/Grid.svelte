@@ -22,13 +22,6 @@
 	let grid_element = $state<HTMLElement | null>(null)
 	let mouse_pos = $state<{ x: number; y: number }>({ x: 0, y: 0 })
 
-	$effect(() => {
-		window.addEventListener('mousemove', update_mouse_pos)
-		return () => {
-			window.removeEventListener('mousemove', update_mouse_pos)
-		}
-	})
-
 	function update_mouse_pos(e: MouseEvent) {
 		if (!grid_element) return
 		const rect = grid_element.getBoundingClientRect()
@@ -36,6 +29,8 @@
 		mouse_pos.y = e.clientY - rect.top
 	}
 </script>
+
+<svelte:window onmousemove={update_mouse_pos} />
 
 <div class="grid-wrapper">
 	<div
