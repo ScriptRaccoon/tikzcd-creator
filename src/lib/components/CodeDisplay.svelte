@@ -54,7 +54,11 @@
 				Normalize
 			{/if}
 		</button>
-		<button class="small button" onclick={copy_code} aria-live="polite">
+		<button
+			class="small button"
+			aria-label="copy code to clipboard"
+			onclick={copy_code}
+		>
 			<Fa icon={copied ? faClipboardCheck : faClipboard} />
 			Copy
 		</button>
@@ -75,6 +79,11 @@
 		background-color: black;
 		scrollbar-width: thin;
 		scrollbar-color: gray black;
+	}
+
+	.code:focus-visible {
+		outline: 2px solid var(--font-color);
+		outline-offset: 2px;
 	}
 
 	.code.copied {

@@ -163,7 +163,7 @@
 	}
 
 	@media (hover: hover) {
-		.remove-btn {
+		.remove-btn:not(:focus-visible) {
 			transition: opacity 200ms;
 			opacity: 0;
 		}

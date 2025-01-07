@@ -36,36 +36,38 @@
 	})
 </script>
 
-{#if show_step}
-	{#key step}
-		<div
-			class="step-card"
-			in:fly={{ x: -50, duration: 200, delay: 200 }}
-			out:fly={{ x: 50, duration: 200 }}
-		>
-			<h2 class="summary">
-				{#if step > 0}
-					Step {step}:
-				{/if}
-				{current_step.summary}
-			</h2>
+<div aria-live="polite">
+	{#if show_step}
+		{#key step}
+			<div
+				class="step-card"
+				in:fly={{ x: -50, duration: 200, delay: 200 }}
+				out:fly={{ x: 50, duration: 200 }}
+			>
+				<h2 class="summary">
+					{#if step > 0}
+						Step {step}:
+					{/if}
+					{current_step.summary}
+				</h2>
 
-			<p>{@html current_step.message}</p>
+				<p>{@html current_step.message}</p>
 
-			{@render children?.()}
-			<div class="buttons">
-				{#if current_step.button_labels.prev !== null}
-					<button class="button" onclick={handle_previous}>
-						{current_step.button_labels.prev}
+				{@render children?.()}
+				<div class="buttons">
+					{#if current_step.button_labels.prev !== null}
+						<button class="button" onclick={handle_previous}>
+							{current_step.button_labels.prev}
+						</button>
+					{/if}
+					<button class="button" onclick={handle_next}>
+						{current_step.button_labels.next}
 					</button>
-				{/if}
-				<button class="button" onclick={handle_next}>
-					{current_step.button_labels.next}
-				</button>
+				</div>
 			</div>
-		</div>
-	{/key}
-{/if}
+		{/key}
+	{/if}
+</div>
 
 <style>
 	.step-card {

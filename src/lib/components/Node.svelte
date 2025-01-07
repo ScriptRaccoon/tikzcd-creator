@@ -64,12 +64,12 @@
 			scale 200ms;
 	}
 
-	.node:not(.selected) .circle {
+	.node:not(.selected, :focus-visible) .circle {
 		opacity: 0;
 		scale: 0;
 	}
 
-	.node:not(.selected):not([disabled]):hover .circle {
+	.node:not(.selected, [disabled]):hover .circle {
 		opacity: 1;
 		scale: 1;
 	}

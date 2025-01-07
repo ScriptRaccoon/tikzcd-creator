@@ -100,7 +100,7 @@
 			)}
 			<Positioner x={x * tile_size} y={y * tile_size}>
 				<NodeComponent
-					aria_label="node at {x}, {y}"
+					aria_label="node at {x}, {y}, {selected ? 'selected' : 'unselected'}"
 					handle_click={() => handle_node_click({ x, y })}
 					{selected}
 					interactive={step <= 2}
