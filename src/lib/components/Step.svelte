@@ -43,10 +43,15 @@
 			in:fly={{ x: -50, duration: 200, delay: 200 }}
 			out:fly={{ x: 50, duration: 200 }}
 		>
-			<p>
-				<span class="summary">{current_step.summary}</span>
-				{@html current_step.message}
-			</p>
+			<h2 class="summary">
+				{#if step > 0}
+					Step {step}:
+				{/if}
+				{current_step.summary}
+			</h2>
+
+			<p>{@html current_step.message}</p>
+
 			{@render children?.()}
 			<div class="buttons">
 				{#if current_step.button_labels.prev !== null}
@@ -76,12 +81,17 @@
 		width: min(90vw, 20rem);
 	}
 
+	h2 {
+		font-size: 1rem;
+	}
+
 	p {
 		line-height: 1.5;
 	}
 
 	.summary {
 		font-weight: bold;
+		margin-bottom: 0.5rem;
 	}
 
 	.buttons {
