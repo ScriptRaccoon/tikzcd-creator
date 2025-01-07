@@ -83,16 +83,13 @@
 		width: min(90vw, 20rem);
 	}
 
-	h2 {
-		font-size: 1rem;
-	}
-
 	p {
 		line-height: 1.5;
 	}
 
 	.summary {
-		font-weight: bold;
+		font-size: 1rem;
+		font-weight: 600;
 		margin-bottom: 0.5rem;
 	}
 
