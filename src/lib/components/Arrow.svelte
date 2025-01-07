@@ -1,3 +1,7 @@
+<script lang="ts" module>
+	let editing_arrow_id = $state<null | string>(null)
+</script>
+
 <script lang="ts">
 	import { faCog, faXmark } from '@fortawesome/free-solid-svg-icons'
 	import { fade } from 'svelte/transition'
@@ -9,6 +13,7 @@
 	import ArrowSelector from './ArrowSelector.svelte'
 
 	type Props = {
+		id: string
 		start: { x: number; y: number }
 		end: { x: number; y: number }
 		handle_remove?: () => void
@@ -18,6 +23,7 @@
 	}
 
 	let {
+		id,
 		start,
 		end,
 		handle_remove,
@@ -42,13 +48,11 @@
 	let padded_start_x = $derived(start.x + Math.cos(angle) * arrow_padding)
 	let padded_start_y = $derived(start.y + Math.sin(angle) * arrow_padding)
 
-	let show_variant_selector = $state(false)
-
 	let has_hook = $derived(variant === 'hookrightarrow')
 
-	$effect(() => {
-		if (variant) show_variant_selector = false
-	})
+	function toggle_variant_selector() {
+		editing_arrow_id = id === editing_arrow_id ? null : id
+	}
 </script>
 
 <div
@@ -88,17 +92,17 @@
 	{/if}
 
 	{#if variantable}
-		{#if show_variant_selector}
+		{#if editing_arrow_id === id}
 			<ArrowSelector
 				{angle}
 				bind:selected_variant={variant}
-				update_variant={() => (show_variant_selector = false)}
+				update_variant={() => (editing_arrow_id = null)}
 			/>
 		{:else}
 			<button
 				class="variant-opener"
 				aria-label="open variant selector"
-				onclick={() => (show_variant_selector = true)}
+				onclick={toggle_variant_selector}
 			>
 				<Fa icon={faCog} />
 			</button>

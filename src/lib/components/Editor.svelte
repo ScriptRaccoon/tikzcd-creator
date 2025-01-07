@@ -115,6 +115,7 @@
 {#if step >= 2}
 	{#each diagram.arrows as arrow (arrow.id)}
 		<ArrowComponent
+			id={arrow.id}
 			start={{
 				x: arrow.start.x * tile_size,
 				y: arrow.start.y * tile_size,
@@ -133,6 +134,7 @@
 
 {#if is_desktop && step === 2 && next_arrow_start}
 	<ArrowComponent
+		id=""
 		start={{
 			x: next_arrow_start.x * tile_size,
 			y: next_arrow_start.y * tile_size,
