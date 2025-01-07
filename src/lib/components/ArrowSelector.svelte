@@ -43,17 +43,20 @@
 <style>
 	.selector {
 		background-color: var(--card-color);
-		display: flex;
+		opacity: 0.95;
 		position: absolute;
 		gap: 0.5rem;
 		rotate: calc(-1 * var(--angle));
 		border-radius: 0.25rem;
 		box-shadow: 0 0 1rem var(--shadow-color);
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 	}
 
 	button {
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 3rem;
+		height: 3rem;
+		font-size: 2rem;
 	}
 
 	button[aria-checked='true'],
