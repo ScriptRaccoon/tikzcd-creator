@@ -10,6 +10,7 @@
 	} from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
 	import { fly } from 'svelte/transition'
+	import { open_dialog } from './Dialog.svelte'
 
 	type Props = {
 		clear_diagram: () => void
@@ -30,12 +31,11 @@
 	}: Props = $props()
 
 	function ask_for_clearing() {
-		const confirmed = window.confirm(
-			'Are you sure that you want to clear the diagram?',
-		)
-		if (confirmed) {
-			clear_diagram()
-		}
+		open_dialog({
+			modal: true,
+			text: 'Do you really want to clear the diagram?',
+			confirm: { text: 'Yes', action: clear_diagram },
+		})
 	}
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Dialog from '$lib/components/Dialog.svelte'
 	import Heading from '$lib/components/Heading.svelte'
 	import './app.css'
 </script>
@@ -30,3 +31,5 @@
 <Heading />
 
 <slot />
+
+<Dialog />
