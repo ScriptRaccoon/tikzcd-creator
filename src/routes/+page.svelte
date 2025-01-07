@@ -15,13 +15,9 @@
 	let tile_size = $state<number>(initial_data.tile_size)
 
 	function reset() {
-		clear_diagram()
-		step = 1
-	}
-
-	function clear_diagram() {
 		diagram.nodes = []
 		diagram.arrows = []
+		step = 1
 	}
 
 	function zoom(value: -1 | 1) {
@@ -43,7 +39,7 @@
 
 {#if step >= 1}
 	<Menu
-		{clear_diagram}
+		clear_diagram={reset}
 		move_left={() => move_left(diagram)}
 		move_right={() => move_right(diagram)}
 		move_up={() => move_up(diagram)}
