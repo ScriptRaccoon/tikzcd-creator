@@ -38,7 +38,13 @@
 </script>
 
 <div class="wrapper">
-	<pre class="code" class:copied>{tikzcd_code}</pre>
+	<!-- the code should be focussable to be able to scroll through it -->
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+	<pre
+		tabindex="0"
+		aria-label="tikzcd code"
+		class="code"
+		class:copied>{tikzcd_code}</pre>
 	<div class="actions">
 		<button class="small button" onclick={toggle_normalization}>
 			<Fa icon={faWandMagicSparkles} />
