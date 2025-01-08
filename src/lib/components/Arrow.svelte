@@ -163,7 +163,7 @@
 		width: 1.5rem;
 		height: 1.5rem;
 		background-color: var(--accent-color);
-		clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
+		clip-path: polygon(0% 10%, 100% 50%, 0% 90%, 20% 50%);
 	}
 
 	.arrow.dashed .line {
