@@ -23,7 +23,7 @@
 		handle_remove?: () => void
 		removable: boolean
 		variant: Arrow['variant']
-		variantable: boolean
+		editable: boolean
 	}
 
 	let {
@@ -33,7 +33,7 @@
 		handle_remove,
 		removable,
 		variant = $bindable(),
-		variantable,
+		editable,
 	}: Props = $props()
 
 	let has_tip = $derived(variant !== 'equal' && variant !== 'dash')
@@ -95,7 +95,7 @@
 		</button>
 	{/if}
 
-	{#if variantable}
+	{#if editable}
 		{#if editing_arrow_id === id}
 			<ArrowSelector
 				{angle}

@@ -124,7 +124,7 @@
 			handle_remove={() => remove_arrow(arrow)}
 			removable={step === 2}
 			bind:variant={arrow.variant}
-			variantable={step === 3}
+			editable={step === 3}
 		></ArrowComponent>
 	{/each}
 {/if}
@@ -139,7 +139,7 @@
 		end={mouse_pos}
 		removable={false}
 		variant={'rightarrow'}
-		variantable={false}
+		editable={false}
 	/>
 {/if}
 
