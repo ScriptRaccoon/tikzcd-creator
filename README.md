@@ -6,7 +6,7 @@ Graphical editor for [tikzcd diagrams](https://ctan.org/pkg/tikz-cd) that genera
 
 ## Demo 1
 
-https://github.com/user-attachments/assets/972f6bcd-c537-4ece-a8ad-c37e99d94a4b
+https://github.com/user-attachments/assets/bdbe68b5-5cbd-44b7-ab52-e9e9d355c421
 
 LaTeX output:
 
@@ -14,7 +14,7 @@ LaTeX output:
 
 ## Demo 2
 
-https://github.com/user-attachments/assets/b138e427-074f-40a1-9e33-26dbc68abecf
+https://github.com/user-attachments/assets/26b13fd0-9e23-40af-9b16-715eb97ae199
 
 LaTeX output:
 
