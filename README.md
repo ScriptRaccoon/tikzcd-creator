@@ -20,6 +20,12 @@ LaTeX output:
 
 <img width="540" alt="output-cube" src="https://github.com/user-attachments/assets/da646b8d-5a01-4b27-864b-27dd194ff912" />
 
+## Demo 3
+
+The editor also works on mobile.
+
+https://github.com/user-attachments/assets/9dbe2574-9ca6-4519-af4e-7319e5ab6cf8
+
 ## Development
 
 This application is made with [SvelteKit](https://svelte.dev/docs/kit/introduction).
