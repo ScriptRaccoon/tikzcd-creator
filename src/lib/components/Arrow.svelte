@@ -1,39 +1,41 @@
-<script lang="ts" module>
-	let editing_arrow_id = $state<null | string>(null)
-
-	export function clear_editing_arrow() {
-		editing_arrow_id = null
-	}
-</script>
-
 <script lang="ts">
-	import { faCog, faXmark } from '@fortawesome/free-solid-svg-icons'
+	import {
+		faCog,
+		faLeftLong,
+		faRightLong,
+		faUpRightAndDownLeftFromCenter,
+		faXmark,
+	} from '@fortawesome/free-solid-svg-icons'
 	import { fade } from 'svelte/transition'
 	import Fa from 'svelte-fa'
 
-	import { arrow_padding } from '$lib/constants'
+	import { arrow_padding, arrow_shift_scale } from '$lib/constants'
 	import type { Arrow } from '$lib/types'
 
 	import ArrowSelector from './ArrowSelector.svelte'
 
 	type Props = {
 		id: string
+		editing_arrow_id: string | null
 		start: { x: number; y: number }
 		end: { x: number; y: number }
-		handle_remove?: () => void
-		removable: boolean
 		variant: Arrow['variant']
-		editable: boolean
+		show_controls: boolean
+		show_variants: boolean
+		shift?: number
+		remove: () => void
 	}
 
 	let {
 		id,
+		editing_arrow_id = $bindable(),
 		start,
 		end,
-		handle_remove,
-		removable,
 		variant = $bindable(),
-		editable,
+		show_variants,
+		show_controls,
+		shift = $bindable(),
+		remove,
 	}: Props = $props()
 
 	let has_tip = $derived(variant !== 'equal' && variant !== 'dash')
@@ -54,8 +56,21 @@
 
 	let has_hook = $derived(variant === 'hookrightarrow')
 
-	function toggle_variant_selector() {
+	let editing = $derived(editing_arrow_id === id)
+
+	function toggle_editing() {
 		editing_arrow_id = id === editing_arrow_id ? null : id
+	}
+
+	function handle_shift(direction: 'left' | 'right') {
+		const current_shift = shift ?? 0
+		shift = current_shift + (direction === 'left' ? -1 : 1)
+		editing_arrow_id = null
+	}
+
+	function handle_remove() {
+		editing_arrow_id = null
+		remove()
 	}
 </script>
 
@@ -65,6 +80,8 @@
 	style:--y="{padded_start_y}px"
 	style:--length="{length}px"
 	style:--angle="{angle * (180 / Math.PI)}deg"
+	style:--shift="{(shift ?? 0) * arrow_shift_scale}px"
+	class:editing
 	transition:fade|global={{ duration: 150 }}
 >
 	<div class="lines">
@@ -85,32 +102,62 @@
 		<div class="hook"></div>
 	{/if}
 
-	{#if removable && handle_remove !== undefined}
+	{#if show_controls && editing_arrow_id === null}
 		<button
-			class="remove-btn"
-			aria-label="delete arrow"
-			onclick={handle_remove}
+			transition:fade={{ duration: 120 }}
+			class="edit-opener"
+			aria-label="edit arrow"
+			onclick={toggle_editing}
 		>
-			<Fa icon={faXmark} />
+			<Fa icon={faUpRightAndDownLeftFromCenter} />
 		</button>
 	{/if}
 
-	{#if editable}
-		{#if editing_arrow_id === id}
-			<ArrowSelector
-				{angle}
-				bind:selected_variant={variant}
-				update_variant={() => (editing_arrow_id = null)}
-			/>
-		{:else}
+	{#if show_controls && editing}
+		<div class="controls" transition:fade={{ duration: 120 }}>
 			<button
-				class="variant-opener"
-				aria-label="open variant selector"
-				onclick={toggle_variant_selector}
+				class="shift-button"
+				aria-label="shift arrow left"
+				onclick={() => handle_shift('left')}
 			>
-				<Fa icon={faCog} />
+				<Fa icon={faLeftLong} />
 			</button>
-		{/if}
+
+			<button
+				class="remove-btn"
+				aria-label="delete arrow"
+				onclick={handle_remove}
+			>
+				<Fa icon={faXmark} />
+			</button>
+
+			<button
+				class="shift-button"
+				aria-label="shift arrow right"
+				onclick={() => handle_shift('right')}
+			>
+				<Fa icon={faRightLong} />
+			</button>
+		</div>
+	{/if}
+
+	{#if show_variants}
+		<button
+			transition:fade={{ duration: 120 }}
+			class="variant-opener"
+			aria-label="change arrow type"
+			onclick={toggle_editing}
+		>
+			<Fa icon={faCog} />
+		</button>
+	{/if}
+
+	{#if show_variants && editing_arrow_id === id}
+		<ArrowSelector
+			{angle}
+			bind:selected_variant={variant}
+			update_variant={() => (editing_arrow_id = null)}
+		/>
 	{/if}
 </div>
 
@@ -121,15 +168,22 @@
 		top: var(--y);
 		left: var(--x);
 		width: var(--length);
-		rotate: var(--angle);
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		translate: 0% -50%;
+		transform: translate(0%, -50%) rotate(var(--angle))
+			translate(0, var(--shift, 0));
+	}
+
+	.arrow > * {
+		position: absolute;
+	}
+
+	.arrow.editing {
+		z-index: 1;
 	}
 
 	.lines {
-		position: absolute;
 		width: 100%;
 		display: grid;
 		gap: 0.25rem;
@@ -158,7 +212,6 @@
 	}
 
 	.tip {
-		position: absolute;
 		right: 0;
 		width: 1.5rem;
 		height: 1.5rem;
@@ -178,7 +231,6 @@
 	}
 
 	.hook {
-		position: absolute;
 		left: 0;
 		bottom: -0.1rem;
 		width: 1.7rem;
@@ -188,20 +240,13 @@
 		clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
 	}
 
-	@media (hover: hover) {
-		.remove-btn:not(:focus-visible) {
-			transition: opacity 200ms;
-			opacity: 0;
-		}
-
-		.remove-btn:hover {
-			opacity: 1;
-		}
+	.controls {
+		display: grid;
+		gap: 0.25rem;
+		z-index: 5;
 	}
 
-	.remove-btn,
-	.variant-opener {
-		position: absolute;
+	button {
 		width: 1.5rem;
 		height: 1.5rem;
 		border-radius: 50%;
@@ -210,19 +255,22 @@
 		align-items: center;
 	}
 
-	:is(.remove-btn, .variant-opener)::before {
-		content: '';
-		position: absolute;
-		width: 3rem;
-		height: 3rem;
-		border-radius: 50%;
-	}
-
 	.remove-btn {
 		background-color: var(--danger-color);
 	}
 
-	.variant-opener {
+	.variant-opener,
+	.shift-button,
+	.edit-opener {
 		background-color: var(--card-color);
+	}
+
+	.shift-button {
+		rotate: 90deg;
+	}
+
+	.edit-opener {
+		font-size: 0.75rem;
+		rotate: -45deg;
 	}
 </style>

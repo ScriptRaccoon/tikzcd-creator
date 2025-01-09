@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { is_desktop } from '$lib/constants'
+	import { arrow_shift_scale, is_desktop } from '$lib/constants'
 	import type { Coord, Diagram, Arrow, StepIndex } from '$lib/types'
 	import { agree } from '$lib/utils'
 
-	import ArrowComponent, { clear_editing_arrow } from './Arrow.svelte'
+	import ArrowComponent from './Arrow.svelte'
 	import Label, { clear_editing_label } from './Label.svelte'
 	import NodeComponent from './Node.svelte'
 	import Positioner from './Positioner.svelte'
@@ -28,11 +28,13 @@
 
 	let next_arrow_start = $state<Coord | null>(null)
 
+	let editing_arrow_id = $state<string | null>(null)
+
 	function handle_keydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
 			next_arrow_start = null
-			clear_editing_label()
-			clear_editing_arrow()
+			clear_editing_label() // TODO: replace also with state in this file
+			editing_arrow_id = null
 		}
 	}
 
@@ -85,6 +87,12 @@
 			create_arrow(pos)
 		}
 	}
+
+	$effect(() => {
+		if (step) {
+			editing_arrow_id = null
+		}
+	})
 </script>
 
 <svelte:window onkeydown={handle_keydown} />
@@ -113,6 +121,7 @@
 	{#each diagram.arrows as arrow (arrow.id)}
 		<ArrowComponent
 			id={arrow.id}
+			bind:editing_arrow_id
 			start={{
 				x: arrow.start.x * tile_size,
 				y: arrow.start.y * tile_size,
@@ -121,10 +130,11 @@
 				x: arrow.end.x * tile_size,
 				y: arrow.end.y * tile_size,
 			}}
-			handle_remove={() => remove_arrow(arrow)}
-			removable={step === 2}
 			bind:variant={arrow.variant}
-			editable={step === 3}
+			bind:shift={arrow.shift}
+			show_controls={step === 2}
+			show_variants={step === 3}
+			remove={() => remove_arrow(arrow)}
 		></ArrowComponent>
 	{/each}
 {/if}
@@ -132,14 +142,16 @@
 {#if is_desktop && step === 2 && next_arrow_start}
 	<ArrowComponent
 		id=""
+		editing_arrow_id={null}
 		start={{
 			x: next_arrow_start.x * tile_size,
 			y: next_arrow_start.y * tile_size,
 		}}
 		end={mouse_pos}
-		removable={false}
 		variant={'rightarrow'}
-		editable={false}
+		show_variants={false}
+		show_controls={false}
+		remove={() => {}}
 	/>
 {/if}
 
@@ -160,14 +172,21 @@
 
 {#if step >= 5}
 	{#each diagram.arrows as arrow (arrow.id)}
-		{@const angle_deg =
-			Math.atan2(arrow.end.y - arrow.start.y, arrow.end.x - arrow.start.x) *
-			(180 / Math.PI)}
-		<Positioner
-			x={0.5 * tile_size * (arrow.start.x + arrow.end.x)}
-			y={0.5 * tile_size * (arrow.start.y + arrow.end.y)}
-		>
-			<div class="arrow_labels" style:--angle-deg="{angle_deg}deg">
+		{@const angle = Math.atan2(
+			arrow.end.y - arrow.start.y,
+			arrow.end.x - arrow.start.x,
+		)}
+		{@const x =
+			0.5 * tile_size * (arrow.start.x + arrow.end.x) -
+			(arrow.shift ?? 0) * arrow_shift_scale * Math.sin(angle)}
+		{@const y =
+			0.5 * tile_size * (arrow.start.y + arrow.end.y) +
+			(arrow.shift ?? 0) * arrow_shift_scale * Math.cos(angle)}
+		<Positioner {x} {y}>
+			<div
+				class="arrow_labels"
+				style:--angle-deg="{angle * (180 / Math.PI)}deg"
+			>
 				<div class="rotation-correction">
 					<Label
 						id={`arrow-label-above-${arrow.id}`}
