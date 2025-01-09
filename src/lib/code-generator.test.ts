@@ -124,14 +124,14 @@ describe('get_tikzcd_code', () => {
 			arrows: [
 				{
 					id: 'a1',
-					variant: 'hookrightarrow',
+					variant: 'equal',
 					start: { x: 0, y: 0 },
 					end: { x: 1, y: 0 },
 					label_above: 'f',
 				},
 			],
 		}
-		const expected_code = `\\begin{tikzcd} A \\ar[hookrightarrow]{r}{f} & B \\end{tikzcd}`
+		const expected_code = `\\begin{tikzcd} A \\ar[equal]{r}{f} & B \\end{tikzcd}`
 		const actual_code = get_tikzcd_code(sample_diagram)
 		expect(actual_code).toBe(expected_code)
 	})
