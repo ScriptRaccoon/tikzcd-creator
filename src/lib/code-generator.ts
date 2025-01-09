@@ -64,12 +64,24 @@ function get_arrow_direction(start: Coord, end: Coord): string | null {
 	return result
 }
 
+function get_arrow_options(arrow: Arrow): string {
+	const option_1 = arrow.variant === 'rightarrow' ? null : arrow.variant
+	const option_2 = arrow.shift
+		? arrow.shift > 0
+			? `shift right=${arrow.shift * 0.4}ex`
+			: `shift left=${-arrow.shift * 0.4}ex`
+		: null
+	const options = [option_1, option_2].filter((opt) => opt != null)
+	return options.join(', ')
+}
+
 function get_arrow_code(arrow: Arrow): string {
 	const direction = get_arrow_direction(arrow.start, arrow.end)
 	let arrow_code = `\\ar`
 
-	if (arrow.variant != 'rightarrow') {
-		arrow_code += `[${arrow.variant}]`
+	const options = get_arrow_options(arrow)
+	if (options) {
+		arrow_code += `[${options}]`
 	}
 
 	arrow_code += `{${direction}}`
@@ -77,9 +89,11 @@ function get_arrow_code(arrow: Arrow): string {
 	if (arrow.label_above) {
 		arrow_code += `{${arrow.label_above}}`
 	}
+
 	if (arrow.label_below) {
 		arrow_code += `[swap]{${arrow.label_below}}`
 	}
+
 	return arrow_code
 }
 

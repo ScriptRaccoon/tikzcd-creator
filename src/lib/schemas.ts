@@ -21,6 +21,7 @@ export const ArrowSchema = z.object({
 	variant: z.enum(arrow_variants),
 	label_above: z.string().optional(),
 	label_below: z.string().optional(),
+	shift: z.number().optional(),
 })
 
 export const DiagramSchema = z.object({
