@@ -32,38 +32,15 @@
 
 <svelte:window onmousemove={update_mouse_pos} />
 
-<div class="grid-wrapper">
-	<div
-		class="grid"
-		style:--cols={grid_cols}
-		style:--rows={grid_rows}
-		style:--tile-size="{tile_size}px"
-		bind:this={grid_element}
-	>
-		<Editor
-			bind:diagram
-			{step}
-			{grid_cols}
-			{grid_rows}
-			{mouse_pos}
-			{tile_size}
-		/>
-	</div>
+<div class="grid" style:--tile-size="{tile_size}px" bind:this={grid_element}>
+	<Editor bind:diagram {step} {grid_cols} {grid_rows} {mouse_pos} {tile_size} />
 </div>
 
 <style>
-	.grid-wrapper {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100vw;
-		height: 100vh;
-	}
-
 	.grid {
 		position: relative;
-		width: calc(var(--cols) * var(--tile-size) + 1px);
-		height: calc(var(--rows) * var(--tile-size) + 1px);
+		width: 100vw;
+		height: 100vh;
 		background-image: linear-gradient(
 				to right,
 				var(--line-color) 1px,
