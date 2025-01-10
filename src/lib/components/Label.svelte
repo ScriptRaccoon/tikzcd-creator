@@ -1,11 +1,3 @@
-<script lang="ts" module>
-	let editing_label_id = $state<null | string>(null)
-
-	export function clear_editing_label() {
-		editing_label_id = null
-	}
-</script>
-
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition'
 
@@ -13,6 +5,7 @@
 
 	type Props = {
 		id: string
+		editing_label_id: string | null
 		aria_label: string
 		size: 'small' | 'large'
 		variant: 'normal' | 'accent'
@@ -22,6 +15,7 @@
 
 	let {
 		id,
+		editing_label_id = $bindable(),
 		aria_label,
 		size,
 		label = $bindable(),

@@ -4,7 +4,7 @@
 	import { agree } from '$lib/utils'
 
 	import ArrowComponent from './Arrow.svelte'
-	import Label, { clear_editing_label } from './Label.svelte'
+	import Label from './Label.svelte'
 	import NodeComponent from './Node.svelte'
 	import Positioner from './Positioner.svelte'
 
@@ -27,16 +27,22 @@
 	}: Props = $props()
 
 	let next_arrow_start = $state<Coord | null>(null)
-
 	let editing_arrow_id = $state<string | null>(null)
+	let editing_label_id = $state<string | null>(null)
+
+	function reset_edits() {
+		next_arrow_start = null
+		editing_label_id = null
+		editing_arrow_id = null
+	}
 
 	function handle_keydown(e: KeyboardEvent) {
-		if (e.key === 'Escape') {
-			next_arrow_start = null
-			clear_editing_label() // TODO: replace also with state in this file
-			editing_arrow_id = null
-		}
+		if (e.key === 'Escape') reset_edits()
 	}
+
+	$effect(() => {
+		if (step) reset_edits()
+	})
 
 	function toggle_node(pos: Coord) {
 		const existing_node = diagram.nodes.find((node) => agree(node.pos, pos))
@@ -87,12 +93,6 @@
 			create_arrow(pos)
 		}
 	}
-
-	$effect(() => {
-		if (step) {
-			editing_arrow_id = null
-		}
-	})
 </script>
 
 <svelte:window onkeydown={handle_keydown} />
@@ -160,6 +160,7 @@
 		<Positioner x={node.pos.x * tile_size} y={node.pos.y * tile_size}>
 			<Label
 				id={`node-label-${node.id}`}
+				bind:editing_label_id
 				aria_label="label for node at {node.pos.x}, {node.pos.y}"
 				size="large"
 				bind:label={node.label}
@@ -190,6 +191,7 @@
 				<div class="rotation-correction">
 					<Label
 						id={`arrow-label-above-${arrow.id}`}
+						bind:editing_label_id
 						aria_label="Create label above the arrow"
 						size="small"
 						editable={step === 5}
@@ -200,6 +202,7 @@
 				<div class="rotation-correction">
 					<Label
 						id={`arrow-label-below-${arrow.id}`}
+						bind:editing_label_id
 						aria_label="Create label below the arrow"
 						size="small"
 						editable={step === 5}
