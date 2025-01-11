@@ -6,9 +6,11 @@
 
 	import { get_stored_data, save_data } from '$lib/storage'
 	import { move_down, move_left, move_right, move_up } from '$lib/move'
-	import { type Diagram, type StepIndex } from '$lib/types'
+	import { type Diagram, type StepIndex, type StorageData } from '$lib/types'
+	import { generate_URL, get_data_from_URL } from '$lib/url.js'
 
-	const initial_data = get_stored_data()
+	const data_from_URL = get_data_from_URL()
+	const initial_data: StorageData = data_from_URL ?? get_stored_data()
 
 	let diagram = $state<Diagram>(initial_data.diagram)
 	let step = $state<StepIndex>(initial_data.step)
