@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { arrow_shift_scale, is_desktop } from '$lib/constants'
-	import type { Coord, Diagram, Arrow, StepIndex } from '$lib/types'
-	import { agree } from '$lib/utils'
+	import { arrow_shift_scale, is_desktop } from '../lib/constants'
+	import type { Coord, Diagram, Arrow, StepIndex } from '../lib/types'
+	import { agree } from '../lib/utils'
 
 	import ArrowComponent from './Arrow.svelte'
 	import Label from './Label.svelte'

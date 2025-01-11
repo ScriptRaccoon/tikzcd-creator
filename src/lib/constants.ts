@@ -1,5 +1,3 @@
-import { browser } from '$app/environment'
-
 export const arrow_padding = 30
 
 export const arrow_shift_scale = 10
@@ -22,4 +20,5 @@ export const arrow_codes = {
 	hookrightarrow: '\\hookrightarrow',
 } as const
 
-export const is_desktop = browser && window.matchMedia('(hover: hover)').matches
+export const is_desktop =
+	typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches

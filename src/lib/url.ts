@@ -1,12 +1,8 @@
-import { browser } from '$app/environment'
-
 import { decode_diagram, encode_diagram } from './encoding'
 import { STEPS } from './step.config'
 import type { StorageData } from './types'
 
 export function generate_URL(data: StorageData): string {
-	if (!browser) return ''
-
 	const encoded_diagram = encode_diagram(data.diagram)
 
 	const url = new URL(window.location.href)
@@ -18,8 +14,6 @@ export function generate_URL(data: StorageData): string {
 }
 
 export function get_data_from_URL(): StorageData | null {
-	if (!browser) return null
-
 	const url = new URL(window.location.href)
 	const diagram_parameter = url.searchParams.get('d')
 	const step_parameter = url.searchParams.get('s')

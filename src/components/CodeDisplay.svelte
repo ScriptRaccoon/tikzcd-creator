@@ -6,9 +6,9 @@
 		faWandMagicSparkles,
 	} from '@fortawesome/free-solid-svg-icons'
 
-	import type { Diagram } from '$lib/types'
-	import { get_tikzcd_code } from '$lib/code-generator'
-	import { normalize } from '$lib/normalize'
+	import type { Diagram } from '../lib/types'
+	import { get_tikzcd_code } from '../lib/code-generator'
+	import { normalize } from '../lib/normalize'
 
 	type Props = {
 		diagram: Diagram

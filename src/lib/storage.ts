@@ -1,11 +1,9 @@
-import { browser } from '$app/environment'
-
 import type { StorageData } from './types'
 import { StorageDataSchema } from './schemas'
 
 const storage_key = 'data'
 
-const default_tile_size = browser && window.innerWidth < 600 ? 50 : 100
+const default_tile_size = window.innerWidth < 600 ? 50 : 100
 
 const default_data: StorageData = {
 	diagram: { nodes: [], arrows: [] },
@@ -14,8 +12,6 @@ const default_data: StorageData = {
 }
 
 export function get_stored_data(): StorageData {
-	if (!browser) return default_data
-
 	try {
 		const data = localStorage.getItem(storage_key)
 		if (!data) return default_data
@@ -27,8 +23,6 @@ export function get_stored_data(): StorageData {
 }
 
 export function save_data(data: StorageData) {
-	if (!browser) return
-
 	try {
 		localStorage.setItem(storage_key, JSON.stringify(data))
 	} catch (err) {

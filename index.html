@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>tikzcd creator</title>
+
+		<meta
+			name="description"
+			content="Create TikZ commutative diagrams visually"
+		/>
+
+		<meta property="og:title" content="tikzcd creator" />
+		<meta
+			property="og:description"
+			content="Create TikZ commutative diagrams visually"
+		/>
+		<meta property="og:url" content="https://tikzcd-creator.netlify.app/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="tikzcd creator" />
+
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="MyWebSite" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$']],
+        },
+        svg: {
+          fontCache: 'global',
+        },
+      }
+    </script>
+  
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+      as="script"
+    />
+  
+    <script
+      type="text/javascript"
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+    ></script>
+		
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
+</html>

@@ -1,13 +1,15 @@
 <script lang="ts">
-	import CodeDisplay from '$lib/components/CodeDisplay.svelte'
-	import Grid from '$lib/components/Grid.svelte'
-	import Menu from '$lib/components/Menu.svelte'
-	import Step from '$lib/components/Step.svelte'
+	import CodeDisplay from './components/CodeDisplay.svelte'
+	import Grid from './components/Grid.svelte'
+	import Menu from './components/Menu.svelte'
+	import Step from './components/Step.svelte'
 
-	import { get_stored_data, save_data } from '$lib/storage'
-	import { move_down, move_left, move_right, move_up } from '$lib/move'
-	import { type Diagram, type StepIndex, type StorageData } from '$lib/types'
-	import { generate_URL, get_data_from_URL } from '$lib/url.js'
+	import { get_stored_data, save_data } from './lib/storage'
+	import { move_down, move_left, move_right, move_up } from './lib/move'
+	import { type Diagram, type StepIndex, type StorageData } from './lib/types'
+	import { generate_URL, get_data_from_URL } from './lib/url.js'
+	import Heading from './components/Heading.svelte'
+	import Dialog from './components/Dialog.svelte'
 
 	const data_from_URL = get_data_from_URL()
 	const initial_data: StorageData = data_from_URL ?? get_stored_data()
@@ -36,6 +38,8 @@
 	}
 </script>
 
+<Heading />
+
 <Step bind:step {reset}>
 	{#if step === 6}
 		<CodeDisplay {diagram} />
@@ -55,3 +59,5 @@
 		{share_URL}
 	/>
 {/if}
+
+<Dialog />

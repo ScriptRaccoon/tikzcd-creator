@@ -9,8 +9,8 @@
 	import { fade } from 'svelte/transition'
 	import Fa from 'svelte-fa'
 
-	import { arrow_padding, arrow_shift_scale } from '$lib/constants'
-	import type { Arrow } from '$lib/types'
+	import { arrow_padding, arrow_shift_scale } from '../lib/constants'
+	import type { Arrow } from '../lib/types'
 
 	import ArrowSelector from './ArrowSelector.svelte'
 

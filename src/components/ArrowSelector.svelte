@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { scale } from 'svelte/transition'
 
-	import { arrow_codes, arrow_variants } from '$lib/constants'
-	import type { Arrow } from '$lib/types'
-	import { render_latex } from '$lib/utils'
+	import { arrow_codes, arrow_variants } from '../lib/constants'
+	import type { Arrow } from '../lib/types'
+	import { render_latex } from '../lib/utils'
 
 	type Props = {
 		angle: number

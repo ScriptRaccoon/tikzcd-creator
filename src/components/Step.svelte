@@ -7,8 +7,8 @@
 	} from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
 
-	import { STEPS } from '$lib/step.config'
-	import type { StepIndex } from '$lib/types'
+	import { STEPS } from '../lib/step.config'
+	import type { StepIndex } from '../lib/types'
 
 	type Props = {
 		step: StepIndex

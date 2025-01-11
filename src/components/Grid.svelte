@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Diagram, StepIndex } from '$lib/types'
+	import type { Diagram, StepIndex } from '../lib/types'
 
 	import Editor from './Editor.svelte'
 

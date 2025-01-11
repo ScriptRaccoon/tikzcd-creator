@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition'
 
-	import { render_latex } from '$lib/utils'
+	import { render_latex } from '../lib/utils'
 
 	type Props = {
 		id: string

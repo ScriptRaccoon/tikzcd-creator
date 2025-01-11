@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { agree, deduplicate, repeat_string as repeat_string } from './utils'
+import { agree, deduplicate, repeat_string } from './utils'
 
 describe('agree', () => {
 	it('returns `true` for {x:2,y:3} and {x:2,y:3}', () => {
