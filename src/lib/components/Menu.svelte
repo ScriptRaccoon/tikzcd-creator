@@ -1,10 +1,12 @@
 <script lang="ts">
 	import {
+		faCheckCircle,
 		faDownLong,
 		faLeftLong,
 		faMinus,
 		faPlus,
 		faRightLong,
+		faShare,
 		faTrash,
 		faUpLong,
 	} from '@fortawesome/free-solid-svg-icons'
@@ -19,6 +21,7 @@
 		move_up: () => void
 		move_down: () => void
 		zoom: (value: -1 | 1) => void
+		share_URL: () => void
 	}
 
 	let {
@@ -28,6 +31,7 @@
 		move_up,
 		move_down,
 		zoom,
+		share_URL,
 	}: Props = $props()
 
 	function ask_for_clearing() {
@@ -36,6 +40,16 @@
 			text: 'Do you really want to clear the diagram?',
 			confirm: { text: 'Yes', action: clear_diagram },
 		})
+	}
+
+	let copied_URL = $state(false)
+
+	function copy_URL() {
+		share_URL()
+		copied_URL = true
+		setTimeout(() => {
+			copied_URL = false
+		}, 2000)
 	}
 </script>
 
@@ -83,6 +97,21 @@
 	<button class="small button" aria-label="zoom out" onclick={() => zoom(-1)}>
 		<Fa icon={faMinus} />
 	</button>
+
+	<button
+		class="small button"
+		aria-label="share URL"
+		onclick={copy_URL}
+		aria-live="assertive"
+	>
+		{#if copied_URL}
+			<div transition:fly={{ y: 20, duration: 100 }} class="copied">
+				Copied URL to clipboard
+			</div>
+		{/if}
+
+		<Fa icon={copied_URL ? faCheckCircle : faShare} />
+	</button>
 </menu>
 
 <style>
@@ -93,11 +122,11 @@
 		display: flex;
 		justify-content: space-evenly;
 		flex-wrap: wrap;
-		gap: 0.5rem 0.5rem;
 	}
 
 	button {
 		width: 2rem;
+		position: relative;
 	}
 
 	@media (min-width: 600px) {
@@ -106,5 +135,13 @@
 			justify-content: center;
 			gap: 1rem;
 		}
+	}
+
+	.copied {
+		width: max-content;
+		position: absolute;
+		bottom: 175%;
+		right: 0;
+		color: var(--font-color);
 	}
 </style>

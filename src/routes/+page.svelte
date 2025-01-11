@@ -27,6 +27,11 @@
 	$effect(() => {
 		save_data({ diagram, step, tile_size })
 	})
+
+	function share_URL() {
+		const url = generate_URL({ diagram, step, tile_size })
+		navigator.clipboard.writeText(url)
+	}
 </script>
 
 <Step bind:step {reset}>
@@ -45,5 +50,6 @@
 		move_up={() => move_up(diagram)}
 		move_down={() => move_down(diagram)}
 		{zoom}
+		{share_URL}
 	/>
 {/if}
