@@ -10,6 +10,7 @@
 		"preview": "vite preview",
 		"test:run": "vitest --run",
 		"test": "vitest",
+		"coverage": "vitest run --coverage",
 		"format": "prettier --write .",
 		"check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
 		"prepare": "husky"
@@ -17,7 +18,9 @@
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tsconfig/svelte": "^5.0.4",
+		"@vitest/coverage-v8": "2.1.8",
 		"husky": "^9.1.7",
+		"jsdom": "^26.0.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.2",
 		"svelte": "^5.15.0",

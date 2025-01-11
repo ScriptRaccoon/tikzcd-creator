@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { arrow_shift_scale, is_desktop } from '../lib/constants'
+	import { arrow_shift_scale } from '../lib/constants'
 	import type { Coord, Diagram, Arrow, StepIndex } from '../lib/types'
 	import { agree } from '../lib/utils'
 
@@ -93,6 +93,8 @@
 			create_arrow(pos)
 		}
 	}
+
+	const is_desktop = window.matchMedia('(hover: hover)').matches
 </script>
 
 <svelte:window onkeydown={handle_keydown} />
