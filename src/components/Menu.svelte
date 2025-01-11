@@ -16,23 +16,12 @@
 
 	type Props = {
 		clear_diagram: () => void
-		move_left: () => void
-		move_right: () => void
-		move_up: () => void
-		move_down: () => void
+		move: (axis: 'x' | 'y', value: 1 | -1) => void
 		zoom: (value: -1 | 1) => void
 		share_URL: () => void
 	}
 
-	let {
-		clear_diagram,
-		move_left,
-		move_right,
-		move_up,
-		move_down,
-		zoom,
-		share_URL,
-	}: Props = $props()
+	let { clear_diagram, move, zoom, share_URL }: Props = $props()
 
 	function ask_for_clearing() {
 		open_dialog({
@@ -65,7 +54,7 @@
 	<button
 		class="small button"
 		aria-label="move diagram left"
-		onclick={move_left}
+		onclick={() => move('x', -1)}
 	>
 		<Fa icon={faLeftLong}></Fa>
 	</button>
@@ -73,19 +62,23 @@
 	<button
 		class="small button"
 		aria-label="move diagram right"
-		onclick={move_right}
+		onclick={() => move('x', 1)}
 	>
 		<Fa icon={faRightLong} />
 	</button>
 
-	<button class="small button" aria-label="move diagram up" onclick={move_up}>
+	<button
+		class="small button"
+		aria-label="move diagram up"
+		onclick={() => move('y', -1)}
+	>
 		<Fa icon={faUpLong} />
 	</button>
 
 	<button
 		class="small button"
 		aria-label="move diagram down"
-		onclick={move_down}
+		onclick={() => move('y', 1)}
 	>
 		<Fa icon={faDownLong} />
 	</button>

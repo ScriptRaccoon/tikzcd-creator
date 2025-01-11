@@ -5,9 +5,9 @@
 	import Step from './components/Step.svelte'
 
 	import { get_stored_data, save_data } from './lib/storage'
-	import { move_down, move_left, move_right, move_up } from './lib/move'
+	import { move_diagram } from './lib/move'
 	import { type Diagram, type StepIndex, type StorageData } from './lib/types'
-	import { generate_URL, get_data_from_URL } from './lib/url.js'
+	import { generate_URL, get_data_from_URL } from './lib/url'
 	import Heading from './components/Heading.svelte'
 	import Dialog from './components/Dialog.svelte'
 
@@ -51,10 +51,7 @@
 {#if step >= 1}
 	<Menu
 		clear_diagram={reset}
-		move_left={() => move_left(diagram)}
-		move_right={() => move_right(diagram)}
-		move_up={() => move_up(diagram)}
-		move_down={() => move_down(diagram)}
+		move={(axis, value) => move_diagram(diagram, axis, value)}
 		{zoom}
 		{share_URL}
 	/>

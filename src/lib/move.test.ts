@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach } from 'vitest'
 
 import type { Diagram } from './types'
-import { move_down, move_left, move_right, move_up } from './move'
+import { move_diagram } from './move'
 
 let sample_diagram: Diagram
 
@@ -46,7 +46,7 @@ beforeEach(() => {
 	}
 })
 
-describe('move_left', () => {
+describe('move_diagram', () => {
 	it('moves a diagram to the left', () => {
 		const expected_diagram: Diagram = {
 			nodes: [
@@ -87,7 +87,7 @@ describe('move_left', () => {
 			],
 		}
 
-		move_left(sample_diagram)
+		move_diagram(sample_diagram, 'x', -1)
 		expect(sample_diagram).toEqual(expected_diagram)
 	})
 })
@@ -134,7 +134,7 @@ describe('move_right', () => {
 			],
 		}
 
-		move_right(sample_diagram)
+		move_diagram(sample_diagram, 'x', 1)
 		expect(sample_diagram).toEqual(expected_diagram)
 	})
 })
@@ -180,7 +180,7 @@ describe('move_up', () => {
 			],
 		}
 
-		move_up(sample_diagram)
+		move_diagram(sample_diagram, 'y', -1)
 		expect(sample_diagram).toEqual(expected_diagram)
 	})
 })
@@ -226,7 +226,7 @@ describe('move_down', () => {
 			],
 		}
 
-		move_down(sample_diagram)
+		move_diagram(sample_diagram, 'y', 1)
 		expect(sample_diagram).toEqual(expected_diagram)
 	})
 })
