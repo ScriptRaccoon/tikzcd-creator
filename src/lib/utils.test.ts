@@ -1,11 +1,29 @@
-import { agree, deduplicate, repeat_string } from './utils'
+import { agree, deduplicate, render_latex, repeat_string } from './utils'
+
+describe('render_latex', () => {
+	it('renders "a = b" with mocked MathJax', () => {
+		// @ts-ignore
+		window.MathJax = {
+			tex2svg: vi.fn((input: string) => ({
+				outerHTML: `<span class="math">${input}</span>`,
+			})),
+		}
+		expect(render_latex('a = b')).toBe('<span class="math">a = b</span>')
+	})
+
+	it('returns an empty string if MathJax is not defined', () => {
+		// @ts-ignore
+		delete window.MathJax
+		expect(render_latex('a=b')).toBe('')
+	})
+})
 
 describe('agree', () => {
-	it('returns `true` for {x:2,y:3} and {x:2,y:3}', () => {
+	it('returns "true" for {x:2,y:3} and {x:2,y:3}', () => {
 		expect(agree({ x: 2, y: 3 }, { x: 2, y: 3 })).toBe(true)
 	})
 
-	it('returns `false` for {x:2,y:3} and {x:2,y:2}', () => {
+	it('returns "false" for {x:2,y:3} and {x:2,y:2}', () => {
 		expect(agree({ x: 2, y: 3 }, { x: 2, y: 2 })).toBe(false)
 	})
 })
