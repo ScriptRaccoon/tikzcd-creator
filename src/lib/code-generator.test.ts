@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest'
 import { get_tikzcd_code } from './code-generator'
 import type { Diagram } from './types'
 

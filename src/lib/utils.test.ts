@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { agree, deduplicate, repeat_string } from './utils'
 
 describe('agree', () => {

@@ -14,7 +14,8 @@
 		"allowJs": true,
 		"checkJs": true,
 		"isolatedModules": true,
-		"moduleDetection": "force"
+		"moduleDetection": "force",
+		"types": ["vitest/globals"]
 	},
 	"include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }

@@ -1,5 +1,3 @@
-import { describe, it, expect } from 'vitest'
-
 import { encode, decode, encode_diagram, decode_diagram } from './encoding'
 import type { Diagram } from './types'
 

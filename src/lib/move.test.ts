@@ -1,5 +1,3 @@
-import { describe, expect, it, beforeEach } from 'vitest'
-
 import type { Diagram } from './types'
 import { move_diagram } from './move'
 

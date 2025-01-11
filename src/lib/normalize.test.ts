@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest'
 import type { Diagram } from './types'
 import { normalize } from './normalize'
 
