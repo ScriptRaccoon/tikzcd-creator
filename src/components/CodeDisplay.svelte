@@ -60,14 +60,14 @@
 			onclick={copy_code}
 		>
 			<Fa icon={copied ? faClipboardCheck : faClipboard} />
-			Copy
+			Copy code
 		</button>
 	</div>
 </div>
 
 <style>
 	.wrapper {
-		margin-top: 1rem;
+		margin-block: 1rem 2rem;
 	}
 
 	.code {
@@ -92,7 +92,8 @@
 
 	.actions {
 		margin-top: 0.25rem;
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
 	}
 </style>

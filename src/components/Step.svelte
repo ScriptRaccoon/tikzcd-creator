@@ -77,7 +77,7 @@
 
 						{@render children?.()}
 
-						<div class="buttons">
+						<div class="actions">
 							{#if current_step.button_labels.prev !== null}
 								<button class="button" onclick={handle_previous}>
 									{current_step.button_labels.prev}
@@ -121,10 +121,11 @@
 		margin-bottom: 0.5rem;
 	}
 
-	.buttons {
+	.actions {
 		margin-top: 1rem;
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
 	}
 
 	.toggle {

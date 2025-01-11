@@ -54,6 +54,7 @@ button:focus-visible {
 	border-radius: 0.25rem;
 	font-weight: 600;
 	transition: scale 100ms;
+	white-space: nowrap;
 }
 
 .button:active {
