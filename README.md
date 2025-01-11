@@ -28,7 +28,7 @@ https://github.com/user-attachments/assets/9dbe2574-9ca6-4519-af4e-7319e5ab6cf8
 
 ## Development
 
-This application is made with [SvelteKit](https://svelte.dev/docs/kit/introduction).
+This application is made with [Svelte](https://svelte.dev/docs/svelte).
 
 Install the dependencies:
 
@@ -42,7 +42,7 @@ See the file `package.json` for further commands.
 
 ## Related
 
-This is a very basic editor (on purpose). There are more fully featured and advanced editors out there.
+This is a basic editor (on purpose). There are more fully featured and advanced editors out there.
 
 - [quiver](https://github.com/varkor/quiver)
 - [tikzcd-editor](https://github.com/yishn/tikzcd-editor)
