@@ -19,5 +19,3 @@ export const arrow_codes = {
 	equal: '=',
 	hookrightarrow: '\\hookrightarrow',
 } as const
-
-export const windowWidth = window.innerWidth
