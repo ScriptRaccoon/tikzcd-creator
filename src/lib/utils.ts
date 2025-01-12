@@ -1,12 +1,7 @@
 import type { Coord } from './types'
 
 export function render_latex(input: string): string {
-	// @ts-ignore
-	if (typeof MathJax !== 'undefined') {
-		// @ts-ignore
-		return MathJax.tex2svg(input, { display: false }).outerHTML
-	}
-	return ''
+	return window.MathJax?.tex2svg(input, { display: false }).outerHTML ?? ''
 }
 
 export function agree(pos1: Coord, pos2: Coord) {

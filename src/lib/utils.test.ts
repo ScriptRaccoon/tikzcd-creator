@@ -1,20 +1,25 @@
 import { agree, deduplicate, render_latex, repeat_string } from './utils'
 
 describe('render_latex', () => {
+	afterEach(() => {
+		delete window.MathJax
+	})
+
 	it('renders "a = b" with mocked MathJax', () => {
-		// @ts-ignore
 		window.MathJax = {
-			tex2svg: vi.fn((input: string) => ({
-				outerHTML: `<span class="math">${input}</span>`,
-			})),
+			tex2svg: (input) => {
+				const span = document.createElement('span')
+				span.className = 'math'
+				span.textContent = input
+				return span
+			},
 		}
+
 		expect(render_latex('a = b')).toBe('<span class="math">a = b</span>')
 	})
 
 	it('returns an empty string if MathJax is not defined', () => {
-		// @ts-ignore
-		delete window.MathJax
-		expect(render_latex('a=b')).toBe('')
+		expect(render_latex('a = b')).toBe('')
 	})
 })
 
