@@ -3,15 +3,14 @@ import { StorageDataSchema } from './schemas'
 
 const storage_key = 'data'
 
-const default_tile_size = window.innerWidth < 600 ? 50 : 100
-
-const default_data: StorageData = {
-	diagram: { nodes: [], arrows: [] },
-	step: 0,
-	tile_size: default_tile_size,
-}
-
-export function get_stored_data(): StorageData {
+export function get_stored_data(
+	window_width: number = window.innerWidth,
+): StorageData {
+	const default_data = {
+		diagram: { nodes: [], arrows: [] },
+		step: 0,
+		tile_size: window_width < 600 ? 50 : 100,
+	}
 	try {
 		const data = localStorage.getItem(storage_key)
 		if (!data) return default_data
