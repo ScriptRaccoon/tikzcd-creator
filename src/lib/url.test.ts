@@ -1,5 +1,5 @@
 import type { StorageData } from './types'
-import { generate_URL, get_data_from_URL } from './url'
+import { generate_URL, get_data_from_URL, remove_params } from './url'
 
 describe('generate_URL', () => {
 	it('generates a URL with a diagram, a step and a tile size', () => {
@@ -169,7 +169,7 @@ describe('get_data_from_URL', () => {
 	it('returns the data from the URL if it is valid', () => {
 		vi.spyOn(window, 'location', 'get').mockReturnValueOnce({
 			...window.location,
-			href: `http://example.com?d=${sample_diagram_string}&s=1&t=32`,
+			href: `http://localhost:3000?d=${sample_diagram_string}&s=1&t=32`,
 		})
 		const expected_data = {
 			diagram: {
@@ -201,5 +201,19 @@ describe('get_data_from_URL', () => {
 
 		const data = get_data_from_URL()
 		expect(data).toEqual(expected_data)
+	})
+})
+
+describe('remove_params', () => {
+	it('removes the d, s and t parameters from the URL', () => {
+		const url = new URL('http://localhost:3000?d=abc&s=1&t=100')
+		expect(url.searchParams.has('d')).toBe(true)
+		expect(url.searchParams.has('s')).toBe(true)
+		expect(url.searchParams.has('t')).toBe(true)
+
+		const new_url = remove_params(url)
+		expect(new_url.searchParams.has('d')).toBe(false)
+		expect(new_url.searchParams.has('s')).toBe(false)
+		expect(new_url.searchParams.has('t')).toBe(false)
 	})
 })

@@ -30,5 +30,15 @@ export function get_data_from_URL(): StorageData | null {
 	const tile_size = parseInt(tile_size_parameter)
 	if (Number.isNaN(tile_size) || tile_size < 1) return null
 
+	remove_params(url)
+
 	return { diagram, step, tile_size }
+}
+
+export function remove_params(url: URL) {
+	url.searchParams.delete('d')
+	url.searchParams.delete('s')
+	url.searchParams.delete('t')
+	history.replaceState(null, '', url.toString())
+	return url
 }
