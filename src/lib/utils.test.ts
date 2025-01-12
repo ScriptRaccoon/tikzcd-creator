@@ -5,16 +5,16 @@ describe('render_latex', () => {
 		delete window.MathJax
 	})
 
-	it('renders "a = b" with mocked MathJax', () => {
-		window.MathJax = {
-			tex2svg: (input) => {
-				const span = document.createElement('span')
-				span.className = 'math'
-				span.textContent = input
-				return span
-			},
-		}
+	const tex2svg = (input: string) => {
+		const span = document.createElement('span')
+		span.className = 'math'
+		span.textContent = input
+		span.setAttribute('tabindex', '0')
+		return span
+	}
 
+	it('renders "a = b" with mocked MathJax', () => {
+		window.MathJax = { tex2svg }
 		expect(render_latex('a = b')).toBe('<span class="math">a = b</span>')
 	})
 

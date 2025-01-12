@@ -1,7 +1,9 @@
 import type { Coord } from './types'
 
 export function render_latex(input: string): string {
-	return window.MathJax?.tex2svg(input, { display: false }).outerHTML ?? ''
+	const element = window.MathJax?.tex2svg(input, { display: false })
+	if (element?.hasAttribute('tabindex')) element.removeAttribute('tabindex')
+	return element?.outerHTML ?? ''
 }
 
 export function agree(pos1: Coord, pos2: Coord) {
